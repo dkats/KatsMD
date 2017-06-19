@@ -1,0 +1,233 @@
+body {
+	font-family: arial;
+	background-color: #e2f3ff;
+	margin: 0px;
+}
+
+header {
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 2;
+	color: white;
+	background-color: #000066;
+	clear: left;
+	text-align: center;
+	font-weight: bold;
+}
+
+.droprest {
+	display: none;
+	position: absolute;
+	top: 46px;
+	color: white;
+	background-color: #000066;
+	text-align: inherit;
+	font-weight: inherit;
+	padding: inherit;
+}
+
+.dropdown:hover .droprest {
+	display: block;
+}
+
+.droprest:hover {
+	color: black;
+	background-color: #f1f1f1;
+}
+
+.dropmain, .droprest {
+	margin: 0;
+	padding: 14px 16px;
+}
+
+.dropmain:not(:hover) {
+	color: white;
+	background-color: #000066;
+}
+
+footer {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+	color: white;
+	background-color: #000066;
+	clear: left;
+	text-align: center;
+	font-size: 8pt;
+	font-weight: bold;
+}
+
+h1 { 
+	display: block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+h2 {
+	display: block;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+h3 { 
+	display: block;
+	font-size: 1.17em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+h4 { 
+	display: block;
+	font-size: 1em;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+h5 { 
+	display: block;
+	font-size: .83em;
+	margin-top: 1.67em;
+	margin-bottom: 1.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+h6 { 
+	display: block;
+	font-size: .67em;
+	margin-top: 2.33em;
+	margin-bottom: 2.33em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+a {
+	cursor: pointer;
+}
+
+.note {
+	font-weight: bold;
+}
+
+h2 + ul {
+	margin-top: -16px;
+}
+
+p + ul {
+	margin-top: -16px;
+}
+
+ul.menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	margin-left: 6pt;
+	margin-right: 6pt;
+}
+
+ul.menu li {
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
+	float: left;
+	display: inline;
+	text-align: center;
+	color: white;
+}
+
+header ul.menu li {
+	padding: 14px 16px;
+}
+
+footer ul.menu li {
+	padding: 10px 16px;
+}
+
+ul.menu li:hover:not(.active) {
+	background-color: #f1f1f1;
+	color: black;
+}
+
+ul.menu li.noclick:hover {
+	color: white;
+	background-color: #000066;
+	cursor: default;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 5px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 105%;
+	left: 15px;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.tooltip .tooltiptextmini {
+	visibility: hidden;
+	width: 250px;
+	background-color: black;
+	color: #fff;
+	text-align: left;
+	font-size: 8pt;
+	border-radius: 6px;
+	padding: 5px 5px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 105%;
+	left: 15px;
+}
+
+.tooltip:hover .tooltiptextmini {
+	visibility: visible;
+}
+
+article {
+	display: inline-block;
+	position: fixed;
+	margin: 0px;
+	padding: 0px 28px;
+	top: 46px;
+	bottom: 32px;
+	overflow: auto;
+}
