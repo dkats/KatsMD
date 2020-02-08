@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculators &ndash; KatsMD</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="sexed/css/nav.css"> -->
+<link rel="stylesheet" type="text/css" href="css/calc.css">
+<meta name="author" content="Daniel J. Kats">
+<script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript" src="js/footer.js"></script>
+<script type="text/javascript" src="js/calc.js"></script>
+</head>
+<body>
+
+<article>
+
+	<div class="calc">
+		<strong>BMI</strong>: weight(kg) / (height (m))^2 = 703 &times; weight(lbs) / (height (in))^2<br />
+		<table>
+			<tr>
+				<td>Height</td>
+				<td><input type="text" id="bmi_ht_ft" onkeyup="if(only_num('bmi_ht_ft')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+					<span id="bmi_ht_ft_lab">ft </span>
+					<input type="text" id="bmi_ht_in" onkeyup="if(only_num('bmi_ht_in')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+					<span id="bmi_ht_in_lab">in</span>
+					<input type="text" id="bmi_ht_tin" onkeyup="if(only_num('bmi_ht_tin')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+					<input type="text" id="bmi_ht_m" onkeyup="if(only_num('bmi_ht_m')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+					<input type="text" id="bmi_ht_cm" onkeyup="if(only_num('bmi_ht_cm')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+					<select id="bmi_ht_u" onclick="bmi_ht_click('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');" onchange="bmi_ht_change('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_ft_lab', 'bmi_ht_in', 'bmi_ht_in_lab', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');">
+					<option value="ft+in">ft+in</option>
+					<option value="in">in</option>
+					<option value="cm">cm</option>
+					<option value="m">m</option>
+				</select>
+				</td></tr>
+			<tr><td>Weight</td>
+				<td>
+					<input type="text" id="bmi_wt_lbs" onkeyup="if(only_num('bmi_wt_lbs')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+					<input type="text" id="bmi_wt_kg" onkeyup="if(only_num('bmi_wt_kg')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+					<select id="bmi_wt_u" onclick="bmi_wt_click('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');" onchange="bmi_wt_change('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');">
+					<option value="lbs">lbs</option>
+					<option value="kg">kg</option>
+				</select></td></tr>
+			<tr><td>BMI</td><td><input type="text" id="bmi_bmi" readonly></td></tr>
+		</table>
+	</div>
+
+	<div class="calc">
+		<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
+		<table>
+			<tr><td>QT</td><td><input type="text" id="qtc_qt" onkeyup="if(only_num('qtc_qt')){qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"></td></tr>
+			<tr><td>HR</td><td><input type="text" id="qtc_hr" onkeyup="if(only_num('qtc_hr')){qtc_hr_update('hr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"> bpm</td></tr>
+			<tr><td>RR</td><td>
+				<input type="text" id="qtc_rr_msec" onkeyup="if(only_num('qtc_rr_msec')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};">
+				<input type="text" id="qtc_rr_sbox" onkeyup="if(only_num('qtc_rr_sbox')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};" style="display: none;">
+				<select id="qtc_rr_u" onclick="qtc_rr_click('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');" onchange="qtc_rr_change('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');">
+				<option value="msec">msec</option>
+				<option value="sbox">small boxes</option>
+			</select></td></tr>
+			<tr><td>QTc</td><td><input type="text" id="qtc_qtc" readonly></td></tr>
+		</table>
+	</div>
+
+</article>
+</body>
+</html>
