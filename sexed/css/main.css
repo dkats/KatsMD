@@ -242,6 +242,24 @@ article {
 	overflow: auto;
 }
 
+.center{
+	text-align: center;
+}
+
+.caption{
+	font-size: 8pt;
+	text-align: center;
+}
+
+.disclaim::before{
+	content: "Disclaimer: ";
+	font-weight: bold;
+}
+
+.disclaim{
+	color: red;
+}
+
 table{
 	display: inline-block;
 	border-collapse: collapse;
@@ -264,6 +282,37 @@ td.left {
 	text-align: left;
 }
 
-td.center {
+input[type="radio"]{
+	margin: 0 1em 0 2em;
+}
+
+.TFq{
+	margin-top: 12pt;
+}
+
+.TFq::before{
+	content: "True or false: ";
+	font-weight: bold;
+}
+
+.TFcorrect {
+	color: green;
+}
+
+.TFwrong {
+	color: red;
+}
+
+.TFans {
+	margin: 5px 0 0 1em;
+}
+
+.numberCircle {
+	display: inline-block;
+	width: 12pt;
+	height: 12pt;
+	border-radius: 100%;
+	padding: 4px;
+	border: 2px solid black;
 	text-align: center;
 }

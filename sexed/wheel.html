@@ -3,7 +3,7 @@
 <head>
 <title>Wheel of Misfortune &ndash; KatsMD</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="../css/wheel.css">
+<link rel="stylesheet" type="text/css" href="css/wheel.css">
 <meta name="author" content="Daniel J. Kats">
 <script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="../js/footer.js"></script>
@@ -18,16 +18,22 @@
 		<div id="wheel">
 			<canvas id="canvas" width="550" height="550"></canvas>
 		</div>
-	</td><td style="vertical-align:top; padding-top: 25px;">
-		<button id="stop">Stop!</button>
-		<button id="reset" disabled="true">Reset</button>
+	</td><td style="vertical-align:top; padding-top: 10px;">
+		<h4><span class="numberCircle">1</span> Stop the wheel</h4>
+
+		<div>
+			<button id="stop">Stop!</button>
+			<button id="reset" disabled="true">Reset</button>
+		</div>
 
 		<div id="disease"></div>
 
+		<h4><span class="numberCircle">2</span> Pick a question</h4>
 		<div id="question_buttons"></div>
 
 		<div id="question"></div>
 
+		<h4><span class="numberCircle">3</span> Check your answer</h4>
 		<button id="ans_button" disabled="true">Show Answer</button><br />
 		<div id="ans"></div>
 	</td></tr>
