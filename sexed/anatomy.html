@@ -3,10 +3,11 @@
 <head>
 <title>Anatomy &ndash; KatsMD</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<!-- <link rel="stylesheet" type="text/css" href="css/nav.css"> -->
+<link rel="stylesheet" type="text/css" href="../css/nav.css">
 <meta name="author" content="Daniel J. Kats">
 <script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="../js/footer.js"></script>
+<script type="text/javascript" src="../js/customscroll.js"></script>
 <script type="text/javascript" src="js/true-false.js"></script>
 <script type="text/javascript" src="js/click-to-show.js"></script>
 <script type="text/javascript" src="js/male-front.js"></script>
@@ -18,12 +19,22 @@
 <script type="text/javascript">header(1);</script>
 <script type="text/javascript">document.getElementById("head_anatomy").className = "active";</script>
 
+<nav role="navigation" class="ToC">
+<ul>
+	<li onclick="customscroll('bodyparts');"><strong>Body Parts</strong></li>
+	<li onclick="customscroll('eggssperm');"><strong>Eggs and Sperm</strong></li>
+	<li onclick="customscroll('pregnancy');"><strong>Pregnancy</strong></li>
+	<li onclick="customscroll('puberty');"><strong>Puberty</strong></li>
+	<li onclick="customscroll('sex');"><strong>Sex</strong></li>
+	<li onclick="customscroll('myths');"><strong>Myths and Misconceptions</strong></li>
+	<li onclick="customscroll('faq');"><strong>FAQ</strong></li>
+</ul>
+</nav>
+
 <article>
-	<h1>Anatomy and Physiology (How the Body Works)</h1>
+	<h1 id="anatomy">Anatomy and Physiology (How the Body Works)</h1>
 
-	<!-- TODO: at some point, talk about douching and hygeine -->
-
-	<h2>Body Parts</h2>
+	<h2 id="bodyparts">Body Parts</h2>
 
 	<h3>Male</h3>
 
@@ -38,6 +49,17 @@
 		<p><strong>Penis:</strong> Organ that hangs outside the body and is used for urination and ejaculation. There is a <em>wide</em> range of shapes and sizes, which are determined by our genes and random chance. <em>The size and shape have <em>nothing</em> to do with "manliness"</em>.</p>
 		</div>
 
+		<span style="margin-left: 2em;">
+		<button class="collapsible">Click to show diagrams of male anatomy</button>
+		<div class="collapse-body center" style="margin-left: 2em;">
+		<img src="files/male-front.png" id="male-front-img" onload="male_front('male-front', 'male-front-img');" style="display: none;">
+		<canvas id="male-front" style=" padding: 10px 20px;"></canvas>
+
+		<img src="files/male-side.png" id="male-side-img" onload="male_side('male-side', 'male-side-img');" style="display: none;">
+		<canvas id="male-side" style=" padding: 10px 20px;"></canvas>
+		</div>
+		</span>
+
 	<h3>Female</h3>
 
 		<div style="margin-left: 2em;">
@@ -47,7 +69,7 @@
 		<p><strong>Clitoris:</strong> A bump of tissue, about the size of a pea, where the labia minora meet in front. Inside it is a bundle of nerves that are very sensitive to touch, just like there are many nerves in the tip of the penis.</p>
 		<p><strong>Urethra:</strong> The tube through which urine leaves the body (it connects the bladder to the outside world). It opens through a little hole between the clitoris and the vaginal opening. It is usually covered by the labia minora.</p>
 		<p><strong>Vagina:</strong> A connection between the uterus and the outside world. This is where a penis would go during sex.</p>
-		<!-- TODO: G-spot -->
+		<p><strong>"G-spot":</strong> (Named after Dr. Gr&auml;fenburg) Some people have a very sensitive spot the inside of the vagina (towards the person's frontside). The "G-spot" isn't a different body part; it's actually part of the clitoris that gets stimulated from inside the vagina. Importantly, not everyone has this, because everyone's body is arranged slightly differently, especially when it comes to nerves.</p>
 		<p><strong>Hymen:</strong> A thin piece of skin that <em>may</em> cover part of the opening. It is often small or missing and can break <em>without</em> sex. Unfortunately, checking for a hymen is frequently&mdash;and <em>incorrectly</em>&mdash;used to see if a female-bodied person is a virgin; however, this <em>does not work!</em> There is <u>no test</u> for virginity other than asking the person.</p>
 		<p><strong>Cervix:</strong> Lower part of the uterus that forms a tight seal between the vagina and the rest of the uterus to keep the uterus sterile. It also makes mucus to keep sperm alive. The only things that can travel through the cervix are menstrual fluid (“blood”) and sperm. During labor, it opens and widens to let the baby come out. During sex, the penis <em>cannot</em>get through the cervix and only stays in the vagina.</p>
 		<p><strong>Uterus:</strong> (Also known as the "womb") It's a huge pear-sized muscle and is where a developing baby (fetus) grows and is fed. It is also where “the period” comes from (we'll talk about this later).</p>
@@ -55,48 +77,66 @@
 		<p><strong>Ovary:</strong> Where the egg cells (also called "ova") are stored and released. Also produces hormones, like estrogen.</p>
 		</div>
 
-	<dl>
-		<dt></dt><dd></dd>
-	</dl>
+		<span style="margin-left: 2em;">
+		<button class="collapsible">Click to show diagrams of female anatomy</button>
+		<div class="collapse-body center" style="margin-left: 2em;">
+		<img src="files/female-external.png" id="female-external-img" onload="female_external('female-external', 'female-external-img');" style="display: none;">
+		<canvas id="female-external" style=" padding: 10px 20px;"></canvas>
 
-	<h2>Eggs and Sperm</h2>
+		<img src="files/female-internal.png" id="female-internal-img" onload="female_internal('female-internal', 'female-internal-img');" style="display: none;">
+		<canvas id="female-internal" style=" padding: 10px 20px;"></canvas>
+		<img src="files/female-combined.png" id="female-combined-img" onload="click_to_show('female-combined', 'female-combined-img', 'the size of the uterus', 0.6);" style="display: none;">
+		<canvas id="female-combined"></canvas>
+		<div class="caption"><a href="https://www.cancer.gov/types/ovarian/patient/ovarian-germ-cell-treatment-pdq" target="_blank">Anatomy of the female reproductive system. Ovarian Germ Cell Tumors Treatment (PDQ&reg;)&mdash;Patient Version.</a></div>
+		</div>
+		</span>
 
-		<!-- TODO: better explanation of sex cells -->
+		<!-- TODO: Add a full-screen option to the diagrams -->
+
+	<h2 id="eggssperm">Eggs and Sperm</h2>
+
+		<p>Egg cells and sperm are called "sex cells" and are the cells that pass on your genes (DNA) to your children. Each egg cell and sperm have a completely unique mix of DNA, which is the instruction manual that babies use to grow and develop. They also only have half of the DNA that you need to make a baby, so when a sperm combines with an egg cell, a fully instruction manual is formed and a baby can develop.</p>
+
+		<!-- TODO: add a photo of sperm and egg -->
 
 	<h3>How Are Sperm Released?</h3>
 
-		<p>Sperm are stored in the epididymis. When it's time for them to be released (ejaculation), muscles squeeze them from the epididymis, through the vas deferens, and into the seminal vesicles. There, they combine with fluid to make semen, which travels through the urethra into and out of the penis. Usually, the penis is erect during this, which happens when the blood vessels in the penis cause increased blood flow. The blood fills the penis and makes it stiff, like how those party balloon animals get inflated with air.</p>
+		<p>Sperm are stored in the epididymis. When it's time for them to be released (ejaculation), muscles squeeze them from the epididymis, through the vas deferens, and into the seminal vesicles. There, they combine with fluid to make semen, which travels through the urethra into and out of the penis. Usually, the penis is erect during this, which happens when the blood vessels in the penis cause increased blood flow. The blood fills the penis and makes it stiff, like how party balloon animals get inflated with air.</p>
 
-		<!-- TODO: finish -->
+	<h3>Where Do Sperm Go?</h3>
 
-	<h3>How Are Egg Cells Released?</h3>
+		<p>If ejaculated into a vagina, sperm travel up the vagina, through the cervix, into the uterus, and then into the uterine tubes, which is where they can fertilize an egg cell. The fluid ("mucus") made by the uterus, cervix, and vagina helps the sperm travel to the uterine tubes.</p>
 
-		<p>Girls are born with hundreds of thousands of tiny egg cells (also called "ova", OH-va; one is called an "ovum", OH-vum). In kids, these egg cells are only half-formed, At puberty, hormones tell the ovaries restart development of the ova and to slowly release them every month. Usually, one ovum develops and is released from an ovary every month, but sometimes two or none can be released.</p>
+	<h3>How Are Egg Cells Released? (Ovulation and Menstruation)</h3>
 
-		<p>While an ovum develops in the ovary, the uterus starts to grow a thick lining on the inside wall. The lining is there to protect and feed a fertilized egg, which is an egg that has combined with a sperm, in case that happens. The uterus has to be ready whether the egg is fertilized or not, because it takes about 2 weeks for the lining to grow enough to support a fetus. This cycle of developing an ovum and releasing it happens every month (until the ova run out).</p>
+		<p>Girls are born with hundreds of thousands of tiny egg cells (also called "ova", pronounced OH-va; one is called an "ovum", pronounced OH-vum). In kids, these egg cells are only half-formed, At puberty, hormones tell the ovaries restart development of the ova and to slowly release them every month. Usually, one ovum develops and is released from an ovary every month, but sometimes two or none can be released. Ovulation is the scientific word for when an egg cell is released by the ovary. Even though there are two ovaries, only one of them is active (ovulates) each month (so, when sperm try to fertilize the egg cell, half of them go into the "wrong" ovarian tube, which is empty). The ovaries don't trade off which one releases an ovum every month, so it's not like your right will release in January, March, May, etc. and the left will release in February, April, June, etc. It's random (we can't predict which side will release on a given month), but the average is about half of the ova from one side and the other half from the other side.</p>
 
-		<p>If the egg is not fertalized, it won't stick to the wall of the uterus and will just flow out from the uterus into the vagina and out of the body. Then, the lining of the uterus, which has fully grown by this point, breaks down and also flows out of the uterus, through the vagina, and out to the outside world. This is a "period" (also called a "menstrual cycle").</p>
+		<p>Anyway, while an ovum develops in the ovary, the uterus starts to grow a thick lining on its inside wall. The lining is there to protect and feed a fertilized egg, which is an ovum that has combined with a sperm, in case it happens. The uterus has to be ready whether the egg is fertilized or not, because it takes about 2 weeks for the lining to grow enough to support a fetus. This cycle of developing an ovum and releasing it happens every month (until the ova run out).</p>
 
-		<!-- TODO: finish -->
+		<p>If the egg is not fertilized, it won't stick to the wall of the uterus and will just flow out from the uterus into the vagina and out of the body. Then, the lining of the uterus, which has fully grown by this point, breaks down and also flows out of the uterus, through the vagina, and to the outside world. This is a "period" (also called a "menstrual cycle"). The bleeding lasts for about one week, stops, and then this cycle starts all over again, so the uterus starts building its lining again.</p>
 
-	<h2>Pregnancy</h2>
+	<h2 id="pregnancy">Pregnancy</h2>
 
-		<p>When a sperm and an egg cell meet, they combine to form a fertilized egg. The fertilized egg then travels from the uterine tube into the uterus and implants into the uterine lining. When this happens, the female-bodied person becomes pregnant. The fertilized egg begins growing and developing and has many different stages. At first, it's called a zygote (z-EYE-goat), which becomes an embryo (EM-bree-yo), and the embryo develops into a fetus (FEE-tus). When a fetus is born, it becomes a baby. This whole process usually takes about 38 to 42 weeks (9 months), but sometimes babies are born prematurely (early).</p>
+		<p>When a sperm and an egg cell meet, they combine to form a fertilized egg. The fertilized egg then travels from the uterine tube into the uterus and implants into the uterine lining. When this happens, the female-bodied person becomes pregnant. The fertilized egg begins growing and developing and has many different stages. At first, it's called a zygote (z-EYE-goat), which becomes an embryo (EM-bree-yo), and the embryo develops into a fetus (FEE-tus).</p>
 
-		<!-- TODO: Find picture of stages of embryo development -->
+		<p>Here's a really fantastic video about how sperm travel, meet the egg cell, and fuse together to make a zygote:</p>
+		<div class="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/_5OvgQW6FG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-	<h2>Puberty</h2>
+		<p>When a fetus is born, it becomes a baby. This whole process usually takes about 38 to 42 weeks (9 months), but sometimes babies are born prematurely (early).</p>
 
-		<p>Puberty is when young bodies develop into adult bodies. There are many changes, but the most important ones are that people develop new feelings and interests and either their egg cells continue to develop or their sperm begin to be made. The egg cells develop while in the womb and pause their development until puberty when they continue. New egg cells are <em>not</em> made after birth. Sperm are not made at all until puberty, but they are constantly made from scratch (<em>hundreds of thousands</em> every day. This means that female-bodied peopel can run out of egg cells (which is called menopause), but male-bodied people will not run out of sperm. As males age, their sperm tend to have more and more problems, but there are usually enough well-functioning sperm to be able to get someone pregnant.</p>
+	<h2 id="puberty">Puberty</h2>
+
+		<p>Puberty is when young bodies develop into adult bodies. There are many changes, but the most important ones are that people develop new feelings and interests and either their egg cells continue to develop or their sperm begin to be made. The egg cells develop while in the womb and pause their development until puberty when they continue. New egg cells are <em>not</em> made after birth. Sperm are not made at all until puberty, but they are constantly made from scratch (<em>hundreds of thousands</em> every day. This means that female-bodied people can run out of egg cells (which is called menopause), but male-bodied people will not run out of sperm. As males age, their sperm tend to have more and more problems, but there are usually enough well-functioning sperm to be able to get someone pregnant.</p>
 
 		<p>The changes in puberty are triggered by a hormone that is made in a part of the brain called the pituitary gland. This hormone travels through the blood to the testicles and ovaries, which then make other hormones, including testosterone and estrogen.</p>
 
 		<p>There are many, many other changes that happen, including:</p>
-		<table>
+		<table class="banded">
 			<tr><td>Females</td>
 				<td><ul>
 					<li>Get taller and heavier</li>
 					<li>Bones grow bigger and heavier</li>
+					<li>Hair and skin can become oily &rarr; get pimples</li>
 					<li>Hips get wider and more curvy</li>
 					<li>Face changes shape</li>
 					<li>Voice gets a little deeper</li>
@@ -120,21 +160,18 @@
 				</ul></td></tr>
 		</table>
 
-		<!-- TODO: Worksheet comparing male/female changes -->
+		<div class="note"><a href="files/puberty-changes-worksheet/puberty-changes-worksheet.pdf" target="_blank">Click here</a> for a worksheet comparing pubertal changes in males and females. <a href="files/puberty-changes-worksheet-key/puberty-changes-worksheet-key.pdf" target="_blank">Click here</a> for an answer key.</div>
 
 		<p>Notice that many of these changes are the same for male- and female-bodied people. Society puts a lot of stress on the differences and has some double-standards (e.g., it's more important for girls to smell good than it is for boys), but many of the changes happen in everyone.</p>
 
-		<p>So, what are the differences between males and females? The main ones are that males get facial hair, their shoulders get wider, the penis and testicles grow, and they begin to have wet dreams (when they ejaculate while dreaming). Females' hips get wider and they begin releasing egg cells ("ovulation").
+		<p>So, what are the differences between males and females? The main ones are that males get facial hair, their shoulders get wider, the penis and testicles grow, and they begin to have wet dreams (when they ejaculate while dreaming). Females' hips get wider and they begin releasing egg cells ("ovulation").</p>
 
-		<div class="center">
+		<button class="collapsible">Click to show how bodies change</button>
+		<div class="collapse-body center">
 		<img src="files/tanner.jpeg" id="tanner-img" onload="click_to_show('tanner', 'tanner-img', 'how bodies change', 0.5);" style="display: none;">
 		<canvas id="tanner"></canvas>
 		<div class="caption"><a href="https://www.nejm.org/doi/full/10.1056/NEJMcp0800459?url_ver=Z39.88-2003&rfr_id=ori:rid:crossref.org&rfr_dat=cr_pub%20%200pubmed" target="_blank">Carel J, L&eacute;ger J. <i>N Engl J Med</i>. 2008; 358: 2366&ndash;2377.</a></div>
 		</div>
-
-			<!-- TODO: explain ovulation -->
-
-			<!-- TODO: explain ejaculation -->
 
 	<h3>What's the Purpose of Sperm and Egg Cells?</h3>
 
@@ -159,52 +196,54 @@
 		<div class="TFq">All girls get really emotional during puberty.</div>
 		<script type="text/javascript">true_false("pubertyemotions", false, "", "", "During puberty, emotions do change and can become more intense. This happens EQUALLY to BOYS AND GIRLS.");</script>
 
-	<h2>Anatomy</h2>
+	<h3>Hygiene</h3>
 
-		<div class="center">
-		<img src="files/male-front.png" id="male-front-img" onload="male_front('male-front', 'male-front-img');" style="display: none;">
-		<canvas id="male-front" style=" padding: 10px 20px;"></canvas>
+		<p>Most of hygiene is pretty self-explanatory, but a topic that gets brought up frequently is washing the vagina ("douching"). Basically, you should <em>not</em> wash your vagina with anything other than water. Just water. Nothing else. At all. Even if you find soaps that say they're specially made for vaginas. Don't do it!</p>
 
-		<img src="files/male-side.png" id="male-side-img" onload="male_side('male-side', 'male-side-img');" style="display: none;">
-		<canvas id="male-side" style=" padding: 10px 20px;"></canvas>
-		</div>
+		<p>Why is this so important? The vagina is a <em>very</em> special and sensitive environment. Like in your gut, there are bacteria that are <em>normally</em> in the vagina. They keep it healthy and keep bad bacteria from growing there. If the bacteria get killed off or new bacteria are added, you can develop a disease like bacterial vaginosis ("BV") or vaginal candidiasis ("a yeast infection"). If you use a soap or any other product on your vagina, it will change that very sensitive environment by either killing the normal and healthy bacteria or adding new bacteria. The vagina is made to keep itself clean and healthy, so don't mess with the systems that are already in place. It's ok to use some water to rinse your vagina, but let your body do most of the work.</p>
 
-		<div class="center">
-		<img src="files/female-external.png" id="female-external-img" onload="female_external('female-external', 'female-external-img');" style="display: none;">
-		<canvas id="female-external" style=" padding: 10px 20px;"></canvas>
+	<h2 id="sex">Sex</h2>
 
-		<img src="files/female-internal.png" id="female-internal-img" onload="female_internal('female-internal', 'female-internal-img');" style="display: none;">
-		<canvas id="female-internal" style=" padding: 10px 20px;"></canvas>
-		</div>
+		<h3>Types of Sex</h3>
 
-		<div class="center">
-		<img src="files/female-combined.png" id="female-combined-img" onload="click_to_show('female-combined', 'female-combined-img', 'the size of the uterus', 0.6);" style="display: none;">
-		<canvas id="female-combined"></canvas>
-		<div class="caption"><a href="https://www.cancer.gov/types/ovarian/patient/ovarian-germ-cell-treatment-pdq" target="_blank">Anatomy of the female reproductive system. Ovarian Germ Cell Tumors Treatment (PDQ&reg;)&mdash;Patient Version.</a></div>
-		</div>
+			<ul>
+				<li>Vaginal sex: penis-in-vagina intercourse</li>
+				<li>Oral sex: mouth-to-genital contact</li>
+				<li>Anal sex: penis-in-anus intercourse</li>
+				<li>Fingering or hand jobs: hand-to-genital contact</li>
+				<li>Dry humping: genital rubbing</li>
+				<li>Touching yourself: masturbation</li>
+			</ul>
 
-		<!-- TODO: Add a full-screen option to the diagrams -->
-		<!-- TODO: Add option to hide each diagram -->
+			<p><em>All</em> of these sexual activities, except masturbation, can carry the risk of sexually transmitted infections (STIs).</p>
 
-	<h2>Sex</h2>
+	<h2 id="myths">Myths and Misconceptions</h2>
 
-	<h3>Types of Sex</h3>
+		<h3>Masturbation</h3>
 
-	<ul>
-		<li>Vaginal sex: penis-in-vagina intercourse</li>
-		<li>Oral sex: mouth-to-genital contact</li>
-		<li>Anal sex: penis-in-anus intercourse</li>
-		<li>Fingering or hand jobs: hand-to-genital contact</li>
-		<li>Dry humping: genital rubbing</li>
-		<li>Touching yourself: masturbation</li>
-	</ul>
+			<p>Masturbation (touching your genitals for pleasure) is completely 100% safe and a normal behavior. Some people like to masturbate and some people don't. The important thing to know is that either is perfectly ok. Masturbating is <em>not</em> cheating or a sign of something going wrong in a relationship; it's about discovering what feels good.</p>
+			<div class="moreinfo"><ul><li><a href="https://www.plannedparenthood.org/learn/sex-and-relationships/masturbation">Planned Parenthood</a></li></ul></div>
 
-	<p><em>All</em> of these sexual activities, except masturbation, can carry the risk of sexually transmitted infections (STIs).</p>
+		<h3>PMS (Pre-Menstrual Syndrome)</h3>
 
-	<h2>Myths and Misconceptions</h2>
+			<p>PMS <em>is</em> a real thing and affects different people in a variety of ways. It might affect mood, bloating, or general comfort levels. It happens in the two-week period between ovulation (when an egg cell is released by an ovary) and menstruation ("the period"). That being said, not all emotions are explained by PMS. If someone is upset about being broken up with or getting a bad grade on a test, please be a kind and supportive human, and don't just say, "Oh, she's just PMS-ing." That being said, there are options for helping to deal with PMS if it's interfering with your life, but that's a conversation between you and your doctor.</p>
 
-	<!-- TODO -->
-	<!-- Masturbation is normal and ok -->
+		<h3>Toxins In the Uterus</h3>
+
+			<p>This is a myth that comes up fairly often, but <u>there are <em>no</em> toxins in the uterus</u>! Your uterus and vagina <strong>do not</strong> need to be cleaned or detoxed (no matter what celebrities say). The uterus and vagina are clean environments that are specifically made to develop babies, so there is nothing harmful about what is inside them.</p>
+
+	<h2 id="faq">Facts and Questions</h2>
+
+		<h3>What Is Pre-ejaculate/Pre-cum?</h3>
+
+			<p>After a penis becomes erect, but before ejaculation/orgasm, a small amount of fluid is pushed through the urethra to clean out any urine and make it a better space for sperm and semen to pass through. This fluid (just a few drops) is called pre-ejaculatory fluid ("pre-cum") and is made by a gland called Cowper's glands, which are right below the prostate. The fluid sometimes carries some sperm, but usually is not enough to make someone pregnant (<u>however, there's still a chance, so don't take the risk!</u>). It <em>can</em> carry sexually transmitted infections/diseases (STIs/STDs).</p>
+
+		<h3>What Is "Squirting"/Female Ejaculation?</h3>
+
+			<p>Internet videos make it seem like female-bodied people can ejaculate ("squirt"), when a lot of fluid seems to gush out of the vagina during orgasm. There aren't any glands or other ways for the body to make that much fluid all at once, and scientists have shown that if there's this much fluid coming out at once, it's actually coming from the bladder (urine), not the vagina (remember, the ureter empties through a little hole between the labia minora, right above the vagina). So, in these videos, they're either acting (or using special effects), or it's urine. That does <em>not</em> mean that it's wrong or shouldn't happen. If you or your partner has experienced it and finds it pleasurable, that's perfectly ok. There's nothing harmful about urine, and the whole point of sex/orgasm is to feel good.</p>
+
+
+	<script type="text/javascript" src="../js/collapsible.js"></script>
 
 </article>
 </body>
