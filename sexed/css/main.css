@@ -240,15 +240,24 @@ article {
 	top: 46px;
 	bottom: 32px;
 	overflow: auto;
+	scroll-behavior: smooth;
 }
 
 .center{
 	text-align: center;
 }
 
+.note{
+	padding: 5px;
+	font-size: 10pt;
+	background-color: #96D3FC;
+	font-weight: normal;
+}
+
 .caption{
 	font-size: 8pt;
 	text-align: center;
+	padding: 0 0 6pt 0;
 }
 
 .disclaim::before{
@@ -260,18 +269,72 @@ article {
 	color: red;
 }
 
+.moreinfo::before{
+	content: "For more information:\A";
+	white-space: pre;
+}
+
+.moreinfo{
+	margin: -6pt 1em 0 1em;
+	padding: 5px;
+	font-size: 11pt;
+	background-color: #96D3FC;
+}
+
+.moreinfo ul {
+	margin: 0 0 0 0;
+}
+
+.collapsible {
+	background-color: #0000b3;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border: none;
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.collapsible:hover {
+	background-color: #0000d6;
+}
+
+.collapsible:after {
+	content: '\002B';
+	color: white;
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+
+.expanded:after {
+	content: "\2212";
+}
+
+.collapse-body {
+	padding: 0 18px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	border: 1px solid #0000b3;
+}
+
 table{
 	display: inline-block;
 	border-collapse: collapse;
 }
 
-tr.head{
+tr.head {
 	background-color: #000066;
 	color: white;
 }
 
-tr:nth-child(even){
-	background-color: #f0f9ff;
+table.banded tr:not(.head):nth-child(even){
+	background-color: #d9efff;
+}
+
+table.banded tr:not(.head):nth-child(odd){
+	background-color: #bfe5ff;
 }
 
 td{
