@@ -2,22 +2,122 @@
 <html>
 <head>
 <title>STIs/STDs &ndash; KatsMD</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<!-- <link rel="stylesheet" type="text/css" href="css/nav.css"> -->
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/nav.css">
 <meta name="author" content="Daniel J. Kats">
 <script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="../js/footer.js"></script>
+<script type="text/javascript" src="../js/customscroll.js"></script>
 </head>
 <body>
 <script type="text/javascript">header(1);</script>
 <script type="text/javascript">document.getElementById("head_stis").className = "active";</script>
 
+<nav role="navigation" class="ToC">
+<ul>
+	<li onclick="customscroll('stistd');"><strong>STIs vs. STDs</strong></li>
+	<li onclick="customscroll('categories');"><strong>Categories</strong></li>
+	<li onclick="customscroll('bacteria');"><strong>Bacteria</strong></li>
+	<ul>
+		<li onclick="customscroll('bacteria');">Gonorrhea</li>
+		<li onclick="customscroll('bacteria');">Chlamydia</li>
+		<li onclick="customscroll('bacteria');">Syphilis</li>
+		<li onclick="customscroll('pid');">Pelvic inflammatory disease</li>
+		<li onclick="customscroll('bv');">Bacterial vaginosis</li>
+	</ul>
+	<li onclick="customscroll('parasites');"><strong>Parasites</strong></li>
+	<ul>
+		<li onclick="customscroll('trichomoniasis');">Trichomoniasis</li>
+		<li onclick="customscroll('lice');">Pubic lice</li>
+		<li onclick="customscroll('scabies');">Scabies</li>
+	</ul>
+	<li onclick="customscroll('fungi');"><strong>Fungi</strong></li>
+	<ul>
+		<li onclick="customscroll('yeast');">Yeast infection</li>
+	</ul>
+	<li onclick="customscroll('viruses');"><strong>Viruses</strong></li>
+	<ul>
+		<li onclick="customscroll('herpes');">Herpes</li>
+		<li onclick="customscroll('hpv');">HPV</li>
+		<li onclick="customscroll('hepb');">Hepatitis B</li>
+		<li onclick="customscroll('hepc');">Hepatitis C</li>
+		<li onclick="customscroll('hiv');">HIV/AIDS</li>
+	</ul>
+	<li onclick="customscroll('wheel');"><strong>Game</strong></li>
+	<li onclick="customscroll('myths');"><strong>Myths and Misconceptions</strong></li>
+	<li onclick="customscroll('faq');"><strong>FAQ</strong></li>
+</ul>
+</nav>
+
 <article>
 	<h1>Sexually Transmitted Infections (STIs) / Diseases (STDs)</h1>
 
-	<h3>Test Your Knowledge</h3>
+		<p>Please note: a few of these disease are <em>not</em> STIs/STDs, but I included them here, because they are genital diseases. These are clearly marked ("<span style="color: red;">Not an STI</span>"), so that you won't mix them up.</p>
 
-	<p>Test your knowledge with the <a href="wheel.html">Wheel of Misfortune game</a>!</p>
+		<p>The point of this page is <em>not</em> to teach you the specifics about each STI so that you can diagnose them. The point is to learn when to go see a doctor, what happens when you get an STI, and how to keep yourself from getting one in the first place.</p>
+
+	<h2 id="stistd">STIs vs. STDs</h2>
+
+		<p>What's the difference between a sexually transmitted <em>infection</em> (STI) and a sexually transmitted <em>disease</em> (STD)? "Infection" means there's a bacteria, virus, fungus, or parasite living in/on your body that shouldn't normally be there. "Disease" means something happened to your body to make you feel sick. So, what's the difference? You can have an infection <em>without</em> feeling sick. In fact, most people with an STI feel completely fine and don't know that they have an infection. All STDs are STIs, but not all STIs are STDs. Here's a Venn Diagram to show what I mean:</p>
+
+		<div class="center"><img src="files/sti-venn.png" width="250px"></div>
+
+	<h2 id="categories">Categories</h2>
+
+		<p>I've broken down the different STIs (and a few other genital diseases) into four different categories: bacteria, parasites, fungi, and viruses. These categories are important, because they explain why some of these diseases can be cured, but others cannot.</p>
+
+	<h2 id="bacteria">Bacteria</h2>
+
+		<p>The main bacteria that cause STIs are:</p>
+
+		<ul>
+			<li>Gonorrhea</li>
+			<li>Chlamydia</li>
+			<li>Syphilis</li>
+		</ul>
+
+		<!-- TODO: Finish -->
+
+		<p id="pid"><sup style="color: red;">Not an STI</sup> <strong>Pelvic inflammatory disease (PID):</strong> </p>
+
+		<p id="bv"><sup style="color: red;">Not an STI</sup> <strong>Bacterial vaginosis:</strong></p>
+
+	<h2 id="parasites">Parasites</h2>
+
+		<p id="trichomoniasis"><strong>Trichomoniasis:</strong></p>
+
+		<p id="lice"><strong>Pubic lice ("crabs"):</strong></p>
+
+		<p id="scabies"><strong>Scabies:</strong></p>
+
+	<h2 id="fungi">Fungi</h2>
+
+		<p id="yeast"><sup style="color: red;">Not an STI</sup> <strong>Yeast infection:</strong></p>
+
+	<h2 id="viruses">Viruses</h2>
+
+		<p id="herpes"><strong>Herpes:</strong></p>
+
+		<p id="hpv"><strong>HPV:</strong></p>
+
+		<p id="hepb"><strong>Hepatitis B:</strong></p>
+
+		<p id="hepc"><strong>Hepatitis C:</strong></p>
+
+		<p id="hiv"><strong>HIV/AIDS:</strong></p>
+
+	<h2 id="wheel">Test Your Knowledge</h2>
+
+		<p>Test your knowledge with the <a href="wheel.html">Wheel of Misfortune game</a>!</p>
+
+	<h2 id="myths">Myths and Misconceptions</h2>
+
+		<h3>Blue Waffle</h3>
+
+			<p>Blue Waffle is <em>not</em> an STI. It is a photoshopped picture on the internet that is fake.</p>
+
+	<h2 id="faq">Facts and Questions</h2>
+
 
 </article>
 </body>
