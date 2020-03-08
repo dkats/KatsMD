@@ -31,3 +31,7 @@ input[readonly] {
 	background-color: inherit;
 	border: 1px solid black;
 }
+
+input[readonly]#ekg_hr,#ekg_p_axis,#ekg_p_dur,#ekg_pr_int,#ekg_qrs_axis,#ekg_qrs_dur,#ekg_qtc,#ekg_p_amp,#ekg_q_amp,#ekg_r_amp,#ekg_s_amp,#ekg_rs_ratio {
+	width: 15em;
+}

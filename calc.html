@@ -3,18 +3,26 @@
 <head>
 <title>Calculators &ndash; KatsMD</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<!-- <link rel="stylesheet" type="text/css" href="sexed/css/nav.css"> -->
+<link rel="stylesheet" type="text/css" href="css/nav.css">
 <link rel="stylesheet" type="text/css" href="css/calc.css">
 <meta name="author" content="Daniel J. Kats">
 <script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/footer.js"></script>
+<script type="text/javascript" src="js/customscroll.js"></script>
 <script type="text/javascript" src="js/calc.js"></script>
 </head>
 <body>
+<nav role="navigation" class="ToC">
+<ul>
+	<li onclick="customscroll('bmi');">BMI</li>
+	<li onclick="customscroll('ekg');">Pediatric EKG Normal Values</li>
+	<li onclick="customscroll('qtc');">QTc</li>
+</ul>
+</nav>
 
 <article>
 
-	<div class="calc">
+	<div class="calc" id="bmi">
 		<strong>BMI</strong>: weight(kg) / (height (m))^2 = 703 &times; weight(lbs) / (height (in))^2<br />
 		<table>
 			<tr>
@@ -45,7 +53,57 @@
 		</table>
 	</div>
 
-	<div class="calc">
+	<script type="text/javascript" src="js/calc-ekg.js"></script>
+	<div class="calc" id="ekg">
+		<strong>Pediatric EKG Normal Values</strong><br />
+		<table>
+			<tr><td>Age</td><td><select id="ekg_age" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+				<option value="" disabled selected style="display:none;"></option>
+				<option value="0-1m">0&ndash;1 months</option>
+				<option value="1-3m">1&ndash;3 months</option>
+				<option value="3-6m">3&ndash;6 months</option>
+				<option value="6-12m">6&ndash;12 months</option>
+				<option value="1-3y">1&ndash;3 years</option>
+				<option value="3-5y">3&ndash;5 years</option>
+				<option value="5-8y">5&ndash;8 years</option>
+				<option value="8-12y">8&ndash;12 years</option>
+				<option value="12-16y">12&ndash;16 years</option></select></td></tr>
+			<tr><td>Sex</td><td><select id="ekg_sex" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+				<option value="" disabled selected style="display:none;"></option>
+				<option value="m">Male</option>
+				<option value="f">Female</option>
+				</select></td></tr>
+			<tr><td>Lead</td><td><select id="ekg_lead" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+				<option value="" selected style="display:none;"></option>
+				<option value="I">I</option>
+				<option value="II">II</option>
+				<option value="III">III</option>
+				<option value="aVR">aVR</option>
+				<option value="aVL">aVL</option>
+				<option value="aVF">aVF</option>
+				<option value="V1">V1</option>
+				<option value="V2">V2</option>
+				<option value="V3R">V3R</option>
+				<option value="V4">V4</option>
+				<option value="V6">V6</option>
+				<option value="V7">V7</option>
+				</select> <i style="color: gray; font-size: 10pt;">(Only necessary for wave amplitudes)</i></td></tr>
+			<tr><td>Heart rate (bpm)</td><td><input type="text" id="ekg_hr" readonly></td></tr>
+			<tr><td>P axis</td><td><input type="text" id="ekg_p_axis" readonly> &deg;</td></tr>
+			<tr><td>P duration</td><td><input type="text" id="ekg_p_dur" readonly> msec</td></tr>
+			<tr><td>PR interval</td><td><input type="text" id="ekg_pr_int" readonly> msec</td></tr>
+			<tr><td>QRS axis</td><td><input type="text" id="ekg_qrs_axis" readonly> &deg;</td></tr>
+			<tr><td>QRS duration</td><td><input type="text" id="ekg_qrs_dur" readonly> msec</td></tr>
+			<tr><td>QTc</td><td><input type="text" id="ekg_qtc" readonly> msec</td></tr>
+			<tr><td>P amplitude</td><td><input type="text" id="ekg_p_amp" readonly> mV</td></tr>
+			<tr><td>Q amplitude</td><td><input type="text" id="ekg_q_amp" readonly> mV</td></tr>
+			<tr><td>R amplitude</td><td><input type="text" id="ekg_r_amp" readonly> mV</td></tr>
+			<tr><td>S amplitude</td><td><input type="text" id="ekg_s_amp" readonly> mV</td></tr>
+			<tr><td>R:S ratio</td><td><input type="text" id="ekg_rs_ratio" readonly></td></tr>
+		</table>
+	</div>
+
+	<div class="calc" id="qtc">
 		<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
 		<table>
 			<tr><td>QT</td><td><input type="text" id="qtc_qt" onkeyup="if(only_num('qtc_qt')){qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"></td></tr>
