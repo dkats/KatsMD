@@ -7,9 +7,11 @@
 <link rel="stylesheet" type="text/css" href="css/calc.css">
 <meta name="author" content="Daniel J. Kats">
 <script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript">header();</script>
 <script type="text/javascript" src="js/footer.js"></script>
 <script type="text/javascript" src="js/customscroll.js"></script>
 <script type="text/javascript" src="js/calc.js"></script>
+<script type="text/javascript">document.getElementById("header_clinicians").className = "active";</script>
 </head>
 <body>
 <nav role="navigation" class="ToC">
@@ -22,6 +24,7 @@
 
 <article>
 
+	<script type="text/javascript" src="js/calc-bmi.js"></script>
 	<div class="calc" id="bmi">
 		<strong>BMI</strong>: weight(kg) / (height (m))^2 = 703 &times; weight(lbs) / (height (in))^2<br />
 		<table>
@@ -54,6 +57,7 @@
 	</div>
 
 	<script type="text/javascript" src="js/calc-ekg.js"></script>
+	<!-- TODO: For fields with mV and msec, add number of small boxes (also, add small dropdowns for paper speed and voltage scale) -->
 	<div class="calc" id="ekg">
 		<strong>Pediatric EKG Normal Values</strong><br />
 		<table>
@@ -103,6 +107,8 @@
 		</table>
 	</div>
 
+	<script type="text/javascript" src="js/calc-qtc.js"></script>
+	<!-- TODO: Add small dropdowns for paper speed (modify numbers accordingly) -->
 	<div class="calc" id="qtc">
 		<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
 		<table>
