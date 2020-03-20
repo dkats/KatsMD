@@ -74,7 +74,7 @@ h1 {
 h2 {
 	display: block;
 	font-size: 1.5em;
-	margin-top: 0.83em;
+	margin-top: 1.17em;
 	margin-bottom: 0.83em;
 	margin-left: 0;
 	margin-right: 0;
@@ -83,7 +83,7 @@ h2 {
 
 h3 { 
 	display: block;
-	font-size: 1.17em;
+	font-size: 1.5em;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	margin-left: 0;
@@ -94,7 +94,7 @@ h3 {
 h4 { 
 	display: block;
 	font-size: 1em;
-	margin-top: 1.33em;
+	margin-top: 1.66em;
 	margin-bottom: 1.33em;
 	margin-left: 0;
 	margin-right: 0;
@@ -104,7 +104,7 @@ h4 {
 h5 { 
 	display: block;
 	font-size: .83em;
-	margin-top: 1.67em;
+	margin-top: 2.0em;
 	margin-bottom: 1.67em;
 	margin-left: 0;
 	margin-right: 0;
@@ -114,7 +114,7 @@ h5 {
 h6 { 
 	display: block;
 	font-size: .67em;
-	margin-top: 2.33em;
+	margin-top: 2.66em;
 	margin-bottom: 2.33em;
 	margin-left: 0;
 	margin-right: 0;
@@ -125,9 +125,9 @@ a {
 	cursor: pointer;
 }
 
-.note {
-	font-weight: bold;
-}
+/*q {
+	quotes: "\201C" "\201D" "\2018" "\2019";
+}*/
 
 h2 + ul {
 	margin-top: -16px;
@@ -251,7 +251,32 @@ article {
 	padding: 5px;
 	font-size: 10pt;
 	background-color: #96D3FC;
-	font-weight: normal;
+}
+
+.source::before{
+	content: "Source: ";
+	font-weight: bold;
+}
+
+.source{
+	padding: 5px;
+	font-size: 10pt;
+}
+
+.sources::before{
+	content: "Sources:\A";
+	font-weight: bold;
+	white-space: pre;
+}
+
+.sources{
+	padding: 5px;
+	font-size: 10pt;
+	border: 1px solid gray;
+}
+
+.sources ul {
+	margin: 0 0 0 0;
 }
 
 .caption{
@@ -269,8 +294,14 @@ article {
 	color: red;
 }
 
+.keyword{
+	font-weight: bold;
+	color: purple;
+}
+
 .moreinfo::before{
 	content: "For more information:\A";
+	font-weight: bold;
 	white-space: pre;
 }
 
@@ -283,6 +314,10 @@ article {
 
 .moreinfo ul {
 	margin: 0 0 0 0;
+}
+
+.spacedlist li {
+	margin: 6pt 0 6pt 0;
 }
 
 .collapsible {
