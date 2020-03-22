@@ -261,6 +261,7 @@ article {
 .source{
 	padding: 5px;
 	font-size: 10pt;
+	border: 1px solid gray;
 }
 
 .sources::before{
