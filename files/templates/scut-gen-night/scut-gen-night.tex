@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[fontsize=10pt]{scrextend}
+\usepackage[margin = 0.5in]{geometry}
+\setlength{\parindent}{0cm}
+% \usepackage{setspace}
+% \setstretch{1.15}			% Line spacing
+
+\usepackage{tabularx}
+\setlength{\tabcolsep}{2pt}
+\usepackage{multirow}
+
+\usepackage{tikz}
+
+\usepackage{wasysym,amssymb}
+\renewcommand{\deg}{$^\circ$}
+
+\pagestyle{empty}
+
+\newcommand{\scutrow}[1]{%
+	\def\temp{}%
+	\foreach \i in {1,...,#1}
+		{%
+		\expandafter\gdef\expandafter\temp\expandafter{\temp 
+			\textbf{Rm:} & $\square$ Sickest & \textbf{Summary} & \textbf{Action List} & \textbf{Situational Awareness}\\
+			& $\square$ Unstable & Dx: & $\square$ &\\
+			\textbf{Name:} & && $\square$ &\\
+			& $\square$ Watcher && $\square$ &\\
+			& && $\square$ &\\
+			\textbf{Age:\qquad\mars\enspace\venus} & $\square$ Stable && $\square$ &\\\hline\hline
+			}%
+		}%
+	\temp}
+
+\begin{document}
+
+	\begin{tabularx}{\textwidth}{l | l | p{50mm} | p{50mm} | X}
+		\hline\hline
+		\scutrow{9}
+	\end{tabularx}
+
+\end{document}

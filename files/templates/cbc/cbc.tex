@@ -1,0 +1,76 @@
+\documentclass[border={-1mm 7mm 0mm -2mm}]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning}
+
+\begin{document}
+	
+	\begin{tikzpicture}[node distance=2mm]
+		\def\blank{Y};
+		\ifx\blank\empty
+			\tikzstyle{data} = [black]
+			\def\wbc{WBC};
+			\def\hgb{HGB};
+			\def\hct{HCT};
+			\def\plt{PLT};
+			\def\drawdiff{Y};
+			\def\neut{N};
+			\def\lymph{L};
+			\def\mono{M};
+			\def\eos{E};
+			\def\baso{B};
+		\else
+			\tikzstyle{data} = [white]
+			\def\wbc{15.2};
+			\def\hgb{13.5};
+			\def\hct{43};
+			\def\plt{285};
+			\def\drawdiff{Y};
+			\def\neut{56};
+			\def\lymph{33};
+			\def\mono{8};
+			\def\eos{5};
+			\def\baso{2};
+		\fi
+
+		\node (center) at (0,0) {};
+
+		\node[data, left of=center, anchor=east] (wbc) {\wbc};
+		\node[data, above of=center, anchor=south] (hgb) {\hgb};
+		\node[data, below of=center, anchor=north] (hct) {\hct};
+		\node[data, right of=center, anchor=west] (plt) {\plt};
+
+		\draw
+			let 
+				\p1 = (wbc),
+				\p2 = (hgb),
+				\p3 = (hct),
+				\p4 = (plt)
+			in
+				(\x1,\y2) -- (\x4,\y3);
+		\draw
+			let 
+				\p1 = (wbc),
+				\p2 = (hgb),
+				\p3 = (hct),
+				\p4 = (plt)
+			in
+				(\x1,\y3) -- (\x4,\y2);
+
+		\ifx\drawdiff\empty
+			%
+		\else
+			\node[below of=hct, anchor=north, yshift=4] (m) {\tiny M};
+			\node[left of=m, anchor=east] (l) {\tiny L};
+			\node[left of=l, anchor=east] (n) {\tiny N};
+			\node[right of=m, anchor=west] (e) {\tiny E};
+			\node[right of=e, anchor=west] (b) {\tiny B};
+
+			\node[data, below of=n, anchor=north, yshift=2] {\neut};
+			\node[data, below of=l, anchor=north, yshift=2] {\lymph};
+			\node[data, below of=m, anchor=north, yshift=2] {\mono};
+			\node[data, below of=e, anchor=north, yshift=2] {\eos};
+			\node[data, below of=b, anchor=north, yshift=2] {\baso};
+		\fi
+	\end{tikzpicture}
+
+\end{document}

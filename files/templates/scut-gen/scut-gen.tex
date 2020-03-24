@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage[fontsize=10pt]{scrextend}
+\usepackage[margin = 0.5in]{geometry}
+\setlength{\parindent}{0cm}
+% \usepackage{setspace}
+% \setstretch{1.15}			% Line spacing
+
+\usepackage{tabularx}
+\setlength{\tabcolsep}{2pt}
+\usepackage{multirow}
+
+\usepackage{tikz}
+
+\usepackage{wasysym,amssymb}
+\renewcommand{\deg}{$^\circ$}
+
+\pagestyle{empty}
+
+\newcommand{\scutrow}[1]{%
+	\def\temp{}%
+	\foreach \i in {1,...,#1}
+		{%
+		\expandafter\gdef\expandafter\temp\expandafter{\temp 
+			\textbf{Rm:} & {\footnotesize T} && \textbf{I} & {\scriptsize PO} & \multirow{6}{*}{\includegraphics[scale=0.8]{../bmp/bmp.pdf}\includegraphics[scale=1.2]{../cbc/cbc.pdf}} & $\square$ \textbf{Note} & $\square$\\
+			& {\footnotesize HR} &&& {\scriptsize IV} && $\square$ & $\square$\\
+			\textbf{Name:} & {\footnotesize SBP} &&& {\scriptsize B} && $\square$ & $\square$\\\cline{4-5}
+			& {\footnotesize DBP} && \textbf{O} & {\scriptsize U} && $\square$ & $\square$\\
+			& {\footnotesize RR} &&& {\scriptsize NG} && $\square$ & $\square$\\
+			\textbf{Age:\qquad\mars\enspace\venus} & {\footnotesize SpO$_2$} &&& {\scriptsize PR} && $\square$ & $\square$\\\cline{4-5}
+			\textbf{\scriptsize HD:} \hspace*{\fill} \textbf{\scriptsize POD:} \hspace*{\fill} & {\footnotesize Wt} && \textbf{N} &&& $\square$ & $\square$\\\hline\hline
+			}%
+		}%
+	\temp}
+
+\begin{document}
+
+	\begin{tabularx}{\textwidth}{l|l p{13mm}| p{2mm} p{17mm} |l| p{35mm} X}
+		\hline\hline
+		\scutrow{8}
+	\end{tabularx}
+
+\end{document}

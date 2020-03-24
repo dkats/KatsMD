@@ -1,0 +1,53 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning}
+
+\begin{document}
+	
+	\begin{tikzpicture}[node distance=0mm]
+		\def\blank{Y};
+		\ifx\blank\empty
+			\tikzstyle{data} = [black]
+			\def\pt{PT};
+			\def\inr{INR};
+			\def\ptt{PTT};
+		\else
+			\tikzstyle{data} = [white]
+			\def\pt{11.5};
+			\def\inr{35.2};
+			\def\ptt{0.9};
+		\fi
+
+		\node (center) at (0,0) {};
+
+		\node[data, left of=center, anchor=south east] (pt) {\pt};
+		\node[data, right of=center, anchor=south west] (ptt) {\ptt};
+		\node[data, below of=center, anchor=north, yshift=-2] (inr) {\inr};
+
+		\draw
+			let 
+				\p1 = (center),
+				\p2 = (pt.north),
+				\p3 = (ptt.north),
+				\p4 = (inr.south)
+			in
+				(\x1,\y1+2) -- (\x1,{max(\y2,\y3)+4});
+		\draw
+			let 
+				\p1 = (center),
+				\p2 = (pt.north),
+				\p3 = (ptt.north),
+				\p4 = (inr.south west)
+			in
+				(\x1,\y1+2) -- ({\x1+1.25*\x4},2/3*\y4);
+		\draw
+			let 
+				\p1 = (center),
+				\p2 = (pt.north),
+				\p3 = (ptt.north),
+				\p4 = (inr.south west)
+			in
+				(\x1,\y1+2) -- ({\x1-1.25*\x4},2/3*\y4);
+	\end{tikzpicture}
+
+\end{document}
