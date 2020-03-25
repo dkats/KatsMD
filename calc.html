@@ -19,14 +19,17 @@
 	<li onclick="customscroll('bmi');">BMI</li>
 	<li onclick="customscroll('ekg');">Pediatric EKG Normal Values</li>
 	<li onclick="customscroll('qtc');">QTc</li>
+	<li onclick="customscroll('acidbase');">Acid-base Compensation</li>
 </ul>
 </nav>
 
 <article>
 
+	<p>These calculators are a similar concept to those on <a href="https://www.mdcalc.com/">MDCalc</a>, however, my goal is to increase transparency. All of the formulae are clearly displayed, except for the calculators with complicated calculations and conversions; however, that code (JavaScript) is available by clicking the link below each calculator.</p>
+
 	<script type="text/javascript" src="js/calc-bmi.js"></script>
 	<div class="calc" id="bmi">
-		<strong>BMI</strong>: weight(kg) / (height (m))^2 = 703 &times; weight(lbs) / (height (in))^2<br />
+		<strong>BMI</strong>: weight(kg) / height<sup>2</sup> (m<sup>2</sup>) = 703 &times; weight(lbs) / height<sup>2</sup> (in<sup>2</sup>)<br />
 		<table>
 			<tr>
 				<td>Height</td>
@@ -54,6 +57,7 @@
 				</select></td></tr>
 			<tr><td>BMI</td><td><input type="text" id="bmi_bmi" readonly></td></tr>
 		</table>
+		<div class="sourcelink"><a href="js/calc-bmi.js">Click for the JavaScript code</a></div>
 	</div>
 
 	<script type="text/javascript" src="js/calc-ekg.js"></script>
@@ -105,6 +109,7 @@
 			<tr><td>S amplitude</td><td><input type="text" id="ekg_s_amp" readonly> mV</td></tr>
 			<tr><td>R:S ratio</td><td><input type="text" id="ekg_rs_ratio" readonly></td></tr>
 		</table>
+		<div class="sourcelink"><a href="js/calc-ekg.js">Click for the JavaScript code</a></div>
 	</div>
 
 	<script type="text/javascript" src="js/calc-qtc.js"></script>
@@ -123,11 +128,33 @@
 			</select></td></tr>
 			<tr><td>QTc</td><td><input type="text" id="qtc_qtc" readonly></td></tr>
 		</table>
+		<div class="sourcelink"><a href="js/calc-qtc.js">Click for the JavaScript code</a></div>
+	</div>
+
+	<script type="text/javascript" src="js/calc-acidbase.js"></script>
+	<div class="calc" id="acidbase">
+		<strong>Acid-base Compensation</strong><br />
+		<table>
+			<tr><td>Primary disorder</td><td><select id="acidbase_disorder" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
+				<option value="metabolic acidosis" selected>Metabolic acidosis</option>
+				<option value="metabolic alkalosis">Metabolic alkalosis</option>
+				<option value="respiratory acidosis">Respiratory acidosis</option>
+				<option value="respiratory alkalosis">Respiratory alkalosis</option>
+				</select></td></tr>
+			<tr><td>Time frame</td><td><select id="acidbase_time" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
+				<option value="acute" selected>Acute</option>
+				<option value="chronic">Chronic</option>
+				</select></td></tr>
+			<tr><td>P<sub>a</sub>CO<sub>2</sub></td><td><input type="text" id="acidbase_paco2" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');" readonly> mmHg</td></tr>
+			<tr><td>HCO<sub>3</sub><sup>&ndash;</sup></td><td><input type="text" id="acidbase_bicarb" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');"> mEq/L</td></tr>
+			<tr><td>Formula</td><td id="acidbase_formula">&Delta; P<sub>a</sub>CO<sub>2</sub> = 40 &minus; 1.2 &times; &Delta; HCO<sub>3</sub></td></tr>
+		</table>
+		<div class="sourcelink"><a href="js/calc-acidbase.js">Click for the JavaScript code</a></div>
 	</div>
 
 	<!-- TODO: Opioid converter (https://cwru.app.box.com/file/638625110986) -->
 
-	<!-- TODO: Winters formula and related pH, pCO2, HCO3 calculations -->
+	<!-- TODO: Albumin adjustment -->
 
 </article>
 </body>
