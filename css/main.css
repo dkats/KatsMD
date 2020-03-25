@@ -321,6 +321,10 @@ article {
 	margin: 6pt 0 6pt 0;
 }
 
+.minispacedlist li {
+	margin: 3pt 0 3pt 0;
+}
+
 .collapsible {
 	background-color: #0000b3;
 	color: white;
