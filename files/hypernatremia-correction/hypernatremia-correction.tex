@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+\usepackage[margin = 1.0in]{geometry}
+
+\newcommand{\na}{\mathrm{Na}}
+\newcommand{\tbw}{\mathrm{TBW}}
+
+\begin{document}
+	
+	When correcting sodium, the new (desired) concentration of sodium will be equal to total sodium divided by total volume. When adding fluids, this is simply the patient's total sodium (mass, not concentration) combined with the total sodium of the infusate divided by the sum of the patient's total body water added to the infusate's volume. Mathematically, this is represented by,
+	\begin{equation}
+		[\na]_d = \frac{\na_t + \na_{inf}}{\tbw + V_{inf}}
+	\end{equation}
+	where $[\na]_d$ is the desired concentration of sodium after infusion, $\na_t$ is the total sodium in the body, $\na_{inf}$ is the total sodium of the infusate, $\tbw$ is total body water, and $V_{inf}$ is the volume of the infusate.
+
+	Now, we substitute for $\na_{TB}$ and $\na_{inf}$ with $[\na]_m \cdot \tbw$ and $[\na]_{inf} \cdot V_{inf}$, respectively. By doing this, we assume that the concentration of sodium in all of the body is approximately equal to the concentration of sodium in the blood.
+	\begin{equation}
+		[\na]_d = \frac{[\na]_m \cdot \tbw + [\na]_{inf} \cdot V_{inf}}{\tbw + V_{inf}}
+	\end{equation}
+	where $[\na]_m$ is the patient's measured concentration of sodium (according to the lab), $[\na]_{inf}$ is the concentration of sodium in the infusate.
+
+	Subtracting $[\na]_m$ from both sides of the equation, we get:
+	\begin{equation}
+		[\na]_d - [\na]_m = \frac{[\na]_m \cdot \tbw + [\na]_{inf} \cdot V_{inf}}{\tbw + V_{inf}} - [\na]_m
+	\end{equation}
+	\begin{equation}
+		[\na]_d - [\na]_m = \frac{[\na]_m \cdot \tbw + [\na]_{inf} \cdot V_{inf} - [\na]_m \cdot \tbw - [\na]_m \cdot V_{inf}}{\tbw + V_{inf}}
+	\end{equation}
+	\begin{equation}
+		[\na]_d - [\na]_m = \frac{[\na]_{inf} \cdot V_{inf} - [\na]_m \cdot V_{inf}}{\tbw + V_{inf}}
+	\end{equation}
+	\begin{equation}
+		([\na]_d - [\na]_m) \times (\tbw + V_{inf}) = [\na]_{inf} \cdot V_{inf} - [\na]_m \cdot V_{inf}
+	\end{equation}
+	\begin{equation}
+		[\na]_d \cdot \tbw + [\na]_d \cdot V_{inf} - [\na]_m \cdot \tbw - [\na]_m \cdot V_{inf} = [\na]_{inf} \cdot V_{inf} - [\na]_m \cdot V_{inf}
+	\end{equation}
+
+	Rearranging such that terms with our variable of clinical importance, $V_{inf}$, are on the left side of the equation and all others are on the right, we get:
+	\begin{equation}
+		[\na]_d \cdot V_{inf} - [\na]_m \cdot V_{inf} - [\na]_{inf} \cdot V_{inf} + [\na]_m \cdot V_{inf} = [\na]_m \cdot \tbw - [\na]_d \cdot \tbw
+	\end{equation}
+	\begin{equation}
+		[\na]_d \cdot V_{inf} - [\na]_{inf} \cdot V_{inf} = [\na]_m \cdot \tbw - [\na]_d \cdot \tbw
+	\end{equation}
+	\begin{equation}
+		V_{inf} = \frac{([\na]_m - [\na]_d) \cdot \tbw}{[\na]_d - [\na]_{inf}}
+	\end{equation}
+	\begin{sloppypar}
+	Finally, rearranging the numerator and denominator (for clinical relevance, because \mbox{$[\na]_d - [\na]_m$} is the desired change in sodium), we get:
+	\end{sloppypar}
+	\begin{equation}
+		V_{inf} = \frac{([\na]_d - [\na]_m) \cdot \tbw}{[\na]_{inf} - [\na]_d}
+	\end{equation}
+
+\end{document}

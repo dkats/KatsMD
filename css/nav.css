@@ -9,13 +9,23 @@ nav {
 }
 
 nav ul{
-	padding: 0;
-	margin: 12pt 0 0 0;
+	padding: 12px 0px;
+	margin: 0;
 }
 
 nav ul li{
 	padding: 4pt 6pt;
 	cursor: pointer;
+}
+
+nav ul li.category{
+	padding: 4pt 6pt;
+	font-weight: bold;
+}
+
+nav ul ul li.category{
+	font-weight: normal;
+	font-style: italic;
 }
 
 nav ul ul{

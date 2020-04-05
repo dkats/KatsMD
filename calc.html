@@ -10,16 +10,25 @@
 <script type="text/javascript">header();</script>
 <script type="text/javascript" src="js/footer.js"></script>
 <script type="text/javascript" src="js/customscroll.js"></script>
-<script type="text/javascript" src="js/calc.js"></script>
+<script type="text/javascript" src="js/calc/calc.js"></script>
 <script type="text/javascript">document.getElementById("header_clinicians").className = "active";</script>
 </head>
 <body>
 <nav role="navigation" class="ToC">
 <ul>
-	<li onclick="customscroll('bmi');">BMI</li>
-	<li onclick="customscroll('ekg');">Pediatric EKG Normal Values</li>
-	<li onclick="customscroll('qtc');">QTc</li>
-	<li onclick="customscroll('acidbase');">Acid-base Compensation</li>
+	<li class="category" onclick="customscroll('general');">General</li>
+	<ul>
+		<li onclick="customscroll('bmi');">BMI</li>
+		<li onclick="customscroll('acidbase');">Acid-base Compensation</li>
+		<li onclick="customscroll('ivf');">IV Fluid Contents</li>
+		<li onclick="customscroll('bodywater');">Free Water, Sodium Correction</li>
+		<li onclick="customscroll('opioid');">Opioid Converter</li>
+	</ul>
+	<li class="category" onclick="customscroll('cardiology');">Cardiology</li>
+	<ul>
+		<li onclick="customscroll('ekg');">Pediatric EKG Normal Values</li>
+		<li onclick="customscroll('qtc');">QTc</li>
+	</ul>
 </ul>
 </nav>
 
@@ -27,134 +36,264 @@
 
 	<p>These calculators are a similar concept to those on <a href="https://www.mdcalc.com/">MDCalc</a>, however, my goal is to increase transparency. All of the formulae are clearly displayed, except for the calculators with complicated calculations and conversions; however, that code (JavaScript) is available by clicking the link below each calculator.</p>
 
-	<script type="text/javascript" src="js/calc-bmi.js"></script>
-	<div class="calc" id="bmi">
-		<strong>BMI</strong>: weight(kg) / height<sup>2</sup> (m<sup>2</sup>) = 703 &times; weight(lbs) / height<sup>2</sup> (in<sup>2</sup>)<br />
-		<table>
-			<tr>
-				<td>Height</td>
-				<td><input type="text" id="bmi_ht_ft" onkeyup="if(only_num('bmi_ht_ft')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
-					<span id="bmi_ht_ft_lab">ft </span>
-					<input type="text" id="bmi_ht_in" onkeyup="if(only_num('bmi_ht_in')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
-					<span id="bmi_ht_in_lab">in</span>
-					<input type="text" id="bmi_ht_tin" onkeyup="if(only_num('bmi_ht_tin')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
-					<input type="text" id="bmi_ht_m" onkeyup="if(only_num('bmi_ht_m')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
-					<input type="text" id="bmi_ht_cm" onkeyup="if(only_num('bmi_ht_cm')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
-					<select id="bmi_ht_u" onclick="bmi_ht_click('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');" onchange="bmi_ht_change('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_ft_lab', 'bmi_ht_in', 'bmi_ht_in_lab', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');">
-					<option value="ft+in">ft+in</option>
-					<option value="in">in</option>
-					<option value="cm">cm</option>
-					<option value="m">m</option>
-				</select>
-				</td></tr>
-			<tr><td>Weight</td>
-				<td>
-					<input type="text" id="bmi_wt_lbs" onkeyup="if(only_num('bmi_wt_lbs')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
-					<input type="text" id="bmi_wt_kg" onkeyup="if(only_num('bmi_wt_kg')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
-					<select id="bmi_wt_u" onclick="bmi_wt_click('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');" onchange="bmi_wt_change('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');">
-					<option value="lbs">lbs</option>
-					<option value="kg">kg</option>
+	<h2 id="general">General</h2>
+
+		<script type="text/javascript" src="js/calc/bmi.js"></script>
+		<div class="calc" id="bmi">
+			<strong>BMI</strong>: weight(kg) / height<sup>2</sup> (m<sup>2</sup>) = 703 &times; weight(lbs) / height<sup>2</sup> (in<sup>2</sup>)<br />
+			<table>
+				<tr>
+					<td>Height</td>
+					<td><input type="text" id="bmi_ht_ft" onkeyup="if(only_num('bmi_ht_ft')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+						<span id="bmi_ht_ft_lab">ft </span>
+						<input type="text" id="bmi_ht_in" onkeyup="if(only_num('bmi_ht_in')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+						<span id="bmi_ht_in_lab">in</span>
+						<input type="text" id="bmi_ht_tin" onkeyup="if(only_num('bmi_ht_tin')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+						<input type="text" id="bmi_ht_m" onkeyup="if(only_num('bmi_ht_m')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+						<input type="text" id="bmi_ht_cm" onkeyup="if(only_num('bmi_ht_cm')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+						<select id="bmi_ht_u" onclick="bmi_ht_click('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');" onchange="bmi_ht_change('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_ft_lab', 'bmi_ht_in', 'bmi_ht_in_lab', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm');">
+						<option value="ft+in">ft+in</option>
+						<option value="in">in</option>
+						<option value="cm">cm</option>
+						<option value="m">m</option>
+					</select>
+					</td></tr>
+				<tr><td>Weight</td>
+					<td>
+						<input type="text" id="bmi_wt_lbs" onkeyup="if(only_num('bmi_wt_lbs')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};">
+						<input type="text" id="bmi_wt_kg" onkeyup="if(only_num('bmi_wt_kg')){bmi('bmi_ht_u', 'bmi_ht_ft', 'bmi_ht_in', 'bmi_ht_tin', 'bmi_ht_m', 'bmi_ht_cm', 'bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg', 'bmi_bmi');};" style="display: none;">
+						<select id="bmi_wt_u" onclick="bmi_wt_click('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');" onchange="bmi_wt_change('bmi_wt_u', 'bmi_wt_lbs', 'bmi_wt_kg');">
+						<option value="lbs">lbs</option>
+						<option value="kg">kg</option>
+					</select></td></tr>
+				<tr><td>BMI</td><td><input type="text" id="bmi_bmi" readonly></td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/bmi.js">Click for the JavaScript code</a></div>
+		</div>
+
+		<script type="text/javascript" src="js/calc/acidbase.js"></script>
+		<div class="calc" id="acidbase">
+			<strong>Acid-base Compensation</strong><br />
+			<table>
+				<tr><td>Primary disorder</td><td><select id="acidbase_disorder" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
+					<option value="metabolic acidosis" selected>Metabolic acidosis</option>
+					<option value="metabolic alkalosis">Metabolic alkalosis</option>
+					<option value="respiratory acidosis">Respiratory acidosis</option>
+					<option value="respiratory alkalosis">Respiratory alkalosis</option>
+					</select></td></tr>
+				<tr><td>Time frame</td><td><select id="acidbase_time" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
+					<option value="acute" selected>Acute</option>
+					<option value="chronic">Chronic</option>
+					</select></td></tr>
+				<tr><td>P<sub>a</sub>CO<sub>2</sub></td><td><input type="text" id="acidbase_paco2" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');" readonly> mmHg</td></tr>
+				<tr><td>HCO<sub>3</sub><sup>&ndash;</sup></td><td><input type="text" id="acidbase_bicarb" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');"> mEq/L</td></tr>
+				<tr><td>Formula</td><td id="acidbase_formula">&Delta; P<sub>a</sub>CO<sub>2</sub> = 40 &minus; 1.2 &times; &Delta; HCO<sub>3</sub></td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/acidbase.js">Click for the JavaScript code</a></div>
+		</div>
+
+		<!-- Electrolyte content of IV fluids -->
+		<script type="text/javascript" src="js/calc/bodywater.js"></script>
+		<div class="calc" id="ivf">
+			<strong>IV Fluid Content</strong><br />
+			<table>
+				<tr>
+					<td>Fluid</td>
+					<td><select id="ivf_fluid" onchange="ivf('ivf_fluid', 'ivf_na', 'ivf_k', 'ivf_cl', 'ivf_ca', 'ivf_lactate', 'ivf_glu', 'ivf_cal', 'ivf_osm');">
+							<option value="" disabled selected style="display:none;"></option>
+							<option value="ns">Normal saline (0.9%)</option>
+							<option value="halfns">Half normal saline (0.45%)</option>
+							<option value="d5halfns">Half normal saline (0.45%) with 5% dextrose</option>
+							<option value="d4fifthns">Fifth normal saline (0.18%) with 4% dextrose</option>
+							<option value="lr">Lactated Ringer's</option>
+							<option value="d5halflr">Half lactated Ringer's with 5% dextrose</option>
+							<option value="d10">10% dextrose</option>
+							<option value="d5">5% dextrose</option>
+							<option value="darrow">Darrow's</option>
+							<option value="d5halfdarrow">Half darrow's with 5% dextrose</option>
+					</select>
+					</td></tr>
+				<tr><td>Sodium (Na)</td><td><input type="text" id="ivf_na" readonly> mEq/L</td></tr>
+				<tr><td>Potassium (K)</td><td><input type="text" id="ivf_k" readonly> mEq/L</td></tr>
+				<tr><td>Chloride (Cl)</td><td><input type="text" id="ivf_cl" readonly> mEq/L</td></tr>
+				<tr><td>Calcium (Ca)</td><td><input type="text" id="ivf_ca" readonly> mEq/L</td></tr>
+				<tr><td>Lactate</td><td><input type="text" id="ivf_lactate" readonly> mmol/L</td></tr>
+				<tr><td>Glucose</td><td><input type="text" id="ivf_glu" readonly> g/L</td></tr>
+				<tr><td>Calories</td><td><input type="text" id="ivf_cal" readonly> cal/L</td></tr>
+				<tr><td>Osmolarity</td><td><input type="text" id="ivf_osm" readonly> mOsm/L</td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/bodywater.js">Click for the JavaScript code</a></div>
+		</div>
+
+		<!-- Volume and sodium replation -->
+		<script type="text/javascript" src="js/calc/bodywater.js"></script>
+		<div class="calc" id="bodywater">
+			<strong>Free Water Deficit and Sodium Correction</strong><br />
+			<table>
+				<tr><td>Weight</td>
+					<td>
+						<input type="text" id="bodywater_wt_kg" onkeyup="if(only_num('bodywater_wt_kg')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};">
+						<input type="text" id="bodywater_wt_lbs" onkeyup="if(only_num('bodywater_wt_lbs')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v')bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');;};" style="display: none;">
+						<select id="bodywater_wt_u" onclick="bmi_wt_click('bodywater_wt_u', 'bodywater_wt_lbs', 'bodywater_wt_kg');" onchange="bmi_wt_change('bodywater_wt_u', 'bodywater_wt_lbs', 'bodywater_wt_kg');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');">
+							<option value="kg">kg</option>
+							<option value="lbs">lbs</option>
+					</select></td></tr>
+				<tr>
+					<td>(optional) Height</td>
+					<td><input type="text" id="bodywater_ht_cm" onkeyup="if(only_num('bodywater_ht_cm')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};">
+						<input type="text" id="bodywater_ht_ft" onkeyup="if(only_num('bodywater_ht_ft')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};" style="display: none;">
+							<span id="bodywater_ht_ft_lab" style="display: none;">ft </span>
+						<input type="text" id="bodywater_ht_in" onkeyup="if(only_num('bodywater_ht_in')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};" style="display: none;">
+							<span id="bodywater_ht_in_lab" style="display: none;">in</span>
+						<input type="text" id="bodywater_ht_tin" onkeyup="if(only_num('bodywater_ht_tin')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};" style="display: none;">
+						<input type="text" id="bodywater_ht_m" onkeyup="if(only_num('bodywater_ht_m')){frac_tbw('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm', 'bodywater_ht_u', 'bodywater_water_perc');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};" style="display: none;">
+						<select id="bodywater_ht_u" onclick="bmi_ht_click('bodywater_ht_u', 'bodywater_ht_ft', 'bodywater_ht_in', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm');" onchange="bmi_ht_change('bodywater_ht_u', 'bodywater_ht_ft', 'bodywater_ht_ft_lab', 'bodywater_ht_in', 'bodywater_ht_in_lab', 'bodywater_ht_tin', 'bodywater_ht_m', 'bodywater_ht_cm');bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');">
+							<option value="ft+in">ft+in</option>
+							<option value="in">in</option>
+							<option value="cm" selected>cm</option>
+							<option value="m">m</option>
+					</select>
+					</td></tr>
+				<tr><td>Body water content</td><td><input type="text" id="bodywater_water_perc" onkeyup="if(only_num('bodywater_water_perc')){bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};" value="60"> %</td></tr>
+				<tr><td>Sodium (measured)</td><td><input type="text" id="bodywater_na_measured" onkeyup="if(only_num('bodywater_na_measured')){bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_infusionwater('bodywater_fluid', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_fluid_free_perc');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');};"> mEq/L</td></tr>
+				<tr><td>Sodium (goal)</td><td><input type="text" id="bodywater_na_goal" onkeyup="if(only_num('bodywater_na_goal')){bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');};" value="140"> mEq/L</td></tr>
+				<tr><td>Sodium (normal)</td><td><input type="text" id="bodywater_na_norm" onkeyup="if(only_num('bodywater_na_norm')){bodywater_deficit('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_na_measured', 'bodywater_na_norm', 'bodywater_na_goal', 'bodywater_deficit', 'bodywater_deficit_formula');};" value="140"> mEq/L</td></tr>
+				<tr><td>Free water deficit</td><td><input type="text" id="bodywater_deficit" readonly> mL</td></tr>
+				<tr><td>Formula</td><td id="bodywater_deficit_formula"></td></tr>
+				<tr style="border-top: 1px solid black;"><td>Fluid</td>
+					<td><select id="bodywater_fluid" onchange="bodywater_infusionwater('bodywater_fluid', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_fluid_free_perc');bodywater_fluidsodiumcorrection('bodywater_wt_lbs', 'bodywater_wt_kg', 'bodywater_wt_u', 'bodywater_water_perc', 'bodywater_fluid_na', 'bodywater_na_measured', 'bodywater_na_goal', 'bodywater_fluid_na_v');bodywater_fluidwatercorrection('bodywater_deficit', 'bodywater_fluid_free_perc', 'bodywater_fluid_free_v');">
+							<option value="" disabled selected style="display:none;"></option>
+							<option value="ns">Normal saline (0.9%)</option>
+							<option value="halfns">Half normal saline (0.45%)</option>
+							<option value="d5halfns">Half normal saline (0.45%) with 5% dextrose</option>
+							<option value="d4fifthns">Fifth normal saline (0.18%) with 4% dextrose</option>
+							<option value="lr">Lactated Ringer's</option>
+							<option value="d5halflr">Half lactated Ringer's with 5% dextrose</option>
+							<option value="darrow">Darrow's</option>
+							<option value="d5halfdarrow">Half darrow's with 5% dextrose</option>
+					</select>
+					</td></tr>
+				<tr><td>Sodium (Na)</td><td><input type="text" id="bodywater_fluid_na" readonly> mEq/L</td></tr>
+				<tr><td>Free fluid</td><td><input type="text" id="bodywater_fluid_free_perc" readonly> %</td></tr>
+				<tr><td>To correct free water</td><td><input type="text" id="bodywater_fluid_free_v" readonly> mL</td></tr>
+				<tr><td>To correct sodium</td><td><input type="text" id="bodywater_fluid_na_v" readonly> mL</td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/bodywater.js">Click for the JavaScript code</a> | <a href="files/hypernatremia-correction/hypernatremia-correction.pdf">Click for the calculation of volume of infusion based on desired change in sodium</a></div>
+		</div>
+
+		<!-- Opioid converter -->
+		<script type="text/javascript" src="js/calc/opioid.js"></script>
+		<div class="calc" id="opioid" onload="opioid_startup();">
+			<strong>Opioid Conversion</strong><br />
+			<table>
+				<tr><td>Starting drug</td><td><select id="opioid_start_drug" onchange="opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')">
+					<option value="" disabled selected style="display:none;"></option>
+					<option value="codeine">Codeine</option>
+					<option value="fentanyl buccal/sl">Fentanyl buccal/sublingual</option>
+					<option value="fentanyl patch">Fentanyl patch (mcg/hr)</option>
+					<option value="hydrocodone">Hydrocodone</option>
+					<option value="hydromorphone">Hydromorphone</option>
+					<option value="methadone">Methadone</option>
+					<option value="morphine">Morphine</option>
+					<option value="oxycodone">Oxycodone</option>
+					<option value="oxymorphone">Oxymorphone</option>
+					</select></td></tr>
+				<tr><td>Dose</td><td><input type="text" id="opioid_start_dose" onkeyup="if(only_num('opioid_start_dose')){opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')};"></td></tr>
+				<tr><td>Doses/day</td><td><input type="text" id="opioid_start_doses" value="1" onkeyup="if(only_num('opioid_start_doses')){opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')};"></td></tr>
+				<tr><td>MME</td><td><input type="text" id="opioid_mme" readonly></td></tr>
+				<tr><td>Output drug</td><td><select id="opioid_output_drug" onchange="opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')">
+					<option value="" disabled selected style="display:none;"></option>
+					<option value="codeine">Codeine</option>
+					<option value="fentanyl buccal/sl">Fentanyl buccal/sublingual</option>
+					<option value="fentanyl patch">Fentanyl patch (mcg/hr)</option>
+					<option value="hydrocodone">Hydrocodone</option>
+					<option value="hydromorphone">Hydromorphone</option>
+					<option value="methadone">Methadone</option>
+					<option value="morphine">Morphine</option>
+					<option value="oxycodone">Oxycodone</option>
+					<option value="oxymorphone">Oxymorphone</option>
+					</select></td></tr>
+				<tr><td>Decrease MME by</td><td><input type="text" id="opioid_output_decrease" value="25" onkeyup="if(only_num('opioid_output_doses')){opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')};"> %</td></tr>
+				<tr><td>Doses/day</td><td><input type="text" id="opioid_output_doses" value="1" onkeyup="if(only_num('opioid_output_doses')){opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')};"></td></tr>
+				<tr><td>Dose</td><td><input type="text" id="opioid_output_dose" readonly></td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/opioid.js">Click for the JavaScript code</a></div>
+		</div>
+
+		<!-- Body water deficit -->
+
+	<h2 id="cardiology">Cardiology</h2>
+
+		<script type="text/javascript" src="js/calc/ekg.js"></script>
+		<!-- TODO: For fields with mV and msec, add number of small boxes (also, add small dropdowns for paper speed and voltage scale) -->
+		<div class="calc" id="ekg">
+			<strong>Pediatric EKG Normal Values</strong><br />
+			<table>
+				<tr><td>Age</td><td><select id="ekg_age" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+					<option value="" disabled selected style="display:none;"></option>
+					<option value="0-1m">0&ndash;1 months</option>
+					<option value="1-3m">1&ndash;3 months</option>
+					<option value="3-6m">3&ndash;6 months</option>
+					<option value="6-12m">6&ndash;12 months</option>
+					<option value="1-3y">1&ndash;3 years</option>
+					<option value="3-5y">3&ndash;5 years</option>
+					<option value="5-8y">5&ndash;8 years</option>
+					<option value="8-12y">8&ndash;12 years</option>
+					<option value="12-16y">12&ndash;16 years</option></select></td></tr>
+				<tr><td>Sex</td><td><select id="ekg_sex" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+					<option value="" disabled selected style="display:none;"></option>
+					<option value="m">Male</option>
+					<option value="f">Female</option>
+					</select></td></tr>
+				<tr><td>Lead</td><td><select id="ekg_lead" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
+					<option value="" selected style="display:none;"></option>
+					<option value="I">I</option>
+					<option value="II">II</option>
+					<option value="III">III</option>
+					<option value="aVR">aVR</option>
+					<option value="aVL">aVL</option>
+					<option value="aVF">aVF</option>
+					<option value="V1">V1</option>
+					<option value="V2">V2</option>
+					<option value="V3R">V3R</option>
+					<option value="V4">V4</option>
+					<option value="V6">V6</option>
+					<option value="V7">V7</option>
+					</select> <i style="color: gray; font-size: 10pt;">(Only necessary for wave amplitudes)</i></td></tr>
+				<tr><td>Heart rate (bpm)</td><td><input type="text" id="ekg_hr" readonly></td></tr>
+				<tr><td>P axis</td><td><input type="text" id="ekg_p_axis" readonly> &deg;</td></tr>
+				<tr><td>P duration</td><td><input type="text" id="ekg_p_dur" readonly> msec</td></tr>
+				<tr><td>PR interval</td><td><input type="text" id="ekg_pr_int" readonly> msec</td></tr>
+				<tr><td>QRS axis</td><td><input type="text" id="ekg_qrs_axis" readonly> &deg;</td></tr>
+				<tr><td>QRS duration</td><td><input type="text" id="ekg_qrs_dur" readonly> msec</td></tr>
+				<tr><td>QTc</td><td><input type="text" id="ekg_qtc" readonly> msec</td></tr>
+				<tr><td>P amplitude</td><td><input type="text" id="ekg_p_amp" readonly> mV</td></tr>
+				<tr><td>Q amplitude</td><td><input type="text" id="ekg_q_amp" readonly> mV</td></tr>
+				<tr><td>R amplitude</td><td><input type="text" id="ekg_r_amp" readonly> mV</td></tr>
+				<tr><td>S amplitude</td><td><input type="text" id="ekg_s_amp" readonly> mV</td></tr>
+				<tr><td>R:S ratio</td><td><input type="text" id="ekg_rs_ratio" readonly></td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/ekg.js">Click for the JavaScript code</a></div>
+		</div>
+
+		<script type="text/javascript" src="js/calc/qtc.js"></script>
+		<!-- TODO: Add small dropdowns for paper speed (modify numbers accordingly) -->
+		<div class="calc" id="qtc">
+			<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
+			<table>
+				<tr><td>QT</td><td><input type="text" id="qtc_qt" onkeyup="if(only_num('qtc_qt')){qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"></td></tr>
+				<tr><td>HR</td><td><input type="text" id="qtc_hr" onkeyup="if(only_num('qtc_hr')){qtc_hr_update('hr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"> bpm</td></tr>
+				<tr><td>RR</td><td>
+					<input type="text" id="qtc_rr_msec" onkeyup="if(only_num('qtc_rr_msec')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};">
+					<input type="text" id="qtc_rr_sbox" onkeyup="if(only_num('qtc_rr_sbox')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};" style="display: none;">
+					<select id="qtc_rr_u" onclick="qtc_rr_click('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');" onchange="qtc_rr_change('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');">
+					<option value="msec">msec</option>
+					<option value="sbox">small boxes</option>
 				</select></td></tr>
-			<tr><td>BMI</td><td><input type="text" id="bmi_bmi" readonly></td></tr>
-		</table>
-		<div class="sourcelink"><a href="js/calc-bmi.js">Click for the JavaScript code</a></div>
-	</div>
-
-	<script type="text/javascript" src="js/calc-ekg.js"></script>
-	<!-- TODO: For fields with mV and msec, add number of small boxes (also, add small dropdowns for paper speed and voltage scale) -->
-	<div class="calc" id="ekg">
-		<strong>Pediatric EKG Normal Values</strong><br />
-		<table>
-			<tr><td>Age</td><td><select id="ekg_age" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
-				<option value="" disabled selected style="display:none;"></option>
-				<option value="0-1m">0&ndash;1 months</option>
-				<option value="1-3m">1&ndash;3 months</option>
-				<option value="3-6m">3&ndash;6 months</option>
-				<option value="6-12m">6&ndash;12 months</option>
-				<option value="1-3y">1&ndash;3 years</option>
-				<option value="3-5y">3&ndash;5 years</option>
-				<option value="5-8y">5&ndash;8 years</option>
-				<option value="8-12y">8&ndash;12 years</option>
-				<option value="12-16y">12&ndash;16 years</option></select></td></tr>
-			<tr><td>Sex</td><td><select id="ekg_sex" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
-				<option value="" disabled selected style="display:none;"></option>
-				<option value="m">Male</option>
-				<option value="f">Female</option>
-				</select></td></tr>
-			<tr><td>Lead</td><td><select id="ekg_lead" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
-				<option value="" selected style="display:none;"></option>
-				<option value="I">I</option>
-				<option value="II">II</option>
-				<option value="III">III</option>
-				<option value="aVR">aVR</option>
-				<option value="aVL">aVL</option>
-				<option value="aVF">aVF</option>
-				<option value="V1">V1</option>
-				<option value="V2">V2</option>
-				<option value="V3R">V3R</option>
-				<option value="V4">V4</option>
-				<option value="V6">V6</option>
-				<option value="V7">V7</option>
-				</select> <i style="color: gray; font-size: 10pt;">(Only necessary for wave amplitudes)</i></td></tr>
-			<tr><td>Heart rate (bpm)</td><td><input type="text" id="ekg_hr" readonly></td></tr>
-			<tr><td>P axis</td><td><input type="text" id="ekg_p_axis" readonly> &deg;</td></tr>
-			<tr><td>P duration</td><td><input type="text" id="ekg_p_dur" readonly> msec</td></tr>
-			<tr><td>PR interval</td><td><input type="text" id="ekg_pr_int" readonly> msec</td></tr>
-			<tr><td>QRS axis</td><td><input type="text" id="ekg_qrs_axis" readonly> &deg;</td></tr>
-			<tr><td>QRS duration</td><td><input type="text" id="ekg_qrs_dur" readonly> msec</td></tr>
-			<tr><td>QTc</td><td><input type="text" id="ekg_qtc" readonly> msec</td></tr>
-			<tr><td>P amplitude</td><td><input type="text" id="ekg_p_amp" readonly> mV</td></tr>
-			<tr><td>Q amplitude</td><td><input type="text" id="ekg_q_amp" readonly> mV</td></tr>
-			<tr><td>R amplitude</td><td><input type="text" id="ekg_r_amp" readonly> mV</td></tr>
-			<tr><td>S amplitude</td><td><input type="text" id="ekg_s_amp" readonly> mV</td></tr>
-			<tr><td>R:S ratio</td><td><input type="text" id="ekg_rs_ratio" readonly></td></tr>
-		</table>
-		<div class="sourcelink"><a href="js/calc-ekg.js">Click for the JavaScript code</a></div>
-	</div>
-
-	<script type="text/javascript" src="js/calc-qtc.js"></script>
-	<!-- TODO: Add small dropdowns for paper speed (modify numbers accordingly) -->
-	<div class="calc" id="qtc">
-		<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
-		<table>
-			<tr><td>QT</td><td><input type="text" id="qtc_qt" onkeyup="if(only_num('qtc_qt')){qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"></td></tr>
-			<tr><td>HR</td><td><input type="text" id="qtc_hr" onkeyup="if(only_num('qtc_hr')){qtc_hr_update('hr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"> bpm</td></tr>
-			<tr><td>RR</td><td>
-				<input type="text" id="qtc_rr_msec" onkeyup="if(only_num('qtc_rr_msec')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};">
-				<input type="text" id="qtc_rr_sbox" onkeyup="if(only_num('qtc_rr_sbox')){qtc_hr_update('rr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};" style="display: none;">
-				<select id="qtc_rr_u" onclick="qtc_rr_click('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');" onchange="qtc_rr_change('qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox');">
-				<option value="msec">msec</option>
-				<option value="sbox">small boxes</option>
-			</select></td></tr>
-			<tr><td>QTc</td><td><input type="text" id="qtc_qtc" readonly></td></tr>
-		</table>
-		<div class="sourcelink"><a href="js/calc-qtc.js">Click for the JavaScript code</a></div>
-	</div>
-
-	<script type="text/javascript" src="js/calc-acidbase.js"></script>
-	<div class="calc" id="acidbase">
-		<strong>Acid-base Compensation</strong><br />
-		<table>
-			<tr><td>Primary disorder</td><td><select id="acidbase_disorder" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
-				<option value="metabolic acidosis" selected>Metabolic acidosis</option>
-				<option value="metabolic alkalosis">Metabolic alkalosis</option>
-				<option value="respiratory acidosis">Respiratory acidosis</option>
-				<option value="respiratory alkalosis">Respiratory alkalosis</option>
-				</select></td></tr>
-			<tr><td>Time frame</td><td><select id="acidbase_time" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
-				<option value="acute" selected>Acute</option>
-				<option value="chronic">Chronic</option>
-				</select></td></tr>
-			<tr><td>P<sub>a</sub>CO<sub>2</sub></td><td><input type="text" id="acidbase_paco2" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');" readonly> mmHg</td></tr>
-			<tr><td>HCO<sub>3</sub><sup>&ndash;</sup></td><td><input type="text" id="acidbase_bicarb" onkeyup="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');"> mEq/L</td></tr>
-			<tr><td>Formula</td><td id="acidbase_formula">&Delta; P<sub>a</sub>CO<sub>2</sub> = 40 &minus; 1.2 &times; &Delta; HCO<sub>3</sub></td></tr>
-		</table>
-		<div class="sourcelink"><a href="js/calc-acidbase.js">Click for the JavaScript code</a></div>
-	</div>
-
-	<!-- TODO: Opioid converter (https://cwru.app.box.com/file/638625110986) -->
-
-	<!-- TODO: Albumin adjustment -->
+				<tr><td>QTc</td><td><input type="text" id="qtc_qtc" readonly></td></tr>
+			</table>
+			<div class="sourcelink"><a href="js/calc/qtc.js">Click for the JavaScript code</a></div>
+		</div>
 
 </article>
 </body>
