@@ -1,0 +1,43 @@
+\documentclass[landscape]{article}
+\usepackage[fontsize=10pt]{scrextend}
+\usepackage[margin = 0.5in]{geometry}
+\setlength{\parindent}{0cm}
+% \usepackage{setspace}
+% \setstretch{1.15}			% Line spacing
+
+\usepackage{tabularx}
+\setlength{\tabcolsep}{2pt}
+\usepackage{multirow}
+
+\usepackage{tikz}
+
+\usepackage{wasysym,amssymb}
+\renewcommand{\deg}{$^\circ$}
+\renewcommand{\blacksquare}{\raisebox{.45ex}{\rule{.7ex}{.7ex}}}
+
+\pagestyle{empty}
+
+\newcommand{\scutrow}[1]{%
+	\def\temp{}%
+	\foreach \i in {1,...,#1}
+		{%
+		\expandafter\gdef\expandafter\temp\expandafter{\temp 
+			\textbf{Rm:} & $\square$ Sickest & \textbf{Summary} & \textbf{Action List} & \textbf{Situational Awareness} & \textbf{Overnight Events}\\
+			{\footnotesize \textbf{Nurse:}} & $\square$ Unstable & Dx: & $\square$ Meds: && \blacksquare\\
+			\textbf{Name:} & & & $\square$ Labs: && \blacksquare\\
+			& $\square$ Watcher & & $\square$ && \blacksquare\\
+			& & Antibiotics: & $\square$ && \blacksquare\\
+			\textbf{Age:\hspace*{\fill}\mars\enspace\venus\enspace} & $\square$ Stable & Access: & $\square$ && \blacksquare \\\hline\hline
+			}%
+		}%
+	\temp}
+
+\begin{document}
+	\textit{Name:} \hspace*{\fill} \textit{Pager:} \hspace*{\fill}\hspace*{\fill} \textit{Date:} \hspace*{1in}\vspace{2pt}
+
+	\begin{tabularx}{\textwidth}{p{30mm} | p{20mm} | p{55mm} | p{50mm} | p{45mm} | X}
+		\hline\hline
+		\scutrow{7}
+	\end{tabularx}
+
+\end{document}
