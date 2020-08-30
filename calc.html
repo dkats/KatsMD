@@ -40,7 +40,7 @@
 
 		<script type="text/javascript" src="js/calc/bmi.js"></script>
 		<div class="calc" id="bmi">
-			<strong>BMI</strong>: weight(kg) / height<sup>2</sup> (m<sup>2</sup>) = 703 &times; weight(lbs) / height<sup>2</sup> (in<sup>2</sup>)<br />
+			<h4 style="display: inline-block;">BMI</h4>: weight(kg) / height<sup>2</sup> (m<sup>2</sup>) = 703 &times; weight(lbs) / height<sup>2</sup> (in<sup>2</sup>)<br />
 			<table>
 				<tr>
 					<td>Height</td>
@@ -73,7 +73,7 @@
 
 		<script type="text/javascript" src="js/calc/acidbase.js"></script>
 		<div class="calc" id="acidbase">
-			<strong>Acid-base Compensation</strong><br />
+			<h4>Acid-base Compensation</h4>
 			<table>
 				<tr><td>Primary disorder</td><td><select id="acidbase_disorder" onchange="acid_base('acidbase_disorder', 'acidbase_time', 'acidbase_paco2', 'acidbase_bicarb', 'acidbase_formula');">
 					<option value="metabolic acidosis" selected>Metabolic acidosis</option>
@@ -95,7 +95,15 @@
 		<!-- Electrolyte content of IV fluids -->
 		<script type="text/javascript" src="js/calc/bodywater.js"></script>
 		<div class="calc" id="ivf">
-			<strong>IV Fluid Content</strong><br />
+			<h4>IV Fluid Contents</h4>
+			<div class="sources">
+				<ul>
+					<li>de Moya, M. <em>et al</em>. ACS/ASE Medical Student Core Curriculum, Fluids and Electrolytes. American College of Surgeons Division of Education. <a href="https://www.facs.org/-/media/files/education/core-curriculum/fluids_electrolytes.ashx">https://www.facs.org/-/media/files/education/core-curriculum/fluids_electrolytes.ashx</a></li>
+					<li>NICE Clinical Guideline 174 Development Group. <a href="https://www.nice.org.uk/guidance/cg174/resources/composition-of-commonly-used-crystalloids-table-191662813">https://www.nice.org.uk/guidance/cg174/resources/composition-of-commonly-used-crystalloids-table-191662813</a></li>
+					<li><em>UpToDate</em>. Comparison of plasma with commonly used intravenous solutions. <a href="https://www.uptodate.com/contents/image?imageKey=PULM%2F117769&topicKey=PULM%2F1607">https://www.uptodate.com/contents/image?imageKey=PULM%2F117769&topicKey=PULM%2F1607</a></li>
+					<li>World Health Organization. <em>Pocket Book of Hospital Care for Children: Guidelines for the Management of Common Childhood Illnesses.</em> 2nd edition, 2013. ANNEX 4, Intravenous fluids. <a href="https://www.ncbi.nlm.nih.gov/books/NBK154437/">https://www.ncbi.nlm.nih.gov/books/NBK154437/</a></li>
+				</ul>
+			</div>
 			<table>
 				<tr>
 					<td>Fluid</td>
@@ -128,7 +136,13 @@
 		<!-- Volume and sodium replation -->
 		<script type="text/javascript" src="js/calc/bodywater.js"></script>
 		<div class="calc" id="bodywater">
-			<strong>Free Water Deficit and Sodium Correction</strong><br />
+			<h4>Free Water Deficit and Sodium Correction</h4>
+			<div class="sources">
+				<ul>
+					<li>Friis-Hansen, B. Body Water Compartments In Children: Changes During Growth And Related Changes In Body Composition. <em>Pediatrics</em>. 1961, 28(2): 169&ndash;181.</li>
+					<li>Somers, M.J., Traum, A.Z. Hypernatremia in children. <em>UpToDate</em>. 2019.</li>
+				</ul>
+			</div>
 			<table>
 				<tr><td>Weight</td>
 					<td>
@@ -184,7 +198,13 @@
 		<!-- Opioid converter -->
 		<script type="text/javascript" src="js/calc/opioid.js"></script>
 		<div class="calc" id="opioid" onload="opioid_startup();">
-			<strong>Opioid Conversion</strong><br />
+			<h4>Opioid Conversion</h4>
+			<div class="sources">
+				<ul>
+					<li>American Academy of Family Physicians. Opioid Conversion Table. <a href="https://www.aafp.org/dam/AAFP/documents/patient_care/pain_management/conversion-table.pdf">https://www.aafp.org/dam/AAFP/documents/patient_care/pain_management/conversion-table.pdf</a></li>
+					<li>Centers for Disease Control and Prevention, National Center for Injury Prevention and Control. Calculating Total Daily Dose of Opioids For Safer Dosage. 2019. <a href="https://www.cdc.gov/drugoverdose/pdf/calculating_total_daily_dose-a.pdf">https://www.cdc.gov/drugoverdose/pdf/calculating_total_daily_dose-a.pdf</a></li>
+				</ul>
+			</div>
 			<table>
 				<tr><td>Starting drug</td><td><select id="opioid_start_drug" onchange="opioid_conversion('opioid_start_drug', 'opioid_start_dose', 'opioid_start_doses', 'opioid_output_drug', 'opioid_output_doses', 'opioid_output_decrease', 'opioid_output_dose', 'opioid_mme')">
 					<option value="" disabled selected style="display:none;"></option>
@@ -227,7 +247,15 @@
 		<script type="text/javascript" src="js/calc/ekg.js"></script>
 		<!-- TODO: For fields with mV and msec, add number of small boxes (also, add small dropdowns for paper speed and voltage scale) -->
 		<div class="calc" id="ekg">
-			<strong>Pediatric EKG Normal Values</strong><br />
+			<h4>Pediatric EKG Normal Values</h4>
+			<div class="sources">
+				<ul>
+					<li>Rijnbeek, P.R., <em>et al</em>. New normal limits for the paediatric electrocardiogram. Eur Heart J. 2001, 22(8): 702-711.</li>
+				</ul>
+			</div>
+			<div class="note">
+				Harriet Lane (Table 7.4) uses values from Park, M.K. <em>Pediatric Cardiology for Practitioners.</em> 5th ed, 2008. and Davidnon, A., <em>et al</em>. Normal ECG standards for infants and children. <em>Pediatr Cardiol</em>. 1979, 1: 123&ndash;131.
+			</div>
 			<table>
 				<tr><td>Age</td><td><select id="ekg_age" onchange="ekg_norm('ekg_sex', 'ekg_age', 'ekg_lead', 'ekg_hr', 'ekg_p_axis', 'ekg_p_dur', 'ekg_pr_int', 'ekg_qrs_axis', 'ekg_qrs_dur', 'ekg_qtc', 'ekg_p_amp', 'ekg_q_amp', 'ekg_r_amp', 'ekg_s_amp', 'ekg_rs_ratio');">
 					<option value="" disabled selected style="display:none;"></option>
@@ -279,7 +307,7 @@
 		<script type="text/javascript" src="js/calc/qtc.js"></script>
 		<!-- TODO: Add small dropdowns for paper speed (modify numbers accordingly) -->
 		<div class="calc" id="qtc">
-			<strong>QTc</strong>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
+			<h4 style="display: inline-block;">QTc</h4>: QT / sqrt(RR)<br />(RR = length of cardiac cycle)<br />
 			<table>
 				<tr><td>QT</td><td><input type="text" id="qtc_qt" onkeyup="if(only_num('qtc_qt')){qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"></td></tr>
 				<tr><td>HR</td><td><input type="text" id="qtc_hr" onkeyup="if(only_num('qtc_hr')){qtc_hr_update('hr', 'qtc_hr', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox'); qtc('qtc_qt', 'qtc_rr_u', 'qtc_rr_msec', 'qtc_rr_sbox', 'qtc_qtc');};"> bpm</td></tr>

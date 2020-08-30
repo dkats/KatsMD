@@ -2,6 +2,10 @@ article, input, select {
 	font-size: 14pt;
 }
 
+h4 {
+	margin: 0;
+}
+
 table {
 	margin: 0.5em 0.5em 0 1em;
 	border: 3px solid #ccc;
@@ -39,4 +43,19 @@ input[readonly]#ekg_hr,#ekg_p_axis,#ekg_p_dur,#ekg_pr_int,#ekg_qrs_axis,#ekg_qrs
 .sourcelink {
 	font-size: 10pt;
 	margin: 0 0 1em 1.5em;
+}
+
+.sources {
+	font-style: italic;
+	font-size: 10pt;
+	color: gray;
+	border: none;
+}
+
+.note {
+	padding: none;
+	background-color: inherit;
+	font-style: italic;
+	font-size: 10pt;
+	color: gray;
 }
