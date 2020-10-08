@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MGH Interpreter Services QR Codes</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/ipop.css">
+<meta name="author" content="Daniel J. Kats">
+<script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript">header();</script>
+<script type="text/javascript" src="js/footer.js"></script>
+<script type="text/javascript">document.getElementById("header_home").className = "active";</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'></script>
+</head>
+<body>
+<article>
+
+	<div id="hipaa">Any website that asks for an MRN is a potential HIPAA violation. This website does <em>not</em> send any data to the internet; all of the code that is used for the QR codes is loaded onto the computer you're using.</div>
+
+	<div class="center">
+		<table id="settings">
+			<tr><td><strong>Language: </strong></td><td><select id="language" onchange="refresh('ipop', 'cyracom', 'pager', 'language', 'mrn', 'location', 'hours');">
+				<option disabled>Frequently Used</option>
+				<option value="haitian_creole">Haitian Creole</option>
+				<option value="portuguese_brazilian">Portuguese (Brazilian)</option>
+				<option value="spanish" selected>Spanish</option>
+				<option disabled>────────────</option>
+				<option disabled>All</option>
+				<option value="asl">American Sign Language</option>
+				<option value="cantonese">Cantonese</option>
+				<option value="portuguese">Portuguese (Portugal)</option>
+				<option value="other">Other</option>
+			</select></td></tr>
+			<tr><td><strong>MRN: </strong></td><td><input type="text" id="mrn" onkeyup="refresh();"></td></tr>
+			<tr><td><strong>Location:</strong></td><td><input type="radio" name="location" id="ped" value="1002" checked onchange="refresh('ipop', 'cyracom', 'pager', 'language', 'mrn', 'location', 'location_other', 'hours');" /><label for="ped">Pedi ED</label></td></tr>
+			<tr><td></td><td><input type="radio" name="location" id="ed" value="1000" onchange="refresh();" /><label for="ed">Acute ED</label></td></tr>
+			<tr><td></td><td><input type="radio" name="location" id="e17" value="1037" onchange="refresh();" /><label for="e17">Ellison 17</label></td></tr>
+			<tr><td></td><td><input type="radio" name="location" id="e18" value="1038" onchange="refresh();" /><label for="e18">Ellison 18</label></td></tr>
+			<tr><td></td><td><input type="radio" name="location" id="picu" value="1059" onchange="refresh();" /><label for="picu">PICU</label></td></tr>
+			<!-- <tr><td></td><td><input type="radio" name="location" id="nicu" value="***" /><label for="nicu">NICU</label></td></tr> -->
+			<tr><td></td><td><input type="radio" name="location" id="location_other" value="other" onchange="refresh();" /><label for="other">Other pin: </label><input type="text" name="location" id="location_other_pin" size="5" onkeyup="document.getElementById('location_other').checked = true;refresh();"></td></tr>
+		</table>
+
+		<div id="room">Room number: ______________</div>
+
+		<div id="language_display"></div>
+
+		<div>
+			<table id="qrcodes">
+				<tr>
+					<td>Interpreter Services<br /><span id="hours"></span></td>
+					<td>Interpreter Services<br />Cyracom</td>
+					<td>Page an interpreter</td>
+				</tr>
+				<tr>
+					<td><span id="ipop" class="qrcode"></span></td>
+					<td><span id="cyracom" class="qrcode"></span></td>
+					<td><span id="pager" class="qrcode"></span></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><span id="cyracom_display"></span></td>
+					<td><span id="pager_display"></span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/ipop.js"></script>
+
+</article>
+</body>
+</html>
