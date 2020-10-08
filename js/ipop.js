@@ -167,7 +167,7 @@ var refresh = function() {
 		colorLight : "#ffffff",
 		correctLevel : QRCode.CorrectLevel.H
 	});
-	document.getElementById(cyracom_display).innerHTML = "PIN: " + pin + "<br />Language code: " + lang.cyracom;
+	document.getElementById(cyracom_display).innerHTML = (pin == '' ? '' : "PIN: " + pin + "<br />") + (lang.cyracom == "" ? "" : "Language code: " + lang.cyracom);
 
 	document.getElementById(pager_id).innerHTML = '';
 	var pager = new QRCode(pager_id, {
@@ -178,7 +178,7 @@ var refresh = function() {
 		colorLight : "#ffffff",
 		correctLevel : QRCode.CorrectLevel.H
 	});
-	document.getElementById(pager_display).innerHTML = "Pager: " + lang.pager;
+	document.getElementById(pager_display).innerHTML = (lang.pager == undefined ? "" : "Pager: " + lang.pager);
 
 	document.getElementById(hours_id).innerHTML = (lang.hrs == undefined ? '' : lang.hrs);
 }
