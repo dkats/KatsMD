@@ -76,6 +76,8 @@ var pager_display = 'pager_display';
 document.getElementById(mrn_id).style.backgroundColor = "pink";
 
 var ipop_num = '6176433344';
+// TODO: get cyracom number
+var cyracom_num = '6176433344';
 var pager_num = '6177245700';
 
 var arabic = new Lang('Arabic', '090');
@@ -158,7 +160,7 @@ var refresh = function() {
 	document.getElementById(cyracom_id).innerHTML = '';
 	var cyracom = new QRCode(cyracom_id, {
 		// PIN + MRN + 1 + language (2 for Spanish, 3 for other) + 1 + 2
-		text: ipop_num+(pin.length == 0 ? '' : ','+pin+(mrn.length==0 ? '' : ','+mrn+',,1'+(language == 'other' ? '' : (language == 'spanish' ? ',2,' : ',3,'+lang.cyracom+',')+'1,2'))),
+		text: cyracom_num+(pin.length == 0 ? '' : ','+pin+(mrn.length==0 ? '' : ','+mrn+',,1'+(language == 'other' ? '' : (language == 'spanish' ? ',2,' : ',3,'+lang.cyracom+',')+'1,2'))),
 		width: 128,
 		height: 128,
 		colorDark : "#000000",
@@ -194,7 +196,7 @@ var ipop = new QRCode("ipop", {
 
 var pin = getChecked(document.getElementsByName('location'));
 var cyracom = new QRCode("cyracom", {
-	text: ipop_num+','+pin,
+	text: cyracom_num+','+pin,
 	width: 128,
 	height: 128,
 	colorDark : "#000000",
