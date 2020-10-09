@@ -21,16 +21,46 @@
 	<div class="center">
 		<table id="settings">
 			<tr><td><strong>Language: </strong></td><td><select id="language" onchange="refresh('ipop', 'cyracom', 'pager', 'language', 'mrn', 'location', 'hours');">
-				<option disabled>Frequently Used</option>
+				<option disabled>Very Frequently Used</option>
+				<option value="arabic">Arabic</option>
 				<option value="haitian_creole">Haitian Creole</option>
 				<option value="portuguese_brazilian">Portuguese (Brazilian)</option>
 				<option value="spanish" selected>Spanish</option>
 				<option disabled>────────────</option>
-				<option disabled>All</option>
+				<option disabled>Frequently Used</option>
+				<option value="arabic_iraqi">Arabic (Iraqi)</option>
+				<option value="arabic_moroccan">Arabic (Moroccan)</option>
+				<option value="arabic_saudi">Arabic (Saudi)</option>
+				<option value="arabic_sudanese">Arabic (Sudanese)</option>
+				<option value="arabic_yemeni">Arabic (Yemeni)</option>
 				<option value="asl">American Sign Language</option>
 				<option value="cantonese">Cantonese</option>
+				<option value="cape_verdean">Cape Verdean</option>
+				<option value="chinese">Chinese</option>
+				<option value="french_creole">French Creole</option>
+				<option value="filipino">Filipino</option>
+				<option value="french">French</option>
+				<option value="hebrew">Hebrew</option>
+				<option value="hindi">Hindi</option>
+				<option value="hindustani">Hindustani</option>
+				<option value="indonesian">Indonesian</option>
+				<option value="italian">Italian</option>
+				<option value="japanese">Japanese</option>
+				<option value="korean">Korean</option>
+				<option value="mandarin">Mandarin</option>
 				<option value="portuguese">Portuguese (Portugal)</option>
-				<option value="other">Other</option>
+				<option value="punjabi">Punjabi</option>
+				<option value="russian">Russian</option>
+				<option value="swahili">Swahili</option>
+				<option value="taiwanese">Taiwanese</option>
+				<option value="telugu">Telugu</option>
+				<option value="thai">Thai</option>
+				<option value="urdu">Urdu</option>
+				<option value="vietnamese">Vietnamese</option>
+				<!-- <option disabled>────────────</option> -->
+				<!-- <option disabled>All</option> -->
+				<!-- <option disabled>────────────</option> -->
+				<!-- <option value="other">Other</option> -->
 			</select></td></tr>
 			<tr><td><strong>MRN: </strong></td><td><input type="text" id="mrn" onkeyup="refresh();"></td></tr>
 			<tr><td><strong>Location:</strong></td><td><input type="radio" name="location" id="ped" value="1002" checked onchange="refresh('ipop', 'cyracom', 'pager', 'language', 'mrn', 'location', 'location_other', 'hours');" /><label for="ped">Pedi ED</label></td></tr>
