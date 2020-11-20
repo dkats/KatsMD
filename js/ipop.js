@@ -129,6 +129,7 @@ var cyracom_display = 'cyracom_display';
 var pager_display = 'pager_display';
 var qr_is_class = 'qris';
 var qr_pager_class = 'qrpager';
+var pause_id = 'pause';
 
 document.getElementById(mrn_id).style.backgroundColor = "pink";
 
@@ -490,6 +491,15 @@ var refresh = function() {
 		document.getElementById(mrn_id).style.backgroundColor = "";
 	} else {
 		document.getElementById(mrn_id).style.backgroundColor = "pink";
+	}
+
+	var pause = validate(pause_id);
+	if(!(pause > 0)) {
+		pause = 1;
+	}
+	var pauses = '';
+	for(i = 0; i < pause; i++) {
+		pauses += ',';
 	}
 
 	var pin = getChecked(document.getElementsByName(location_id));
@@ -1560,7 +1570,7 @@ var refresh = function() {
 	document.getElementById(cyracom_id).innerHTML = '';
 	var cyracom = new QRCode(cyracom_id, {
 		// PIN + MRN + 1 + language (2 for Spanish, 3 for other) + 1 + 2
-		text: cyracom_num+(pin.length == 0 ? '' : ','+pin+(mrn.length==0 ? '' : ','+mrn+',,1'+(language == 'other' ? '' : (language == 'spanish' ? ',2,' : ',3,'+lang.cyracom+',')+'1,2'))),
+		text: cyracom_num+(pin.length == 0 ? '' : pauses+pin+(mrn.length==0 ? '' : ','+mrn+',,1'+(language == 'other' ? '' : (language == 'spanish' ? ',2,' : ',3,'+lang.cyracom+',')+'1,2'))),
 		width: 128,
 		height: 128,
 		colorDark : "#000000",

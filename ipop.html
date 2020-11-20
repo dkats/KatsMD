@@ -448,9 +448,16 @@
 		</div>
 	</div>
 
-	<br /><div><u>Instructions:</u> Open the camera app on your phone and point it at a QR code. Do <em>not</em> take a picture. An outline should show up around the QR code and a pop-up should appear asking if you'd like to make a call. Click on the pop-up to place the call.</div>
+	<br />
+	<div><u>Instructions:</u> Open the camera app on your phone and point it at a QR code. Do <em>not</em> take a picture. An outline should show up around the QR code and a pop-up should appear asking if you'd like to make a call. Click on the pop-up to place the call.</div>
 
-	<!-- TODO: Add customizable number of pauses at beginning -->
+	<br /><br />
+	<div class="center">
+	<div><strong>Advanced options:</strong></div>
+		<table id="settings_adv">
+			<tr><td><strong>Number of pauses before dailing: </strong></td><td><input type="text" id="pause" size="5" value="1" onkeyup="refresh();"></td></tr>
+		</table>
+	</div>
 
 	<script type="text/javascript" src="js/ipop.js"></script>
 
