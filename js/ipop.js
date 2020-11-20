@@ -21,11 +21,14 @@ function validate(id) {
 }
 
 class Lang {
-	constructor(name, cyracom, pager, hours) {
+	constructor(name, cyracom, pager, hour_mf_start, hour_mf_end, hour_ss_start, hour_ss_end) {
 		this._name = name;
 		this._cyracom = cyracom;
 		this._pager = pager;
-		this._hours = hours;
+		this._hour_mf_start = hour_mf_start;
+		this._hour_mf_end = hour_mf_end;
+		this._hour_ss_start = hour_ss_start;
+		this._hour_ss_end = hour_ss_end;
 	}
 
 	get name() {
@@ -52,12 +55,62 @@ class Lang {
 		return this._pager;
 	}
 
-	get hours() {
-		return this._hours;
+	get hour_mf_start() {
+		return this._hour_mf_start;
 	}
 
-	get hrs() {
-		return this._hours;
+	get hour_mf_end() {
+		return this._hour_mf_end;
+	}
+
+	get hours_mf() {
+		return this._hour_mf_start + "&ndash;" + this._hour_mf_end;
+	}
+
+	get hours_mf_inv() {
+		return this._hour_mf_end + "&ndash;" + this._hour_mf_start;
+	}
+
+	get hour_ss_start() {
+		return this._hour_ss_start;
+	}
+
+	get hour_ss_end() {
+		return this._hour_ss_end;
+	}
+
+	get hours_ss() {
+		return this._hour_ss_start + "&ndash;" + this._hour_ss_end;
+	}
+
+	get hours_ss_inv() {
+		return this._hour_ss_end + "&ndash;" + this._hour_ss_start;
+	}
+
+	get hours() {
+		if(this._hour_mf_start == undefined && this._hour_mf_end == undefined) {
+			return undefined;
+		}
+		if(this._hour_ss_start != undefined && this._hour_ss_end != undefined) {
+			if(this._hour_ss_start != this._hour_mf_start && this._hour_ss_end != this._hour_mf_end) {
+				return "Weekdays: " + this.hours_mf + "<br />Weekends: " + this.hours_ss;
+			}
+			return "Every day: " + this.hours_mf;
+		}
+		return "Weekdays: " + this.hours_mf;
+	}
+
+	get hours_inv() {
+		if(this._hour_mf_start == undefined && this._hour_mf_end == undefined) {
+			return undefined;
+		}
+		if(this._hour_ss_start != undefined && this._hour_ss_end != undefined) {
+			if(this._hour_ss_start != this._hour_mf_start && this._hour_ss_end != this._hour_mf_end) {
+				return "Weekdays: " + this.hours_mf_inv + "<br />Weekends: " + this.hours_ss_inv;
+			}
+			return "Every day: " + this.hours_mf_inv;
+		}
+		return "Weekdays: " + this.hours_mf_inv + "<br />Weekends: all day";
 	}
 }
 
@@ -69,15 +122,18 @@ var mrn_id = 'mrn';
 var location_id = 'location';
 var location_other_id = 'location_other_pin';
 var language_display = 'language_display';
-var hours_id = 'hours';
+var hours_on_id = 'hours_on';
+var hours_off_id = 'hours_off';
+var after_hours_id = 'after_hours';
 var cyracom_display = 'cyracom_display';
 var pager_display = 'pager_display';
+var qr_is_class = 'qris';
+var qr_pager_class = 'qrpager';
 
 document.getElementById(mrn_id).style.backgroundColor = "pink";
 
 var ipop_num = '6176433344';
-// TODO: get cyracom number
-var cyracom_num = '6176433344';
+var cyracom_num = '8554964429';
 var pager_num = '6177245700';
 
 var acholi = new Lang('Acholi (Sudan-Uganda)', '264');
@@ -88,18 +144,18 @@ var akan = new Lang('Akan', '016');
 var akateko = new Lang('Akateko', '418');
 var aklan = new Lang('Aklan', '120');
 var albanian = new Lang('Albanian', '070');
-var asl = new Lang('American Sign Language', '404','30007');
-var amharic = new Lang('Amharic', '027', '30009');
+var asl = new Lang('American Sign Language', '404', '30007', '7am', '8pm');
+var amharic = new Lang('Amharic', '027', undefined, '7am', '8pm');
 var apache = new Lang('Apache', '323');
-var arabic = new Lang('Arabic', '090', '30009');
-var arabic_egyptian = new Lang('Arabic (Egyptian)', '398', '30009');
-var arabic_gulf = new Lang('Arabic (Gulf)', '401', '30009');
-var arabic_iraqi = new Lang('Arabic (Iraqi)', '399', '30009');
-var arabic_levantine = new Lang('Arabic (Levantine)', '402', '30009');
-var arabic_moroccan = new Lang('Arabic (Moroccan)', '381', '30009');
-var arabic_saudi = new Lang('Arabic (Saudi)', '400', '30009');
-var arabic_sudanese = new Lang('Arabic (Sudanese)', '311', '30009');
-var arabic_yemeni = new Lang('Arabic (Yemeni)', '387', '30009');
+var arabic = new Lang('Arabic', '090', '30009', '7am', '8pm', '8am', '6:30pm');
+var arabic_egyptian = new Lang('Arabic (Egyptian)', '398', '30009', '7am', '8pm');
+var arabic_gulf = new Lang('Arabic (Gulf)', '401', '30009', '7am', '8pm');
+var arabic_iraqi = new Lang('Arabic (Iraqi)', '399', '30009', '7am', '8pm');
+var arabic_levantine = new Lang('Arabic (Levantine)', '402', '30009', '7am', '8pm');
+var arabic_moroccan = new Lang('Arabic (Moroccan)', '381', '30009', '7am', '8pm');
+var arabic_saudi = new Lang('Arabic (Saudi)', '400', '30009', '7am', '8pm');
+var arabic_sudanese = new Lang('Arabic (Sudanese)', '311', '30009', '7am', '8pm');
+var arabic_yemeni = new Lang('Arabic (Yemeni)', '387', '30009', '7am', '8pm');
 var armenian = new Lang('Armenian', '072');
 var armenian_eastern = new Lang('Armenian (Eastern)', '420');
 var armenian_western = new Lang('Armenian (Western)', '421');
@@ -117,7 +173,7 @@ var basque = new Lang('Basque', '136');
 var bassa = new Lang('Bassa', '314');
 var belorusian = new Lang('Belorusian', '225');
 var bemba = new Lang('Bemba (Zambia)', '324');
-var bengali = new Lang('Bengali', '084', '30009');
+var bengali = new Lang('Bengali', '084', undefined, '7am', '8pm');
 var berber = new Lang('Berber', '269');
 var bhojpuri = new Lang('Bhojpuri', '085');
 var bhutanese = new Lang('Bhutanese', '391');
@@ -125,10 +181,10 @@ var bikol = new Lang('Bikol', '118');
 var borana = new Lang('Borana', '382');
 var bosnian = new Lang('Bosnian', '263');
 var bulgarian = new Lang('Bulgarian', '069');
-var burmese = new Lang('Burmese', '042', '30009');
+var burmese = new Lang('Burmese', '042', undefined, '7am', '8pm');
 var cakchiquel = new Lang('Cakchiquel', '325');
-var cambodian = new Lang('Cambodian', '048', '30009');
-var cantonese = new Lang('Cantonese', '031', '30009');
+var cambodian = new Lang('Cambodian', '048', '30009', '7am', '8pm');
+var cantonese = new Lang('Cantonese', '031', '30009', '7am', '8pm');
 var cape_verdean = new Lang('Cape Verdean', '013');
 var catalan = new Lang('Catalan', '132');
 var cebuano = new Lang('Cebuano', '122');
@@ -146,7 +202,7 @@ var chin_matu = new Lang('Chin (Matu)', '426');
 var chin_tedim = new Lang('Chin (Tedim)', '408');
 var chin_zanniat = new Lang('Chin (Zanniat)', '417');
 var chin_zophei = new Lang('Chin (Zophei)', '407');
-var chinese = new Lang('Chinese', '030', '30009');
+var chinese = new Lang('Chinese', '030', '30009', '7am', '8pm');
 var chittagonian = new Lang('Chittagonian', '434');
 var chuichow = new Lang('Chui Chow', '346');
 var chuj = new Lang('Chuj', '429');
@@ -182,10 +238,10 @@ var finnish = new Lang('Finnish', '052');
 var flemish = new Lang('Flemish', '227');
 var fon = new Lang('Fon', '228');
 var foochow = new Lang('Foochow', '276');
-var french = new Lang('French', '058', '30009');
-var french_canadian = new Lang('French Canadian', '383', '30009');
+var french = new Lang('French', '058', '30009', '7am', '8pm');
+var french_canadian = new Lang('French Canadian', '383', '30009', '7am', '8pm');
 var french_cajun = new Lang('French Cajun', '277');
-var french_creole = new Lang('French Creole', '217', '30009');
+var french_creole = new Lang('French Creole', '217', '30009', '7am', '8pm');
 var frisian = new Lang('Frisian', '278');
 var fukienese = new Lang('Fukienese', '032');
 var fulani = new Lang('Fulani', '014');
@@ -201,10 +257,10 @@ var garre = new Lang('Garre', '388');
 var georgian = new Lang('Georgian', '216');
 var german = new Lang('German', '057');
 var grebo = new Lang('Grebo', '322');
-var greek = new Lang('Greek', '071', '30009');
+var greek = new Lang('Greek', '071', undefined, '7am', '8pm');
 var guamanian = new Lang('Guamanian', '125');
 var guarani = new Lang('Guarani', '350');
-var gujarati = new Lang('Gujarati', '083', '30009');
+var gujarati = new Lang('Gujarati', '083', undefined, '7am', '8pm');
 var gwa = new Lang('Gwa', '284');
 var haitian_creole = new Lang('Haitian Creole', '129');
 var hakka = new Lang('Hakka', '039');
@@ -212,7 +268,7 @@ var hamerbana = new Lang('Hamer-Bana', '396');
 var hausa = new Lang('Hausa', '022');
 var hawaii_creole = new Lang('Hawaii Creole', '285');
 var hebrew = new Lang('Hebrew', '106');
-var hindi = new Lang('Hindi', '082', '30009');
+var hindi = new Lang('Hindi', '082', undefined, '7am', '8pm');
 var hindko = new Lang('Hindko', '351');
 var hindustani = new Lang('Hindustani', '319');
 var hmong = new Lang('Hmong', '046');
@@ -229,10 +285,10 @@ var ilocano = new Lang('Ilocano', '113');
 var ilonggo = new Lang('Ilonggo', '121');
 var indonesian = new Lang('Indonesian', '050');
 var inupiaq = new Lang('Inupiaq', '018');
-var italian = new Lang('Italian', '059', '30009');
+var italian = new Lang('Italian', '059', '30009', '7am', '8pm');
 var jakartanese = new Lang('Jakartanese', '235');
 var jamaicanenglish_creole = new Lang('Jamaican English Creole', '357');
-var japanese = new Lang('Japanese', '040', '30009');
+var japanese = new Lang('Japanese', '040', undefined, '7am', '8pm');
 var jarai = new Lang('Jarai', '411');
 var javanese = new Lang('Javanese', '236');
 var jingpho = new Lang('Jingpho', '379');
@@ -247,7 +303,7 @@ var kashmiri = new Lang('Kashmiri', '237');
 var kayah = new Lang('Kayah', '385');
 var kazakh = new Lang('Kazakh', '238');
 var kham = new Lang('Kham', '441');
-var khmer = new Lang('Khmer', '023', '30009');
+var khmer = new Lang('Khmer', '023', '30009', '7am', '8pm');
 var khmu = new Lang('Khmu', '044');
 var kibajuni = new Lang('Kibajuni', '422');
 var kikuyu = new Lang('Kikuyu', '239');
@@ -289,7 +345,7 @@ var malayalam = new Lang('Malayalam', '088');
 var malinke = new Lang('Malinke', '354');
 var maltese = new Lang('Maltese', '245');
 var mam = new Lang('Mam', '318');
-var mandarin = new Lang('Mandarin', '035', '30009');
+var mandarin = new Lang('Mandarin', '035', '30009', '7am', '8pm');
 var mandingo = new Lang('Mandingo', '015');
 var mandinka = new Lang('Mandinka', '246');
 var mankon = new Lang('Mankon', '247');
@@ -317,7 +373,7 @@ var nanjing = new Lang('Nanjing', '248');
 var navajo = new Lang('Navajo', '144');
 var ndebele = new Lang('Ndebele', '374');
 var neapolitan = new Lang('Neapolitan', '249');
-var nepali = new Lang('Nepali', '081', '30009');
+var nepali = new Lang('Nepali', '081', undefined, '7am', '8pm');
 var nigerianpidgin = new Lang('Nigerian Pidgin', '363');
 var norwegian = new Lang('Norwegian', '054');
 var nuer = new Lang('Nuer', '294');
@@ -334,24 +390,24 @@ var pidgin_english = new Lang('Pidgin English', '254');
 var pohnpeian = new Lang('Pohnpeian', '331');
 var polish = new Lang('Polish', '062');
 var polynesian = new Lang('Polynesian', '073');
-var portuguese = new Lang('Portuguese', '061', '30003');
-var portuguese_brazilian = new Lang('Brazilian Portuguese', '270', '30003');
+var portuguese = new Lang('Portuguese', '061', '30003', '7am', '8pm');
+var portuguese_brazilian = new Lang('Brazilian Portuguese', '270', '30003', '7am', '8pm');
 var portugeuse_creole = new Lang('Portuguese Creole', '141');
 var pothohari = new Lang('Pothohari', '358');
 var pulaar = new Lang('Pulaar', '409');
-var punjabi = new Lang('Punjabi', '080', '30009');
+var punjabi = new Lang('Punjabi', '080', undefined, '7am', '8pm');
 var purepecha = new Lang('Purepecha', '332');
 var quechua = new Lang('Quechua', '145');
 var quiche = new Lang('Quiche', '317');
 var rohingya = new Lang('Rohingya', '430');
 var romani = new Lang('Romani', '298');
 var romanian = new Lang('Romanian', '066');
-var russian = new Lang('Russian', '078', '30009');
+var russian = new Lang('Russian', '078', '30009', '7am', '8pm');
 var rwanda = new Lang('Rwanda', '366');
 var samoan = new Lang('Samoan', '126');
 var sango = new Lang('Sango', '432');
 var saraiki = new Lang('Saraiki', '431');
-var arabic_saudi = new Lang('Saudi Arabic', '400', '30009');
+var arabic_saudi = new Lang('Saudi Arabic', '400', '30009', '7am', '8pm');
 var senegalese = new Lang('Senegalese', '255');
 var serbian = new Lang('Serbian', '148');
 var serbocroatian = new Lang('Serbo-Croatian', '299');
@@ -364,12 +420,12 @@ var sinhala = new Lang('Sinhala', '089');
 var slovak = new Lang('Slovak', '064');
 var slovakian = new Lang('Slovakian', '301');
 var slovene = new Lang('Slovene', '134');
-var somali = new Lang('Somali', '142', '30009');
+var somali = new Lang('Somali', '142', undefined, '7am', '8pm');
 var soninke = new Lang('Soninke', '312');
 var soninke_maraka = new Lang('Soninke (Maraka)', '413');
 var soninke_sarahuleh = new Lang('Soninke (Sarahuleh)', '337');
 var soninke_sarakole = new Lang('Soninke (Sarakole)', '419');
-var spanish = new Lang('Spanish', '060', '30001');
+var spanish = new Lang('Spanish', '060', '30001', '7am', '8pm', '8am', '6:30pm');
 var suchown = new Lang('Suchown', '258');
 var susu = new Lang('Susu', '368');
 var swahili = new Lang('Swahili', '026');
@@ -387,21 +443,21 @@ var tem = new Lang('Tem', '439');
 var temne = new Lang('Temne', '359');
 var teochew = new Lang('Teochew', '302');
 var thai = new Lang('Thai', '047');
-var tibetan = new Lang('Tibetan', '105', '30009');
+var tibetan = new Lang('Tibetan', '105', undefined, '7am', '8pm');
 var tigre = new Lang('Tigre', '442');
 var tigrigna = new Lang('Tigrigna (Eritrea)', '028');
 var tohono = new Lang("Tohono O'Odham", '307');
 var toisan = new Lang('Toisan', '305');
-var toishanese = new Lang('Toishanese', '036', '30009');
+var toishanese = new Lang('Toishanese', '036', undefined, '7am', '8pm');
 var tongan = new Lang('Tongan', '128');
 var triqui = new Lang('Triqui', '334');
 var trukese = new Lang('Trukese', '342');
 var tshiluba = new Lang('Tshiluba', '259');
-var turkish = new Lang('Turkish', '112', '30009');
+var turkish = new Lang('Turkish', '112', undefined, '7am', '8pm');
 var turkmen = new Lang('Turkmen', '435');
 var twi = new Lang('Twi', '095');
-var ukrainian = new Lang('Ukrainian', '076', '30009');
-var urdu = new Lang('Urdu', '079', '30009');
+var ukrainian = new Lang('Ukrainian', '076', undefined, '7am', '8pm');
+var urdu = new Lang('Urdu', '079', undefined, '7am', '8pm');
 var uyghur = new Lang('Uyghur', '410');
 var uzbek = new Lang('Uzbek', '336');
 var vietnamese = new Lang('Vietnamese', '049');
@@ -425,16 +481,15 @@ var zapoteco = new Lang('Zapoteco', '029');
 var zarma = new Lang('Zarma', '335');
 var zomi = new Lang('Zomi', '427');
 var zulu = new Lang('Zulu', '309');
-// var other = new Lang('Other Language', '', '30009');
 
 var refresh = function() {
 	var language = document.getElementById(language_id).value;
 
 	var mrn = validate(mrn_id);
-	if(mrn.length < 7) {
-		document.getElementById(mrn_id).style.backgroundColor = "pink";
-	} else {
+	if(mrn.length == 7) {
 		document.getElementById(mrn_id).style.backgroundColor = "";
+	} else {
+		document.getElementById(mrn_id).style.backgroundColor = "pink";
 	}
 
 	var pin = getChecked(document.getElementsByName(location_id));
@@ -1482,6 +1537,26 @@ var refresh = function() {
 	}
 	document.getElementById(language_display).innerHTML = lang.name;
 
+	if(lang.hours != undefined) {
+		for(let element of document.getElementsByClassName(qr_is_class)){
+			element.style.display = "table-cell";
+		}
+	} else {
+		for(let element of document.getElementsByClassName(qr_is_class)){
+			element.style.display = "none";
+		}
+	}
+
+	if(lang.pager != undefined) {
+		for(let element of document.getElementsByClassName(qr_pager_class)){
+			element.style.display = "table-cell";
+		}
+	} else {
+		for(let element of document.getElementsByClassName(qr_pager_class)){
+			element.style.display = "none";
+		}
+	}
+
 	document.getElementById(cyracom_id).innerHTML = '';
 	var cyracom = new QRCode(cyracom_id, {
 		// PIN + MRN + 1 + language (2 for Spanish, 3 for other) + 1 + 2
@@ -1505,7 +1580,9 @@ var refresh = function() {
 	});
 	document.getElementById(pager_display).innerHTML = (lang.pager == undefined ? "" : "Pager: " + lang.pager);
 
-	document.getElementById(hours_id).innerHTML = (lang.hrs == undefined ? '' : lang.hrs);
+	document.getElementById(hours_on_id).innerHTML = (lang.hours == undefined ? '' : lang.hours);
+	document.getElementById(hours_off_id).innerHTML = (lang.hours_inv == undefined ? '' : lang.hours_inv);
+	document.getElementById(after_hours_id).style.display = (lang.hours == undefined ? "none" : "block");
 }
 
 document.getElementById(language_display).innerHTML = "Spanish";
@@ -1539,3 +1616,6 @@ var pager = new QRCode("pager", {
 	correctLevel : QRCode.CorrectLevel.H
 });
 document.getElementById(pager_display).innerHTML = "Pager: " + spanish.pager;
+
+document.getElementById(hours_on_id).innerHTML = (spanish.hours == undefined ? '' : spanish.hours);
+document.getElementById(hours_off_id).innerHTML = (spanish.hours_inv == undefined ? '' : spanish.hours_inv);

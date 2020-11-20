@@ -406,12 +406,12 @@
 				<option value="zulu">Zulu</option>
 			</select></td></tr>
 			<tr><td><strong>MRN: </strong></td><td><input type="text" id="mrn" onkeyup="refresh();"></td></tr>
-			<tr><td><strong>Location:</strong></td><td><input type="radio" name="location" id="ped" value="1002" checked onchange="refresh('ipop', 'cyracom', 'pager', 'language', 'mrn', 'location', 'location_other', 'hours');" /><label for="ped">Pedi ED</label></td></tr>
+			<tr><td><strong>Location:</strong></td><td><input type="radio" name="location" id="ped" value="1002" checked onchange="refresh();" /><label for="ped">Pedi ED</label></td></tr>
 			<tr><td></td><td><input type="radio" name="location" id="ed" value="1000" onchange="refresh();" /><label for="ed">Acute ED</label></td></tr>
 			<tr><td></td><td><input type="radio" name="location" id="e17" value="1037" onchange="refresh();" /><label for="e17">Ellison 17</label></td></tr>
 			<tr><td></td><td><input type="radio" name="location" id="e18" value="1038" onchange="refresh();" /><label for="e18">Ellison 18</label></td></tr>
 			<tr><td></td><td><input type="radio" name="location" id="picu" value="1059" onchange="refresh();" /><label for="picu">PICU</label></td></tr>
-			<!-- <tr><td></td><td><input type="radio" name="location" id="nicu" value="***" /><label for="nicu">NICU</label></td></tr> -->
+			<tr><td></td><td><input type="radio" name="location" id="nicu" value="1049" /><label for="nicu">NICU</label></td></tr>
 			<tr><td></td><td><input type="radio" name="location" id="location_other" value="other" onchange="refresh();" /><label for="other">Other pin: </label><input type="text" name="location" id="location_other_pin" size="5" onkeyup="document.getElementById('location_other').checked = true;refresh();"></td></tr>
 		</table>
 
@@ -422,30 +422,35 @@
 		<div>
 			<table id="qrcodes">
 				<tr>
-					<td>Interpreter Services<br /><span id="hours"></span></td>
-					<td>Interpreter Services<br />Cyracom</td>
-					<td>Page an interpreter</td>
+					<td class="qris">Interpreter Services
+						<div id="hours_on" style="font-weight: normal; margin-top: 6pt;"></div></td>
+					<td>Interpreter Services<br />Cyracom
+						<div id="after_hours" style="font-weight: normal; font-style: italic; margin-top: 6pt;">This only works after-hours</div></td>
+					<td class="qrpager">Page an interpreter
+						<div id="hours_off" style="font-weight: normal; margin-top: 6pt;"></div></td>
 				</tr>
 				<tr>
-					<td><span id="ipop" class="qrcode"></span></td>
+					<td class="qris"><span id="ipop" class="qrcode"></span></td>
 					<td><span id="cyracom" class="qrcode"></span></td>
-					<td><span id="pager" class="qrcode"></span></td>
+					<td class="qrpager"><span id="pager" class="qrcode"></span></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td style="font-weight: normal; font-style: italic;"><div>This only works after-hours</div><div>You will hear a series of beeps<br />that will bypass the phone tree</div></td>
-					<td></td>
+					<td class="qris"></td>
+					<td style="font-weight: normal; font-style: italic;"><div>You will hear a series of beeps<br />that will bypass the phone tree</div></td>
+					<td class="qrpager"></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td class="qris"></td>
 					<td><span id="cyracom_display"></span></td>
-					<td><span id="pager_display"></span></td>
+					<td class="qrpager"><span id="pager_display"></span></td>
 				</tr>
 			</table>
 		</div>
 	</div>
 
 	<br /><div><u>Instructions:</u> Open the camera app on your phone and point it at a QR code. Do <em>not</em> take a picture. An outline should show up around the QR code and a pop-up should appear asking if you'd like to make a call. Click on the pop-up to place the call.</div>
+
+	<!-- TODO: Add customizable number of pauses at beginning -->
 
 	<script type="text/javascript" src="js/ipop.js"></script>
 
