@@ -435,3 +435,20 @@ input[type="radio"]{
 	-ms-transform: rotate(-90deg);
 	transform: rotate(-90deg);
 }
+
+
+
+@media print{
+	header {
+		display: none;
+	}
+
+	footer {
+		display: none;
+	}
+
+	article {
+		top: 0px;
+		bottom: 0px;
+	}
+}

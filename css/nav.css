@@ -47,3 +47,15 @@ nav ul li:hover {
 article {
 	left: 15%;
 }
+
+
+
+@media print {
+	nav {
+		display: none;
+	}
+
+	article {
+		left: 0%;
+	}
+}
