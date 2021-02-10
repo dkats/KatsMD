@@ -1,0 +1,115 @@
+article {
+	font-family: arial;
+	font-size: 14pt;
+}
+
+h4 {
+	margin: 0;
+}
+
+table {
+	margin: 0.5em 0.5em 0 1em;
+	border: 3px solid #ccc;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+td:first-child {
+	font-weight: bold;
+	text-align: right;
+	padding-right: 0.5em;
+}
+
+td:first-child::after {
+	content: ":";
+}
+
+.calc {
+	margin: 1.5em 0 0 0;
+}
+
+input[type=text] {
+	text-align: right;
+	font-size: 12pt;
+}
+
+select {
+	font-size: 12pt;
+}
+
+input[readonly] {
+	text-align: left;
+	background-color: inherit;
+	border: 1px solid black;
+}
+
+#ga_w, #ga_d {
+	width: 2em;
+}
+
+#wt_g, #wt_kg, #wt_lbs, #wt_oz {
+	width: 4em;
+}
+
+#small-baby, #thermo, #feed-fortify {
+	width: 3em;
+}
+
+#ra-trial {
+	width: 24em;
+}
+
+#nasal-cannula {
+	width: 21em;
+}
+
+#caffeine {
+	width: 12em;
+}
+
+#tfg, #ivf, #ivf-same-day {
+	width: 7em;
+}
+
+#ivf-extra {
+	width: 13em;
+}
+
+#feed-type {
+	width: 28em;
+}
+
+#feed-amt {
+	width: 26em;
+}
+
+#feed-fortifier {
+	width: 17em;
+}
+
+#feed-formula {
+	width: 9em;
+}
+
+#lab-freq {
+	width: 8em;
+}
+
+.sourcelink {
+	font-size: 10pt;
+	margin: 0 0 1em 1.5em;
+}
+
+.sources {
+	font-style: italic;
+	font-size: 10pt;
+	color: gray;
+	border: none;
+}
+
+.note {
+	padding: 0 0 0 1em;
+	background-color: inherit;
+	font-style: italic;
+	font-size: 10pt;
+	color: gray;
+}

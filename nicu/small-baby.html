@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Small Baby Initiative Guide</title>
+<link rel="stylesheet" type="text/css" href="css/small-baby.css">
+<meta name="author" content="Kats, Chou">
+<script type="text/javascript" src="js/small-baby.js"></script>
+</head>
+<body>
+
+<article>
+
+<h2>Enter Patient Information</h2>
+	<div class="calc" id="pt-info">
+		<table>
+			<tr><td>Gestational Age</td>
+				<td><input type="text" id="ga_w" onkeyup="if(only_whole_num('ga_w')){wrap_output();};"> weeks&nbsp;&nbsp;<input type="text" id="ga_d" onkeyup="if(only_whole_num('ga_d')){wrap_output();};"> days</td></tr>
+			<tr><td>Weight</td>
+				<td><input type="text" id="wt_g" onkeyup="if(only_whole_num('wt_g')){wt_click();wrap_output();};">
+					<input type="text" id="wt_kg" onkeyup="if(only_num('wt_kg')){wt_click();wrap_output();};" style="display: none;">
+					<input type="text" id="wt_lbs" onkeyup="if(only_whole_num('wt_lbs')){wt_click();wrap_output();};" style="display: none;"> <span id="wt_lbs_lab" style="display: none;">lbs&nbsp;&nbsp;</span>
+					<input type="text" id="wt_oz" onkeyup="if(only_whole_num('wt_oz')){wt_click();wrap_output();};" style="display: none;"> <span id="wt_oz_lab" style="display: none;">oz </span>
+					<select id="wt_u" onchange="wt_change();wrap_output();">
+						<option value="g">g</option>
+						<option value="kg">kg</option>
+						<option value="lbs+oz">lbs+oz</option></select></td></tr>
+			<tr><td>Small Baby</td>
+				<td><input type="text" id="small-baby" readonly></td></tr></tr>
+		</table>
+		<div class="sourcelink"><a href="small-baby.js">Click for the JavaScript code</a></div>
+	</div>
+
+<h2>Resuscitation</h2>
+	<table>
+		<tr><td>Thermoregulatory precautions</td><td><input type="text" id="thermo" readonly><span class="note">Thermal mattress, NeoHelp bag “poncho”, increase OR/DR temp to 74 &deg;F 1 hour prior to anticipated delivery</span></td></tr>
+		<tr><td>Surfactant</td><td><input type="text" id="surf" readonly></td></tr>
+	</table>
+
+<h2>Respiratory</h2>
+	<table>
+		<tr><td>Room air trial</td><td><input type="text" id="ra-trial" readonly></td></tr>
+		<tr><td>Nasal cannula (LF or HF)</td><td><input type="text" id="nasal-cannula" readonly><span class="note">Can PO if ≤2 LPM; HFNC should always be blended</span></td></tr>
+		<tr><td>Caffeine</td><td><input type="text" id="caffeine" readonly><span class="note">If no contraindications present</span></td></tr>
+	</table>
+
+<h2>Fluids, Electrolytes, and Nutrition</h2>
+	<table>
+		<tr><td>Total fluid goal</td><td><input type="text" id="tfg" readonly><span class="note">start fluids within 1 hour of life</span></td></tr>
+		<tr><td>Total IV fluids</td><td><input type="text" id="ivf" readonly></td></tr>
+		<tr><td>Same-day PN</td><td><input type="text" id="ivf-same-day" readonly></td></tr>
+		<tr><td>Extra IV fluids</td><td><input type="text" id="ivf-extra" readonly></td></tr>
+		<tr><td>Feed type</td><td><input type="text" id="feed-type" value="Prefer EBM/PDHM to PE formula, start within 6 hours of life" readonly></td></tr>
+		<tr><td>Feed amount</td><td><input type="text" id="feed-amt" readonly></td></tr>
+		<tr><td>Fortify</td><td><input type="text" id="feed-fortify" readonly><span class="note">To 24 kcal/oz once tolerating 80 mL/kg/d for 12 hours</span></td></tr>
+		<tr><td>Fortifier</td><td><input type="text" id="feed-fortifier" readonly></td></tr>
+		<tr><td>Formula</td><td><input type="text" id="feed-formula" readonly></td></tr>
+		<tr><td>Lab frequency</td><td><input type="text" id="lab-freq" readonly><span class="note">For the first 72 hours of life</span></td></tr>
+	</table>
+
+
+</article>
+</body>
+</html>
