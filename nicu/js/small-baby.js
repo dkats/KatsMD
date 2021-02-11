@@ -66,6 +66,10 @@ function only_num(field) {
 	return false;
 }
 
+function lowerFirstChar(str) {
+	return (str.charAt(0).toLowerCase() + str.slice(1));
+}
+
 function wt_click() {
 	var u = document.getElementById(wt_u_select).value;
 	var wt = NaN;
@@ -308,5 +312,34 @@ function wrap_output() {
 	} else {
 		document.getElementById(small_baby_box).style.backgroundColor = "white";
 	}
+}
+
+///////////////////////////////////////
+// COPY FUNCTIONS
+///////////////////////////////////////
+
+function copyToClipboard(text) {
+	const elem = document.createElement('textarea');
+	elem.value = text;
+	document.body.appendChild(elem);
+	elem.select();
+	document.execCommand('copy');
+	document.body.removeChild(elem);
+}
+
+function clipResp() {
+	out = '';
+	out += 'Room air trial: Consider ' + lowerFirstChar(document.getElementById(ra_trial_box).value) + '\n';
+	out += 'Nasal cannula: Consider ' + lowerFirstChar(document.getElementById(nasal_cannula_box).value) + '\n';
+	out += 'Caffeine: ' + document.getElementById(caffeine_box).value;
+	copyToClipboard(out);
+}
+
+function clipFEN() {
+	out = '';
+	out += 'Total fluid goal: ' + lowerFirstChar(document.getElementById(tfg_box).value) + '\n';
+	out += 'Feeding advancement: ' + lowerFirstChar(document.getElementById(feed_amt_box).value) + '\n';
+	out += (document.getElementById(feed_fortify_box).value == 'Yes' ? 'Plan to fortify feeds when rate >80 mL/kg/d\n' : '');
+	copyToClipboard(out);
 }
 
