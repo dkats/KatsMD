@@ -61,7 +61,7 @@ select {
 
 input[readonly] {
 	text-align: left;
-	background-color: inherit;
+	background-color: #ddd;
 	border: 1px solid black;
 }
 

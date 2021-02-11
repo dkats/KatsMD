@@ -310,7 +310,7 @@ function wrap_output() {
 		document.getElementById(small_baby_box).style.backgroundColor = "#FDFF47";
 		document.getElementById(small_baby_box).style.fontWeight = "bold";
 	} else {
-		document.getElementById(small_baby_box).style.backgroundColor = "white";
+		document.getElementById(small_baby_box).style.backgroundColor = "#ddd";
 	}
 }
 
