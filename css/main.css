@@ -448,6 +448,8 @@ input[type="radio"]{
 	}
 
 	article {
+		display: block;
+		position: static;
 		top: 0px;
 		bottom: 0px;
 	}
