@@ -317,6 +317,23 @@ article {
 	margin: 0 0 0 0;
 }
 
+.seealso::before{
+	content: "See also:\A";
+	font-weight: bold;
+	white-space: pre;
+}
+
+.seealso{
+	margin: -6pt 1em 0 1em;
+	padding: 5px;
+	font-size: 11pt;
+	border: 1px solid black;
+}
+
+.seealso ul {
+	margin: 0 0 0 0;
+}
+
 .spacedlist li {
 	margin: 6pt 0 6pt 0;
 }
