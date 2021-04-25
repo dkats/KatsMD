@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Augmentin Calculator</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/augmentin.css">
+<meta name="author" content="Daniel J. Kats">
+<script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript">header();</script>
+<script type="text/javascript" src="js/footer.js"></script>
+<script type="text/javascript">document.getElementById("header_home").className = "active";</script>
+</head>
+<body>
+<article>
+
+	<h1>Amoxicillin-clavulanate (Augmentin) Calculator</h1>
+
+	<p>Amoxicillin-clavulanate (Augmentin) is an incredibly confusing medication to prescribe, due to the many different formulations. It is very commonly prescribed incorrectly, which leads to inadequate treatment (iatrogenic treatment failure) and poor antibiotic stewardship. This calculator is meant to guide you towards the correct amoxicillin-clavulanate formulation to prescribe.</p>
+
+	<div style="color: red;">NOTE: This is <em>not</em> meant to be used in place of a real-life pharmacist. Please always confirm with them if you have doubts or questions about proper amoxicillin-clavulanate formulation selection.</div>
+
+	<div class="center">
+		<table>
+			<tr><td><strong>Dose: </strong></td><td><input type="text" id="dose" onkeyup="refresh();"> mg/kg</td></tr>
+			<tr><td><strong>Weight: </strong></td><td><input type="text" id="wt" onkeyup="refresh();"> kg</td></tr>
+			<tr><td><strong>Augmentin: </strong></td><td><input type="text" id="augmentin" disabled></td></tr>
+		</table>
+	</div>
+
+	<script type="text/javascript" src="js/calc/augmentin.js">set("dose", "wt", "augmentin");</script>
+
+	<p>This calculator was created by Dan Kats, MD, and Iman Moawad, PharmD, BCPPS. This website is <em>not</em> associated with MassGeneral Hospital <i>for</i> Children.</p>
+
+</article>
+</body>
+</html>
