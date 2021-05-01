@@ -128,6 +128,7 @@ var freq_id = "frequency";
 var wt_id = "wt";
 var show_id = "show";
 
+var t250_id = "t250";
 var l125_id = "l125";
 var l250_id = "l250";
 var t500_id = "t500";
@@ -139,6 +140,7 @@ var t875_id = "t875";
 var l600_id = "l600";
 var t1000_id = "t1000";
 
+var t250_quant_id = "t250_quant";
 var l125_quant_id = "l125_quant";
 var l250_quant_id = "l250_quant";
 var t500_quant_id = "t500_quant";
@@ -150,6 +152,7 @@ var t875_quant_id = "t875_quant";
 var l600_quant_id = "l600_quant";
 var t1000_quant_id = "t1000_quant";
 
+var t250_freq_id = "t250_freq";
 var l125_freq_id = "l125_freq";
 var l250_freq_id = "l250_freq";
 var t500_freq_id = "t500_freq";
@@ -161,6 +164,7 @@ var t875_freq_id = "t875_freq";
 var l600_freq_id = "l600_freq";
 var t1000_freq_id = "t1000_freq";
 
+var t250_amox_dose_id = "t250_amox_dose";
 var l125_amox_dose_id = "l125_amox_dose";
 var l250_amox_dose_id = "l250_amox_dose";
 var t500_amox_dose_id = "t500_amox_dose";
@@ -172,6 +176,7 @@ var t875_amox_dose_id = "t875_amox_dose";
 var l600_amox_dose_id = "l600_amox_dose";
 var t1000_amox_dose_id = "t1000_amox_dose";
 
+var t250_amox_day_id = "t250_amox_day";
 var l125_amox_day_id = "l125_amox_day";
 var l250_amox_day_id = "l250_amox_day";
 var t500_amox_day_id = "t500_amox_day";
@@ -183,6 +188,7 @@ var t875_amox_day_id = "t875_amox_day";
 var l600_amox_day_id = "l600_amox_day";
 var t1000_amox_day_id = "t1000_amox_day";
 
+var t250_clav_id = "t250_clav";
 var l125_clav_id = "l125_clav";
 var l250_clav_id = "l250_clav";
 var t500_clav_id = "t500_clav";
@@ -204,6 +210,7 @@ var freq_el = document.getElementById(freq_id);
 var wt_el = document.getElementById(wt_id);
 var show_el = document.getElementById(show_id);
 
+var t250 = new augmentin(t250_id, "2:1", "tablet", 250, 125, t250_quant_id, t250_freq_id, t250_amox_dose_id, t250_amox_day_id, t250_clav_id);
 var l125 = new augmentin(l125_id, "4:1", "liquid", 125, 31.25, l125_quant_id, l125_freq_id, l125_amox_dose_id, l125_amox_day_id, l125_clav_id);
 var l250 = new augmentin(l250_id, "4:1", "liquid", 250, 62.5, l250_quant_id, l250_freq_id, l250_amox_dose_id, l250_amox_day_id, l250_clav_id);
 var t500 = new augmentin(t500_id, "4:1", "tablet", 500, 125, t500_quant_id, t500_freq_id, t500_amox_dose_id, t500_amox_day_id, t500_clav_id);
@@ -215,7 +222,7 @@ var t875 = new augmentin(t875_id, "7:1", "tablet", 875, 125, t875_quant_id, t875
 var l600 = new augmentin(l600_id, "14:1", "liquid", 600, 42.9, l600_quant_id, l600_freq_id, l600_amox_dose_id, l600_amox_day_id, l600_clav_id);
 var t1000 = new augmentin(t1000_id, "16:1", "tablet", 1000, 62.5, t1000_quant_id, t1000_freq_id, t1000_amox_dose_id, t1000_amox_day_id, t1000_clav_id);
 
-var formulations = [l125, l250, t500, l200, c200, l400, c400, t875, l600, t1000];
+var formulations = [t250, l125, l250, t500, l200, c200, l400, c400, t875, l600, t1000];
 
 var dose_day = NaN;
 var dose_dose = NaN;
@@ -324,6 +331,7 @@ function refresh(listener) {
 				break;
 		}
 
+		// Set frequencies in the output table rows to the selected frequency
 		for(var i = 0; i < formulations.length; i++) {
 			formulations[i].frequency = frequency;
 		}
@@ -350,6 +358,7 @@ function refresh(listener) {
 							increment = 0.5;
 							break;
 					}
+					
 					// Calculate maximums
 					var quant_max = NaN;
 					if(!isNaN(dose_dose_max)) {
