@@ -29,6 +29,34 @@ function show() {
 	}
 }
 
+// Wrap in a span depending on clavulanate value
+function spanClavWrap(text, clav) {
+	var out = "<span class='";
+	if(clav < 6) {
+		out += "clav_low";
+	} else if(clav > 10) {
+		out += "clav_high";
+	} else {
+		out += "clav_good";
+	}
+	out += "'>" + text + "</span>";
+	return out;
+}
+
+// Wrap in a span depending on clavulanate value
+function spanRowWrap(text, clav) {
+	var out = "<span class='";
+	if(clav < 6) {
+		out += "inappropriate";
+	} else if(clav > 10) {
+		out += "inappropriate";
+	} else {
+		out += "appropriate";
+	}
+	out += "'>" + text + "</span>";
+	return out;
+}
+
 // Augment class constructor
 class augmentin {
 	constructor(row, ratio, form, amox_conc, clav_conc, quantity, frequency, amox_dose, amox_day, clav) {
@@ -46,6 +74,9 @@ class augmentin {
 	}
 
 	// GETTERS
+	get row() {
+		return this._row;
+	}
 	get ratio() {
 		return this._ratio;
 	}
@@ -373,21 +404,31 @@ function refresh(listener) {
 					// Calculate quantity
 					var quant_low = Math.min(Math.round(Math.floor(Math.round(dose_dose * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
 					var quant_high = Math.min(Math.round(Math.ceil(Math.round(dose_dose * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
-					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? quant_high : quant_low + "&ndash;" + quant_high);
 
 					// Calculate amoxicillin dose per DOSE
 					var dose_low = Math.round(quant_low * formulations[i].amox_conc * liquid_correction / wt * 10) / 10;
 					var dose_high = Math.round(quant_high * formulations[i].amox_conc * liquid_correction / wt * 10) / 10;
-					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? dose_high : dose_low + "&ndash;" + dose_high);
-					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? Math.round(dose_high * freq * 1000) / 1000 : Math.round(dose_low * freq * 1000) / 1000 + "&ndash;" + Math.round(dose_high * freq * 1000) / 1000);
 
 					// Calculate clavulanate dose per DAY
 					var clav_low = Math.round(quant_low * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
 					var clav_high = Math.round(quant_high * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
-					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? clav_high : clav_low + "&ndash;" + clav_high);
+
+					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
+					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(quant_high, clav_high) : spanRowWrap(quant_low, clav_low) + "&ndash;" + spanRowWrap(quant_high, clav_high));
+					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(dose_high, clav_high) : spanRowWrap(dose_low, clav_low) + "&ndash;" + spanRowWrap(dose_high, clav_high));
+					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high) : spanRowWrap(Math.round(dose_low * freq * 1000) / 1000, clav_low) + "&ndash;" + spanRowWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high));
+					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanClavWrap(clav_high, clav_high) : spanClavWrap(clav_low, clav_low) + "&ndash;" + spanClavWrap(clav_high, clav_high));
 
 					// Show the row if the clavulanate is between 6-10 (inclusive)
-					formulations[i].show = (clav_low >= 6 && clav_low <= 10) || (clav_high >= 6 && clav_high <= 10);
+					if((clav_low >= 6 && clav_low <= 10) || (clav_high >= 6 && clav_high <= 10)) {
+						formulations[i].show = true;
+						formulations[i].row.classList.add("appropriate");
+						formulations[i].row.classList.remove("inappropriate");
+					} else {
+						formulations[i].show = false;
+						formulations[i].row.classList.remove("appropriate");
+						formulations[i].row.classList.add("inappropriate");
+					}
 				}
 			}
 		}

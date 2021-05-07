@@ -86,6 +86,26 @@ select {
 	color: initial;
 }
 
-.inappropriate td{
+.inappropriate {
 	color: #a6a6a6;
+}
+
+.clav_low {
+	color: red;
+}
+
+.clav_low::after {
+  content: "\2193";
+}
+
+.clav_good {
+	/*Nothing*/
+}
+
+.clav_high {
+	color: red;
+}
+
+.clav_high::after {
+  content: "\2191";
 }
