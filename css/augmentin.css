@@ -90,22 +90,34 @@ select {
 	color: #a6a6a6;
 }
 
-.clav_low {
+.primary_low {
 	color: red;
 }
 
-.clav_low::after {
-  content: "\2193";
+.primary_low::after {
+	content: "\2193";	/*Down arrow*/
 }
 
-.clav_good {
+.primary_good {
 	/*Nothing*/
 }
 
-.clav_high {
+.primary_high {
 	color: red;
 }
 
-.clav_high::after {
-  content: "\2191";
+.primary_high::after {
+	content: "\2191";	/*Up arrow*/
+}
+
+.secondary_low {
+	color: #a6a6a6;
+}
+
+.secondary_good {
+	/*Nothing*/
+}
+
+.secondary_high {
+	color: #a6a6a6;
 }

@@ -1,3 +1,7 @@
+// Settings
+var clav_min = 6;
+var clav_max = 10;
+
 // Only allow numeric input
 function validate(id) {
 	var input = document.getElementById(id).value;
@@ -30,28 +34,28 @@ function show() {
 }
 
 // Wrap in a span depending on clavulanate value
-function spanClavWrap(text, clav) {
+function spanPrimaryWrap(text, value, min, max) {
 	var out = "<span class='";
-	if(clav < 6) {
-		out += "clav_low";
-	} else if(clav > 10) {
-		out += "clav_high";
+	if(value < min) {
+		out += "primary_low";
+	} else if(value > max) {
+		out += "primary_high";
 	} else {
-		out += "clav_good";
+		out += "primary_good";
 	}
 	out += "'>" + text + "</span>";
 	return out;
 }
 
 // Wrap in a span depending on clavulanate value
-function spanRowWrap(text, clav) {
+function spanSecondaryWrap(text, value, min, max) {
 	var out = "<span class='";
-	if(clav < 6) {
-		out += "inappropriate";
-	} else if(clav > 10) {
-		out += "inappropriate";
+	if(value < min) {
+		out += "secondary_low";
+	} else if(value > max) {
+		out += "secondary_high";
 	} else {
-		out += "appropriate";
+		out += "secondary_good";
 	}
 	out += "'>" + text + "</span>";
 	return out;
@@ -414,13 +418,13 @@ function refresh(listener) {
 					var clav_high = Math.round(quant_high * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
 
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
-					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(quant_high, clav_high) : spanRowWrap(quant_low, clav_low) + "&ndash;" + spanRowWrap(quant_high, clav_high));
-					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(dose_high, clav_high) : spanRowWrap(dose_low, clav_low) + "&ndash;" + spanRowWrap(dose_high, clav_high));
-					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanRowWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high) : spanRowWrap(Math.round(dose_low * freq * 1000) / 1000, clav_low) + "&ndash;" + spanRowWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high));
-					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanClavWrap(clav_high, clav_high) : spanClavWrap(clav_low, clav_low) + "&ndash;" + spanClavWrap(clav_high, clav_high));
+					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(quant_high, clav_high, clav_min, clav_max) : spanSecondaryWrap(quant_low, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(quant_high, clav_high, clav_min, clav_max));
+					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(dose_high, clav_high, clav_min, clav_max) : spanSecondaryWrap(dose_low, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(dose_high, clav_high, clav_min, clav_max));
+					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high, clav_min, clav_max) : spanSecondaryWrap(Math.round(dose_low * freq * 1000) / 1000, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(Math.round(dose_high * freq * 1000) / 1000, clav_high, clav_min, clav_max));
+					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanPrimaryWrap(clav_high, clav_high, clav_min, clav_max) : spanPrimaryWrap(clav_low, clav_low, clav_min, clav_max) + "&ndash;" + spanPrimaryWrap(clav_high, clav_high, clav_min, clav_max));
 
-					// Show the row if the clavulanate is between 6-10 (inclusive)
-					if((clav_low >= 6 && clav_low <= 10) || (clav_high >= 6 && clav_high <= 10)) {
+					// Show the row if the clavulanate is between clav_min and clav_max (inclusive)
+					if((clav_low >= clav_min && clav_low <= clav_max) || (clav_high >= clav_min && clav_high <= clav_max)) {
 						formulations[i].show = true;
 						formulations[i].row.classList.add("appropriate");
 						formulations[i].row.classList.remove("inappropriate");
