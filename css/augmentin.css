@@ -110,14 +110,10 @@ select {
 	content: "\2191";	/*Up arrow*/
 }
 
-.secondary_low {
+.secondary_bad {
 	color: #a6a6a6;
 }
 
 .secondary_good {
 	/*Nothing*/
-}
-
-.secondary_high {
-	color: #a6a6a6;
 }
