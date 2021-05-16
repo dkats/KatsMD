@@ -305,6 +305,10 @@ function refresh(listener) {
 		// If <3 months old --> 30 mg/kg/day
 		amox_day = 30;
 		amox_el.value = amox_day;
+
+		if(!isNaN(freq)) {
+			amox_dose = amox_day / freq;
+		}
 	} else if(listener == "dose") {
 		switch(amox_u) {
 			case "day":
@@ -374,6 +378,8 @@ function refresh(listener) {
 		validate(wt_el.id);
 		wt = wt_el.value;
 	}
+
+	console.log(amox_day, amox_dose);
 
 	if(!isNaN(freq)) {
 		// Update frequency
