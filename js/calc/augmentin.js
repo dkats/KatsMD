@@ -312,11 +312,11 @@ function refresh(listener) {
 	} else if(listener == "dose") {
 		switch(amox_u) {
 			case "day":
-				amox_day = parseFloat(dose);
+				amox_day = parseFloat(amox);
 				amox_dose = amox_day / freq;
 				break;
 			case "dose":
-				amox_dose = parseFloat(dose);
+				amox_dose = parseFloat(amox);
 				amox_day = amox_dose * freq;
 				break;
 		}
@@ -378,8 +378,6 @@ function refresh(listener) {
 		validate(wt_el.id);
 		wt = wt_el.value;
 	}
-
-	console.log(amox_day, amox_dose);
 
 	if(!isNaN(freq)) {
 		// Update frequency
