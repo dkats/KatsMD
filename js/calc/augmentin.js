@@ -35,7 +35,7 @@ function show() {
 }
 
 // Wrap in a span depending whether values are within min/max values
-function spanWrap(text, value1, min1, max1, value2, min2, max2) {
+function spanWrap(text, value1, min1, max1, value2, min2, max2, tooltip = true) {
 	var out = "<span class='";
 	if(value1 < min1) {
 		out += "primary_low";
@@ -50,7 +50,28 @@ function spanWrap(text, value1, min1, max1, value2, min2, max2) {
 			out += "primary_good";
 		}
 	}
-	out += "'>" + text + "</span>";
+	out += "'>";
+
+	// Open tooltip span
+	if(tooltip && (value1 < min1 || value1 > max1)) {
+		out += "<span class='tooltip'>";
+	}
+
+	out += text;
+
+	// Add tooltip
+	if(tooltip && (value1 < min1 || value1 > max1)) {
+		out += "<span class='tooltiptext'>";
+		if(value1 < min1) {
+			out += Math.round((1 - value1 / ((min1 + max1) / 2)) * 100) + "% | " + (Math.round(((min1 + max1) / 2 - value1) * 10) / 10) + " mg/kg below desired";
+		} else if(value1 > max1) {
+			out += Math.round((value1 / ((min1 + max1) / 2) - 1) * 100) + "% | " + (Math.round((value1 - (min1 + max1) / 2) * 10) / 10) + " mg/kg above desired";
+		}
+		out += "</span></span>";
+	}
+
+	out += "</span>";
+
 	return out;
 }
 
@@ -429,8 +450,8 @@ function refresh(listener) {
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
 					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanSecondaryWrap(quant_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
 					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanWrap(amox_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
-					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanWrap(Math.round(amox_low * freq * 1000) / 1000, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
-					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max) : spanWrap(clav_low, clav_low, clav_min, clav_max, amox_low, amox_min, amox_max) + "&ndash;" + spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max));
+					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max) : spanWrap(Math.round(amox_low * freq * 1000) / 1000, amox_low * freq, amox_min * freq, amox_max * freq, clav_low, clav_min, clav_max) + "&ndash;" + spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max));
+					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false) : spanWrap(clav_low, clav_low, clav_min, clav_max, amox_low, amox_min, amox_max, false) + "&ndash;" + spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false));
 
 					// Show the row if the amoxicillin is between amox_min and amox_max (inclusive) AND if the clavulanate is between clav_min and clav_max (inclusive)
 					if((amox_low >= amox_min && amox_low <= amox_max && clav_low >= clav_min && clav_low <= clav_max) || (amox_high >= amox_min && amox_high <= amox_max && clav_high >= clav_min && clav_high <= clav_max)) {
