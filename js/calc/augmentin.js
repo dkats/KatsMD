@@ -37,7 +37,7 @@ function show() {
 }
 
 // Wrap in a span depending whether values are within min/max values
-function spanWrap(text, value1, min1, max1, value2, min2, max2, tooltip = true) {
+function spanWrap(text, value1, min1, max1, value2, min2, max2, perkg = true, tooltip = true) {
 	var out = "<span class='";
 	if(value1 < min1) {
 		out += "primary_low";
@@ -65,9 +65,9 @@ function spanWrap(text, value1, min1, max1, value2, min2, max2, tooltip = true) 
 	if(tooltip && (value1 < min1 || value1 > max1)) {
 		out += "<span class='tooltiptext'>";
 		if(value1 < min1) {
-			out += Math.round((1 - value1 / ((min1 + max1) / 2)) * 100) + "% | " + (Math.round(((min1 + max1) / 2 - value1) * 10) / 10) + " mg/kg below desired";
+			out += Math.round((1 - value1 / ((min1 + max1) / 2)) * 100) + "% | " + (Math.round(((min1 + max1) / 2 - value1) * 10) / 10) + " mg" + (perkg ? "/kg" : "") + " below desired";
 		} else if(value1 > max1) {
-			out += Math.round((value1 / ((min1 + max1) / 2) - 1) * 100) + "% | " + (Math.round((value1 - (min1 + max1) / 2) * 10) / 10) + " mg/kg above desired";
+			out += Math.round((value1 / ((min1 + max1) / 2) - 1) * 100) + "% | " + (Math.round((value1 - (min1 + max1) / 2) * 10) / 10) + " mg" + (perkg ? "/kg" : "") + " above desired";
 		}
 		out += "</span></span>";
 	}
@@ -91,7 +91,7 @@ function spanSecondaryWrap(text, value1, min1, max1, value2, min2, max2) {
 
 // Augment class constructor
 class augmentin {
-	constructor(row, ratio, form, amox_conc, clav_conc, quantity, frequency, amox_dose, amox_day, clav) {
+	constructor(row, ratio, form, amox_conc, clav_conc, quantity, frequency, amox_dose_perkg, amox_dose_abs, amox_day, clav) {
 		this._row = document.getElementById(row);
 		this._ratio = ratio;
 		this._form = form;
@@ -99,7 +99,8 @@ class augmentin {
 		this._clav_conc = clav_conc;
 		this._quantity = document.getElementById(quantity);
 		this._frequency = document.getElementById(frequency);
-		this._amox_dose = document.getElementById(amox_dose);
+		this._amox_dose_perkg = document.getElementById(amox_dose_perkg);
+		this._amox_dose_abs = document.getElementById(amox_dose_abs);
 		this._amox_day = document.getElementById(amox_day);
 		this._clav = document.getElementById(clav);
 		this._show = true;
@@ -133,8 +134,12 @@ class augmentin {
 		return this._frequency.innerHTML;
 	}
 
-	get amox_dose() {
-		return this._amox_dose.innerHTML;
+	get amox_dose_perkg() {
+		return this._amox_dose_perkg.innerHTML;
+	}
+
+	get amox_dose_abs() {
+		return this._amox_dose_abs.innerHTML;
 	}
 
 	get amox_day() {
@@ -158,8 +163,12 @@ class augmentin {
 		this._frequency.innerHTML = x;
 	}
 
-	set amox_dose(x) {
-		this._amox_dose.innerHTML = x;
+	set amox_dose_perkg(x) {
+		this._amox_dose_perkg.innerHTML = x;
+	}
+
+	set amox_dose_abs(x) {
+		this._amox_dose_abs.innerHTML = x;
 	}
 
 	set amox_day(x) {
@@ -227,17 +236,29 @@ var t875_freq_id = "t875_freq";
 var l600_freq_id = "l600_freq";
 var t1000_freq_id = "t1000_freq";
 
-var t250_amox_dose_id = "t250_amox_dose";
-var l125_amox_dose_id = "l125_amox_dose";
-var l250_amox_dose_id = "l250_amox_dose";
-var t500_amox_dose_id = "t500_amox_dose";
-var l200_amox_dose_id = "l200_amox_dose";
-var c200_amox_dose_id = "c200_amox_dose";
-var l400_amox_dose_id = "l400_amox_dose";
-var c400_amox_dose_id = "c400_amox_dose";
-var t875_amox_dose_id = "t875_amox_dose";
-var l600_amox_dose_id = "l600_amox_dose";
-var t1000_amox_dose_id = "t1000_amox_dose";
+var t250_amox_dose_perkg_id = "t250_amox_dose_perkg";
+var l125_amox_dose_perkg_id = "l125_amox_dose_perkg";
+var l250_amox_dose_perkg_id = "l250_amox_dose_perkg";
+var t500_amox_dose_perkg_id = "t500_amox_dose_perkg";
+var l200_amox_dose_perkg_id = "l200_amox_dose_perkg";
+var c200_amox_dose_perkg_id = "c200_amox_dose_perkg";
+var l400_amox_dose_perkg_id = "l400_amox_dose_perkg";
+var c400_amox_dose_perkg_id = "c400_amox_dose_perkg";
+var t875_amox_dose_perkg_id = "t875_amox_dose_perkg";
+var l600_amox_dose_perkg_id = "l600_amox_dose_perkg";
+var t1000_amox_dose_perkg_id = "t1000_amox_dose_perkg";
+
+var t250_amox_dose_abs_id = "t250_amox_dose_abs";
+var l125_amox_dose_abs_id = "l125_amox_dose_abs";
+var l250_amox_dose_abs_id = "l250_amox_dose_abs";
+var t500_amox_dose_abs_id = "t500_amox_dose_abs";
+var l200_amox_dose_abs_id = "l200_amox_dose_abs";
+var c200_amox_dose_abs_id = "c200_amox_dose_abs";
+var l400_amox_dose_abs_id = "l400_amox_dose_abs";
+var c400_amox_dose_abs_id = "c400_amox_dose_abs";
+var t875_amox_dose_abs_id = "t875_amox_dose_abs";
+var l600_amox_dose_abs_id = "l600_amox_dose_abs";
+var t1000_amox_dose_abs_id = "t1000_amox_dose_abs";
 
 var t250_amox_day_id = "t250_amox_day";
 var l125_amox_day_id = "l125_amox_day";
@@ -273,17 +294,17 @@ var freq_el = document.getElementById(freq_id);
 var wt_el = document.getElementById(wt_id);
 var show_el = document.getElementById(show_id);
 
-var t250 = new augmentin(t250_id, "2:1", "tablet", 250, 125, t250_quant_id, t250_freq_id, t250_amox_dose_id, t250_amox_day_id, t250_clav_id);
-var l125 = new augmentin(l125_id, "4:1", "liquid", 125, 31.25, l125_quant_id, l125_freq_id, l125_amox_dose_id, l125_amox_day_id, l125_clav_id);
-var l250 = new augmentin(l250_id, "4:1", "liquid", 250, 62.5, l250_quant_id, l250_freq_id, l250_amox_dose_id, l250_amox_day_id, l250_clav_id);
-var t500 = new augmentin(t500_id, "4:1", "tablet", 500, 125, t500_quant_id, t500_freq_id, t500_amox_dose_id, t500_amox_day_id, t500_clav_id);
-var l200 = new augmentin(l200_id, "7:1", "liquid", 200, 28.5, l200_quant_id, l200_freq_id, l200_amox_dose_id, l200_amox_day_id, l200_clav_id);
-var c200 = new augmentin(c200_id, "7:1", "chewable", 200, 28.5, c200_quant_id, c200_freq_id, c200_amox_dose_id, c200_amox_day_id, c200_clav_id);
-var l400 = new augmentin(l400_id, "7:1", "liquid", 400, 57, l400_quant_id, l400_freq_id, l400_amox_dose_id, l400_amox_day_id, l400_clav_id);
-var c400 = new augmentin(c400_id, "7:1", "chewable", 400, 57, c400_quant_id, c400_freq_id, c400_amox_dose_id, c400_amox_day_id, c400_clav_id);
-var t875 = new augmentin(t875_id, "7:1", "tablet", 875, 125, t875_quant_id, t875_freq_id, t875_amox_dose_id, t875_amox_day_id, t875_clav_id);
-var l600 = new augmentin(l600_id, "14:1", "liquid", 600, 42.9, l600_quant_id, l600_freq_id, l600_amox_dose_id, l600_amox_day_id, l600_clav_id);
-var t1000 = new augmentin(t1000_id, "16:1", "tablet", 1000, 62.5, t1000_quant_id, t1000_freq_id, t1000_amox_dose_id, t1000_amox_day_id, t1000_clav_id);
+var t250 = new augmentin(t250_id, "2:1", "tablet", 250, 125, t250_quant_id, t250_freq_id, t250_amox_dose_perkg_id, t250_amox_dose_abs_id, t250_amox_day_id, t250_clav_id);
+var l125 = new augmentin(l125_id, "4:1", "liquid", 125, 31.25, l125_quant_id, l125_freq_id, l125_amox_dose_perkg_id, l125_amox_dose_abs_id, l125_amox_day_id, l125_clav_id);
+var l250 = new augmentin(l250_id, "4:1", "liquid", 250, 62.5, l250_quant_id, l250_freq_id, l250_amox_dose_perkg_id, l250_amox_dose_abs_id, l250_amox_day_id, l250_clav_id);
+var t500 = new augmentin(t500_id, "4:1", "tablet", 500, 125, t500_quant_id, t500_freq_id, t500_amox_dose_perkg_id, t500_amox_dose_abs_id, t500_amox_day_id, t500_clav_id);
+var l200 = new augmentin(l200_id, "7:1", "liquid", 200, 28.5, l200_quant_id, l200_freq_id, l200_amox_dose_perkg_id, l200_amox_dose_abs_id, l200_amox_day_id, l200_clav_id);
+var c200 = new augmentin(c200_id, "7:1", "chewable", 200, 28.5, c200_quant_id, c200_freq_id, c200_amox_dose_perkg_id, c200_amox_dose_abs_id, c200_amox_day_id, c200_clav_id);
+var l400 = new augmentin(l400_id, "7:1", "liquid", 400, 57, l400_quant_id, l400_freq_id, l400_amox_dose_perkg_id, l400_amox_dose_abs_id, l400_amox_day_id, l400_clav_id);
+var c400 = new augmentin(c400_id, "7:1", "chewable", 400, 57, c400_quant_id, c400_freq_id, c400_amox_dose_perkg_id, c400_amox_dose_abs_id, c400_amox_day_id, c400_clav_id);
+var t875 = new augmentin(t875_id, "7:1", "tablet", 875, 125, t875_quant_id, t875_freq_id, t875_amox_dose_perkg_id, t875_amox_dose_abs_id, t875_amox_day_id, t875_clav_id);
+var l600 = new augmentin(l600_id, "14:1", "liquid", 600, 42.9, l600_quant_id, l600_freq_id, l600_amox_dose_perkg_id, l600_amox_dose_abs_id, l600_amox_day_id, l600_clav_id);
+var t1000 = new augmentin(t1000_id, "16:1", "tablet", 1000, 62.5, t1000_quant_id, t1000_freq_id, t1000_amox_dose_perkg_id, t1000_amox_dose_abs_id, t1000_amox_day_id, t1000_clav_id);
 
 var formulations = [t250, l125, l250, t500, l200, c200, l400, c400, t875, l600, t1000];
 
@@ -309,18 +330,18 @@ function refresh(listener) {
 		amox_el.value = amox_day;
 
 		if(!isNaN(freq)) {
-			amox_dose = amox_day / freq;
+			amox_dose_perkg = amox_day / freq;
 		}
 	}
 	if(listener == "dose") {
 		switch(amox_u) {
 			case "day":
 				amox_day = parseFloat(amox);
-				amox_dose = amox_day / freq;
+				amox_dose_perkg = amox_day / freq;
 				break;
 			case "dose":
-				amox_dose = parseFloat(amox);
-				amox_day = amox_dose * freq;
+				amox_dose_perkg = parseFloat(amox);
+				amox_day = amox_dose_perkg * freq;
 				break;
 		}
 	}
@@ -374,7 +395,7 @@ function refresh(listener) {
 				amox_dose_max = 500;
 				break;
 		}
-		amox_dose = amox_day / freq;
+		amox_dose_perkg = amox_day / freq;
 
 		// Set dose value
 		amox_el.value = amox_day;
@@ -413,7 +434,7 @@ function refresh(listener) {
 
 		// Calculate doses
 		if(!isNaN(wt) && wt != "" && wt > 0) {
-			if(!isNaN(amox_dose)) {
+			if(!isNaN(amox_dose_perkg)) {
 				for(var i = 0; i < formulations.length; i++) {
 					// Calculate dose increment
 					var increment = NaN;
@@ -440,13 +461,13 @@ function refresh(listener) {
 					var amox_min = NaN;
 					if(!isNaN(amox_day_max)) {
 						quant_max = amox_day_max / (formulations[i].amox_conc * liquid_correction) / freq;
-						amox_max = Math.min(amox_dose, amox_day_max / freq / wt);
-						amox_min = Math.min(amox_dose, amox_day_max / freq / wt);
+						amox_max = Math.min(amox_dose_perkg, amox_day_max / freq / wt);
+						amox_min = Math.min(amox_dose_perkg, amox_day_max / freq / wt);
 					}
 					if(!isNaN(amox_dose_max)) {
 						quant_max = amox_dose_max / (formulations[i].amox_conc * liquid_correction);
-						amox_max = Math.min(amox_dose, amox_dose_max / wt);
-						amox_min = Math.min(amox_dose, amox_dose_max / wt);
+						amox_max = Math.min(amox_dose_perkg, amox_dose_max / wt);
+						amox_min = Math.min(amox_dose_perkg, amox_dose_max / wt);
 					}
 					// Make sure it's a multiple of the increment (ignore the multiplying by 10, it's to overcome floating point inaccuracy)
 					quant_max = Math.round((quant_max * 10) - (quant_max * 10) % (increment * 10)) / 10;
@@ -456,8 +477,8 @@ function refresh(listener) {
 					amox_min *= (1 - amox_error);
 
 					// Calculate quantity
-					var quant_low = Math.min(Math.round(Math.floor(Math.round(amox_dose * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
-					var quant_high = Math.min(Math.round(Math.ceil(Math.round(amox_dose * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
+					var quant_low = Math.min(Math.round(Math.floor(Math.round(amox_dose_perkg * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
+					var quant_high = Math.min(Math.round(Math.ceil(Math.round(amox_dose_perkg * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
 
 					// Calculate amoxicillin dose per DOSE
 					var amox_low = Math.round(quant_low * formulations[i].amox_conc * liquid_correction / wt * 10) / 10;
@@ -473,9 +494,10 @@ function refresh(listener) {
 
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
 					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanSecondaryWrap(quant_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
-					formulations[i].amox_dose = (quant_low == quant_high || quant_low == 0 ? spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanWrap(amox_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
-					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max) : spanWrap(Math.round(amox_low * freq * 1000) / 1000, amox_low * freq, amox_min * freq, amox_max * freq, clav_low, clav_min, clav_max) + "&ndash;" + spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max));
-					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false) : spanWrap(clav_low, clav_low, clav_min, clav_max, amox_low, amox_min, amox_max, false) + "&ndash;" + spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false));
+					formulations[i].amox_dose_perkg = (quant_low == quant_high || quant_low == 0 ? spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max, true) : spanWrap(amox_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max, true) + "&ndash;" + spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max, true));
+					formulations[i].amox_dose_abs = (quant_low == quant_high || quant_low == 0 ? spanWrap(Math.round(amox_high * wt * 1000) / 1000, Math.round(amox_high * wt * 1000) / 1000, Math.round(amox_min * wt * 1000) / 1000, Math.round(amox_max * wt * 1000) / 1000, clav_high, clav_min, clav_max, false) : spanWrap(Math.round(amox_low * wt * 1000) / 1000, Math.round(amox_low * wt * 1000) / 1000, Math.round(amox_min * wt * 1000) / 1000, Math.round(amox_max * wt * 1000) / 1000, clav_low, clav_min, clav_max, false) + "&ndash;" + spanWrap(Math.round(amox_high * wt * 1000) / 1000, Math.round(amox_high * wt * 1000) / 1000, Math.round(amox_min * wt * 1000) / 1000, Math.round(amox_max * wt * 1000) / 1000, clav_high, clav_min, clav_max, false));
+					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max, true) : spanWrap(Math.round(amox_low * freq * 1000) / 1000, amox_low * freq, amox_min * freq, amox_max * freq, clav_low, clav_min, clav_max, true) + "&ndash;" + spanWrap(Math.round(amox_high * freq * 1000) / 1000, amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max, true));
+					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false) : spanWrap(clav_low, clav_low, clav_min, clav_max, amox_low, amox_min, amox_max, false, false) + "&ndash;" + spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false));
 
 					// Show the row if the amoxicillin is between amox_min and amox_max (inclusive) AND if the clavulanate is between clav_min and clav_max (inclusive)
 					if((amox_low >= amox_min && amox_low <= amox_max && clav_low >= clav_min && clav_low <= clav_max) || (amox_high >= amox_min && amox_high <= amox_max && clav_high >= clav_min && clav_high <= clav_max)) {
