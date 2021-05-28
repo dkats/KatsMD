@@ -299,7 +299,7 @@ function refresh(listener) {
 	var amox = amox_el.value;
 	var amox_u = amox_u_el.value;
 	freq = parseInt(freq_el.value);
-	wt = wt_el.value;
+	wt = parseFloat(wt_el.value);
 
 	if((listener == "age" || listener == "indication") && !age_over.checked && age_under.checked) {
 		// If <3 months old --> 30 mg/kg/day
@@ -309,7 +309,8 @@ function refresh(listener) {
 		if(!isNaN(freq)) {
 			amox_dose = amox_day / freq;
 		}
-	} else if(listener == "dose") {
+	}
+	if(listener == "dose") {
 		switch(amox_u) {
 			case "day":
 				amox_day = parseFloat(amox);
@@ -320,7 +321,8 @@ function refresh(listener) {
 				amox_day = amox_dose * freq;
 				break;
 		}
-	} else if(listener == "indication" || (listener == "age" && age_over.checked && !age_under.checked)) {
+	}
+	if(listener == "indication" || (listener == "age" && age_over.checked && !age_under.checked)) {
 		validate(amox_el.id);
 
 		switch(indication) {
@@ -374,9 +376,10 @@ function refresh(listener) {
 		if(!isNaN(amox_day)) {
 			amox_u_el.value = "day";
 		}
-	} else if(listener == "weight") {
+	}
+	if(listener == "weight") {
 		validate(wt_el.id);
-		wt = wt_el.value;
+		wt = parseFloat(wt_el.value);
 	}
 
 	if(!isNaN(freq)) {
