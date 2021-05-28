@@ -67,6 +67,11 @@ div {
 	text-align: center;
 }
 
+table .notes {
+	text-align: left !important;
+	font-size: 10pt;
+}
+
 table input[type="text"] {
 	width: 3em;
 	text-align: right;

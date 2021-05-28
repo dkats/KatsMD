@@ -1,6 +1,8 @@
 // Settings
-var clav_min = 6;
-var clav_max = 10;
+var clav_min_perkg = 6;
+var clav_max_perkg = 10;
+var clav_min_abs = 250;
+var clav_max_abs = 375;
 var amox_error = 0.1;	// Percentage of acceptable dosing error
 
 // Only allow numeric input
@@ -344,6 +346,11 @@ function refresh(listener) {
 				freq = 2;
 				amox_day_max = 4000;
 				break;
+			case "abdominal":
+				amox_day = 45;
+				freq = 2;
+				amox_dose_max = 875;
+				break;
 			case "cap":
 				amox_day = 90;
 				freq = 2;
@@ -429,18 +436,24 @@ function refresh(listener) {
 					
 					// Calculate maximums
 					var quant_max = NaN;
-					if(!isNaN(amox_dose_max)) {
-						quant_max = amox_dose_max / (formulations[i].amox_conc * liquid_correction);
-					}
+					var amox_max = NaN;
+					var amox_min = NaN;
 					if(!isNaN(amox_day_max)) {
 						quant_max = amox_day_max / (formulations[i].amox_conc * liquid_correction) / freq;
+						amox_max = Math.min(amox_dose, amox_day_max / freq / wt);
+						amox_min = Math.min(amox_dose, amox_day_max / freq / wt);
+					}
+					if(!isNaN(amox_dose_max)) {
+						quant_max = amox_dose_max / (formulations[i].amox_conc * liquid_correction);
+						amox_max = Math.min(amox_dose, amox_dose_max / wt);
+						amox_min = Math.min(amox_dose, amox_dose_max / wt);
 					}
 					// Make sure it's a multiple of the increment (ignore the multiplying by 10, it's to overcome floating point inaccuracy)
 					quant_max = Math.round((quant_max * 10) - (quant_max * 10) % (increment * 10)) / 10;
 
-					// Calculate acceptable amox error
-					var amox_max = amox_dose * (1 + amox_error);
-					var amox_min = amox_dose * (1 - amox_error);
+					// Calculate acceptable amox error (or take max allowable amox dose)
+					amox_max *= (1 + amox_error);
+					amox_min *= (1 - amox_error);
 
 					// Calculate quantity
 					var quant_low = Math.min(Math.round(Math.floor(Math.round(amox_dose * wt / (increment * liquid_correction * formulations[i].amox_conc) * 1000) / 1000) * increment * 10) / 10, quant_max);
@@ -453,6 +466,10 @@ function refresh(listener) {
 					// Calculate clavulanate dose per DAY
 					var clav_low = Math.round(quant_low * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
 					var clav_high = Math.round(quant_high * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
+
+					// Set minimum and maximum clavulanate levels based on weight (6-10 mg/kg/day if <40 kg, 250-375 mg/day if ≥40 kg)
+					var clav_min = (wt < 40 ? clav_min_perkg : clav_min_abs/wt);
+					var clav_max = (wt < 40 ? clav_max_perkg : clav_max_abs/wt);
 
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
 					formulations[i].quantity = (quant_low == quant_high || quant_low == 0 ? spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max) : spanSecondaryWrap(quant_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max) + "&ndash;" + spanSecondaryWrap(quant_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max));
@@ -481,10 +498,14 @@ function refresh(listener) {
 	// Augmentin ES is not studied in patients >40 kg
 	if(wt > 40) {
 		l600.show = false;
+		l600.row.classList.remove("appropriate");
+		l600.row.classList.add("inappropriate");
 	}
 	// Augmentin XR only in patients >40 kg
 	if(wt < 40) {
 		t1000.show = false;
+		t1000.row.classList.remove("appropriate");
+		t1000.row.classList.add("inappropriate");
 	}
 
 	show();
