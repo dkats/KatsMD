@@ -441,9 +441,16 @@ function refresh(listener) {
 					var liquid_correction = 1;
 					switch(formulations[i].form) {
 						case "liquid":
-							// Increments of 0.1 mL, divide by five because concentrations are per 5 mL
-							increment = 0.1;
+							// Divide by five because concentrations are per 5 mL
 							liquid_correction = 1/5;
+
+							// Increments of 0.1 mL if volume <3 mL, 0.2 mL if volume >3 mL
+							// TODO
+							if(amox_dose_perkg * wt / (liquid_correction * formulations[i].amox_conc) >= 3) {
+								increment = 0.2;
+							} else {
+								increment = 0.1;
+							}
 							break;
 						case "tablet":
 							// Increments of 1/2 tabs
