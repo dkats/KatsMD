@@ -67,6 +67,15 @@ div {
 	text-align: center;
 }
 
+#formulations tr:last-child {
+	border-style: none;
+}
+
+#formulations tr {
+	padding: 3px 0 3px 0;
+	border-bottom: 1px solid #dbdbdb;
+}
+
 table .notes {
 	text-align: left !important;
 	font-size: 10pt;
