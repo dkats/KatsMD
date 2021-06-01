@@ -89,6 +89,10 @@ function spanSecondaryWrap(text, value1, min1, max1, value2, min2, max2) {
 	return out;
 }
 
+function headerTooltip(header_text, tooltip_text) {
+	return "<span class='tooltip'>" + header_text + "<span class='tooltiptext'>" + tooltip_text + "</span></span>";
+}
+
 // Augment class constructor
 class augmentin {
 	constructor(row, ratio, form, amox_conc, clav_conc, quantity, frequency, amox_dose_perkg, amox_dose_abs, amox_day, clav) {
@@ -198,6 +202,10 @@ var amox_id = "dose";
 var amox_u_id = "dose_u";
 var freq_id = "frequency";
 var wt_id = "wt";
+var th_amox_mgkgdose_id = "th_amox_mgkgdose";
+var th_amox_mgdose_id = "th_amox_mgdose";
+var th_amox_mgkgday_id = "th_amox_mgkgday";
+var th_clav_id = "th_clav";
 var show_id = "show";
 
 var t250_id = "t250";
@@ -292,7 +300,17 @@ var amox_el = document.getElementById(amox_id);
 var amox_u_el = document.getElementById(amox_u_id);
 var freq_el = document.getElementById(freq_id);
 var wt_el = document.getElementById(wt_id);
+var th_amox_mgkgdose_el = document.getElementById(th_amox_mgkgdose_id);
+var th_amox_mgdose_el = document.getElementById(th_amox_mgdose_id);
+var th_amox_mgkgday_el = document.getElementById(th_amox_mgkgday_id);
+var th_clav_el = document.getElementById(th_clav_id);
 var show_el = document.getElementById(show_id);
+
+// Saving header labels
+var th_amox_mgkgdose_text = th_amox_mgkgdose_el.innerHTML;
+var th_amox_mgdose_text = th_amox_mgdose_el.innerHTML;
+var th_amox_mgkgday_text = th_amox_mgkgday_el.innerHTML;
+var th_clav_text = th_clav_el.innerHTML;
 
 var t250 = new augmentin(t250_id, "2:1", "tablet", 250, 125, t250_quant_id, t250_freq_id, t250_amox_dose_perkg_id, t250_amox_dose_abs_id, t250_amox_day_id, t250_clav_id);
 var l125 = new augmentin(l125_id, "4:1", "liquid", 125, 31.25, l125_quant_id, l125_freq_id, l125_amox_dose_perkg_id, l125_amox_dose_abs_id, l125_amox_day_id, l125_clav_id);
@@ -404,6 +422,14 @@ function refresh(listener) {
 		if(!isNaN(amox_day)) {
 			amox_u_el.value = "day";
 		}
+
+		if(!isNaN(amox_dose_max)) {
+			th_amox_mgkgdose_el.innerHTML = headerTooltip(th_amox_mgkgdose_text, "Max dose: " + amox_dose_max + " mg/kg/dose");	
+		}
+
+		if(!isNaN(amox_day_max)) {
+			th_amox_mgkgday_el.innerHTML = headerTooltip(th_amox_mgkgday_text, "Max dose: " + amox_day_max + " mg/kg/day");	
+		}
 	}
 	if(listener == "weight") {
 		validate(wt_el.id);
@@ -435,6 +461,15 @@ function refresh(listener) {
 		// Calculate doses
 		if(!isNaN(wt) && wt != "" && wt > 0) {
 			if(!isNaN(amox_dose_perkg)) {
+				// Set minimum and maximum clavulanate levels based on weight (6-10 mg/kg/day if <40 kg, 250-375 mg/day if ≥40 kg)
+				var clav_min = (wt < 40 ? clav_min_perkg : clav_min_abs/wt);
+				var clav_max = (wt < 40 ? clav_max_perkg : clav_max_abs/wt);
+				if(wt < 40) {
+					th_clav_el.innerHTML = headerTooltip(th_clav_text, "Target: " + clav_min_perkg + "-" + clav_max_perkg + " mg/kg/day");
+				} else {
+					th_clav_el.innerHTML = headerTooltip(th_clav_text, "Target: " + clav_min_abs + "-" + clav_max_abs + " mg/day");
+				}
+
 				for(var i = 0; i < formulations.length; i++) {
 					// Calculate dose increment
 					var increment = NaN;
@@ -494,10 +529,6 @@ function refresh(listener) {
 					// Calculate clavulanate dose per DAY
 					var clav_low = Math.round(quant_low * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
 					var clav_high = Math.round(quant_high * formulations[i].clav_conc * liquid_correction * freq / wt * 10) / 10;
-
-					// Set minimum and maximum clavulanate levels based on weight (6-10 mg/kg/day if <40 kg, 250-375 mg/day if ≥40 kg)
-					var clav_min = (wt < 40 ? clav_min_perkg : clav_min_abs/wt);
-					var clav_max = (wt < 40 ? clav_max_perkg : clav_max_abs/wt);
 
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
 					var range_sep = "<br />";
