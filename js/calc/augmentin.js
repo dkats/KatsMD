@@ -415,7 +415,7 @@ function refresh(listener) {
 				break;
 		}
 	}
-	if(listener == "indication" && !age_under.checked) {
+	if((listener == "indication" || listener == "age") && !age_under.checked) {
 		validate(amox_el.id);
 
 		switch(indication) {
