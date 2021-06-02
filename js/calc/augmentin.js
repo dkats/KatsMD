@@ -476,11 +476,11 @@ function refresh(listener) {
 		}
 
 		if(!isNaN(amox_dose_max)) {
-			th_amox_mgkgdose_el.innerHTML = headerTooltip(th_amox_mgkgdose_text, "Max dose: " + amox_dose_max + " mg/kg/dose");	
+			th_amox_mgdose_el.innerHTML = headerTooltip(th_amox_mgdose_text, "Max dose: " + amox_dose_max + " mg/dose");	
 		}
 
 		if(!isNaN(amox_day_max)) {
-			th_amox_mgkgday_el.innerHTML = headerTooltip(th_amox_mgkgday_text, "Max dose: " + amox_day_max + " mg/kg/day");	
+			th_amox_mgkgday_el.innerHTML = headerTooltip(th_amox_mgkgday_text, "Max dose: " + amox_day_max + " mg/day");	
 		}
 	}
 	if(listener == "weight") {
@@ -582,8 +582,8 @@ function refresh(listener) {
 					var amox_high = round(quant_high * formulations[i].amox_conc * liquid_correction / wt, 1);
 
 					// Calculate clavulanate dose per DAY
-					var clav_low = round(quant_low * formulations[i].clav_conc * liquid_correction * freq / wt, 1);
-					var clav_high = round(quant_high * formulations[i].clav_conc * liquid_correction * freq / wt, 1);
+					var clav_low = quant_low * formulations[i].clav_conc * liquid_correction * freq / wt;
+					var clav_high = quant_high * formulations[i].clav_conc * liquid_correction * freq / wt;
 
 					// Output the HTML either as a single value if rounding up and rounding down are equal or as a range if rounding up vs. down results in different values
 					var range_sep = "<br />";
@@ -591,7 +591,7 @@ function refresh(listener) {
 					formulations[i].amox_dose_perkg = (quant_low == quant_high || quant_low == 0 ? spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max, true) : spanWrap(amox_low, amox_low, amox_min, amox_max, clav_low, clav_min, clav_max, true) + range_sep + spanWrap(amox_high, amox_high, amox_min, amox_max, clav_high, clav_min, clav_max, true));
 					formulations[i].amox_dose_abs = (quant_low == quant_high || quant_low == 0 ? spanWrap(round(quant_high * formulations[i].amox_conc * liquid_correction, 3), round(quant_high * formulations[i].amox_conc * liquid_correction, 3), round(amox_min * wt, 3), round(amox_max * wt, 3), clav_high, clav_min, clav_max, false) : spanWrap(round(quant_low * formulations[i].amox_conc * liquid_correction, 3), round(quant_low * formulations[i].amox_conc * liquid_correction, 3), round(amox_min * wt, 3), round(amox_max * wt, 3), clav_low, clav_min, clav_max, false) + range_sep + spanWrap(round(quant_high * formulations[i].amox_conc * liquid_correction, 3), round(quant_high * formulations[i].amox_conc * liquid_correction, 3), round(amox_min * wt, 3), round(amox_max * wt, 3), clav_high, clav_min, clav_max, false));
 					formulations[i].amox_day = (quant_low == quant_high || quant_low == 0 ? spanWrap(round(amox_high * freq, 3), amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max, true) : spanWrap(round(amox_low * freq, 3), amox_low * freq, amox_min * freq, amox_max * freq, clav_low, clav_min, clav_max, true) + range_sep + spanWrap(round(amox_high * freq, 3), amox_high * freq, amox_min * freq, amox_max * freq, clav_high, clav_min, clav_max, true));
-					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false) : spanWrap(clav_low, clav_low, clav_min, clav_max, amox_low, amox_min, amox_max, false, false) + range_sep + spanWrap(clav_high, clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false));
+					formulations[i].clav = (quant_low == quant_high || quant_low == 0 ? spanWrap(round(clav_high,1), clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false) : spanWrap(round(clav_low,1), clav_low, clav_min, clav_max, amox_low, amox_min, amox_max, false, false) + range_sep + spanWrap(round(clav_high,1), clav_high, clav_min, clav_max, amox_high, amox_min, amox_max, false, false));
 
 					// Show the row if the amoxicillin is between amox_min and amox_max (inclusive) AND if the clavulanate is between clav_min and clav_max (inclusive)
 					if((amox_low >= amox_min && amox_low <= amox_max && clav_low >= clav_min && clav_low <= clav_max) || (amox_high >= amox_min && amox_high <= amox_max && clav_high >= clav_min && clav_high <= clav_max)) {
