@@ -151,7 +151,7 @@ ul.menu li {
 	font-weight: bold;
 	cursor: pointer;
 	float: left;
-	display: inline;
+	display: inline-block;
 	text-align: center;
 	color: white;
 }
