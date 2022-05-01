@@ -129,7 +129,11 @@ a {
 }*/
 
 h2 + ul {
-	margin-top: -16px;
+	margin-top: -0.83em;
+}
+
+h3 + ul {
+	margin-top: -1em;
 }
 
 p + ul {
@@ -292,6 +296,12 @@ article {
 
 .disclaim{
 	color: red;
+}
+
+mark {
+	color: red;
+	font-weight: bold;
+	background: none;
 }
 
 .keyword{
